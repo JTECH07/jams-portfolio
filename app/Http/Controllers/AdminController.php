@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Subscriber;
+use App\Models\Subscriber;
+use App\Mail\NewPostNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -46,7 +49,7 @@ class AdminController extends Controller
             'published' => 'nullable',
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'excerpt' => $request->excerpt,
@@ -56,7 +59,14 @@ class AdminController extends Controller
             'published' => $request->has('published'),
         ]);
 
-        return redirect()->route('admin.posts')->with('success', 'Article créé.');
+        if ($request->has('published')) {
+            $subscribers = Subscriber::where('active', true)->get();
+            foreach ($subscribers as $sub) {
+                Mail::to($sub->email)->send(new NewPostNotification($post));
+            }
+        }
+
+        return redirect()->route('admin.posts')->with('success', 'Article créé' . ($request->has('published') ? ' et abonnés notifiés.' : '.'));
     }
 
     public function postEdit(Post $post)
