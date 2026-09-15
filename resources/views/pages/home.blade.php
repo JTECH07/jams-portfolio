@@ -71,10 +71,12 @@
 
         {{-- RIGHT --}}
         <div class="hero-right reveal">
-          <p>
-            Hi, je suis <strong style="color:var(--white)">Joseph ALAYE</strong> — développeur web &amp; mobile passionné par la création d'expériences numériques fluides, performantes et utiles.
+          <p class="hero-intro-text">
+            Hi, je suis <strong class="hero-name-highlight">Joseph ALAYE</strong>
           </p>
+          <p class="hero-role-text">développeur web &amp; mobile</p>
           <p>
+            Passionné par la création d'expériences numériques fluides, performantes et utiles.
             Je combine rigueur logicielle, sens du détail UX/UI et communication fluide pour livrer des produits qui servent un objectif concret.
           </p>
           <div class="hero-tech-stack">
@@ -277,7 +279,7 @@
     </div>
   </section>
 
-  {{-- ═══════════ PROJECTS PREVIEW ═══════════ --}}
+  {{-- ═══════════ PROJECTS PREVIEW (Marquee) ═══════════ --}}
   <section class="section" style="background:var(--bg);">
     <div class="wrap">
       <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
@@ -288,106 +290,130 @@
         <h2 style="text-align:center;">Mes réalisations récentes</h2>
         <p style="text-align:center;max-width:560px;margin:12px auto 0;color:var(--muted);">Une sélection de projets qui montrent mon approche et ma capacité à livrer des solutions complètes.</p>
       </div>
+    </div>
 
-      <div class="home-projects-grid">
-        {{-- Project 1 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/desktop_code.jpg') }}" alt="Green World Builders" />
-          </figure>
+    <div class="marquee-wrap" style="padding:10px 0 30px;">
+      <div class="marquee-track projects-marquee" style="animation-duration:40s;">
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Green World Builders" /></figure>
           <div class="home-project-body">
-            <div class="tags"><span>MySQL</span><span>PHP</span><span>Web Design</span></div>
-            <h4>Plateforme Green World Builders</h4>
-            <p>Plateforme web avec gestion de produits, commandes et dashboard analytique interactif.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <div class="tags"><span>MySQL</span><span>PHP</span></div>
+            <h4>Green World Builders</h4>
+            <p>Plateforme web avec gestion de produits, commandes et dashboard analytique.</p>
           </div>
         </article>
-
-        {{-- Project 2 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/recognize_face.png') }}" alt="Reconnaissance faciale" />
-          </figure>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/recognize_face.png') }}" alt="Reconnaissance faciale" /></figure>
           <div class="home-project-body">
             <div class="tags"><span>Python</span><span>OpenCV</span><span>ML</span></div>
-            <h4>Système de reconnaissance faciale</h4>
-            <p>Système de vision par ordinateur pour l'identification et la vérification d'identité.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="https://github.com/JTECH07" target="_blank" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-github"></i> Code</a>
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <h4>Reconnaissance faciale</h4>
+            <p>Système de vision par ordinateur pour vérification d'identité.</p>
           </div>
         </article>
-
-        {{-- Project 3 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/code.jpg') }}" alt="Agrimarket" />
-          </figure>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/code.jpg') }}" alt="Agrimarket" /></figure>
           <div class="home-project-body">
-            <div class="tags"><span>PHP</span><span>MySQL</span><span>E-commerce</span></div>
+            <div class="tags"><span>PHP</span><span>MySQL</span></div>
             <h4>Agrimarket</h4>
-            <p>Plateforme e-commerce connectant producteurs agro et restaurants pour les échanges locaux.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <p>E-commerce connectant producteurs agro et restaurants.</p>
           </div>
         </article>
-
-        {{-- Project 4 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/laptop_code.jpg') }}" alt="App scolarité" />
-          </figure>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/laptop_code.jpg') }}" alt="App scolarité" /></figure>
           <div class="home-project-body">
-            <div class="tags"><span>Dart</span><span>Flutter</span><span>Mobile</span></div>
-            <h4>Gestion des paiements de scolarité</h4>
-            <p>Application mobile pour la gestion des paiements à l'UATM GASA Formation.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="https://github.com/JTECH07/school_fees_management_app" target="_blank" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-github"></i> Code</a>
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <div class="tags"><span>Dart</span><span>Flutter</span></div>
+            <h4>Gestion scolarité</h4>
+            <p>App mobile pour la gestion des paiements étudiants.</p>
           </div>
         </article>
-
-        {{-- Project 5 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/desktop_code.jpg') }}" alt="Bibliothèques" />
-          </figure>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Bibliothèques" /></figure>
           <div class="home-project-body">
-            <div class="tags"><span>Laravel</span><span>SQL</span><span>MVC</span></div>
-            <h4>Gestion de bibliothèques</h4>
-            <p>Système de suivi des ouvrages et emprunts pour la traçabilité opérationnelle.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <div class="tags"><span>Laravel</span><span>SQL</span></div>
+            <h4>Gestion bibliothèques</h4>
+            <p>Système de suivi des ouvrages et emprunts.</p>
           </div>
         </article>
-
-        {{-- Project 6 --}}
-        <article class="home-project-card glass reveal">
-          <figure>
-            <img src="{{ asset('images/desktop_code.jpg') }}" alt="Le Verger" />
-          </figure>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Le Verger" /></figure>
           <div class="home-project-body">
             <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
             <h4>Site Le Verger</h4>
-            <p>Site web pour le Complexe Scolaire Le Verger, mettant en avant programmes et activités.</p>
-            <div class="project-actions">
-              <a class="btn btn-outline" href="{{ route('contact') }}" style="padding:6px 12px;font-size:.8rem;"><i class="bi bi-chat-dots"></i> Discuter</a>
-            </div>
+            <p>Site web pour le Complexe Scolaire Le Verger.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/code.jpg') }}" alt="CRUD posts" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>Laravel</span><span>PHP</span></div>
+            <h4>CRUD de posts</h4>
+            <p>Application Laravel pour la gestion de contenus.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/laptop_code.jpg') }}" alt="Authentification" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>Laravel</span><span>Mail</span></div>
+            <h4>Authentification + mail</h4>
+            <p>Inscription sécurisée avec confirmation par e-mail.</p>
+          </div>
+        </article>
+        {{-- Duplicates for seamless loop --}}
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Green World Builders" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>MySQL</span><span>PHP</span></div>
+            <h4>Green World Builders</h4>
+            <p>Plateforme web avec gestion de produits, commandes et dashboard analytique.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/recognize_face.png') }}" alt="Reconnaissance faciale" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>Python</span><span>OpenCV</span><span>ML</span></div>
+            <h4>Reconnaissance faciale</h4>
+            <p>Système de vision par ordinateur pour vérification d'identité.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/code.jpg') }}" alt="Agrimarket" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>PHP</span><span>MySQL</span></div>
+            <h4>Agrimarket</h4>
+            <p>E-commerce connectant producteurs agro et restaurants.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/laptop_code.jpg') }}" alt="App scolarité" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>Dart</span><span>Flutter</span></div>
+            <h4>Gestion scolarité</h4>
+            <p>App mobile pour la gestion des paiements étudiants.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Bibliothèques" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>Laravel</span><span>SQL</span></div>
+            <h4>Gestion bibliothèques</h4>
+            <p>Système de suivi des ouvrages et emprunts.</p>
+          </div>
+        </article>
+        <article class="home-project-card glass">
+          <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Le Verger" /></figure>
+          <div class="home-project-body">
+            <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+            <h4>Site Le Verger</h4>
+            <p>Site web pour le Complexe Scolaire Le Verger.</p>
           </div>
         </article>
       </div>
+    </div>
 
-      <div style="text-align:center;margin-top:40px;" class="reveal">
-        <a class="btn btn-main" href="{{ route('projects') }}">
-          <i class="bi bi-grid-3x3-gap"></i> Voir tous les projets (15+)
-        </a>
-      </div>
+    <div style="text-align:center;margin-top:10px;" class="wrap reveal">
+      <a class="btn btn-main" href="{{ route('projects') }}">
+        <i class="bi bi-grid-3x3-gap"></i> Voir tous les projets (15+)
+      </a>
     </div>
   </section>
 

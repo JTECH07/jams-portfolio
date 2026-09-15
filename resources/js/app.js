@@ -76,12 +76,42 @@ if (cursorText) {
   setTimeout(typeCursor, 1200);
 }
 
-/* ─── Nav scroll effect ─── */
+/* ─── Pill Nav: scroll + sliding indicator ─── */
 const nav = document.getElementById('mainNav');
+const pillLinks = document.getElementById('navLinks');
+const pillIndicator = document.getElementById('pillIndicator');
+
 if (nav) {
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+function moveIndicator(el) {
+  if (!pillIndicator || !el) return;
+  const parent = el.parentElement;
+  const pRect = parent.getBoundingClientRect();
+  const eRect = el.getBoundingClientRect();
+  pillIndicator.style.left = (eRect.left - pRect.left) + 'px';
+  pillIndicator.style.width = eRect.width + 'px';
+}
+
+if (pillLinks && pillIndicator) {
+  const activeLink = pillLinks.querySelector('.pill-link.active');
+  if (activeLink) {
+    moveIndicator(activeLink);
+  } else {
+    const first = pillLinks.querySelector('.pill-link');
+    if (first) moveIndicator(first);
+  }
+  pillLinks.querySelectorAll('.pill-link').forEach(link => {
+    link.addEventListener('mouseenter', () => moveIndicator(link));
+    link.addEventListener('focus', () => moveIndicator(link));
+  });
+  pillLinks.addEventListener('mouseleave', () => {
+    const current = pillLinks.querySelector('.pill-link.active') || pillLinks.querySelector('.pill-link');
+    if (current) moveIndicator(current);
+  });
 }
 
 /* ─── Mobile menu ─── */
