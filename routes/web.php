@@ -50,6 +50,11 @@ Route::get('/sitemap.xml', function () {
     return response()->view('sitemap', [], 200)->header('Content-Type', 'application/xml');
 })->name('sitemap');
 
+Route::get('/feed', function () {
+    $posts = \App\Models\Post::published()->latest()->get();
+    return response()->view('rss', compact('posts'), 200)->header('Content-Type', 'application/rss+xml');
+})->name('feed');
+
 // Basic back-office route
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
