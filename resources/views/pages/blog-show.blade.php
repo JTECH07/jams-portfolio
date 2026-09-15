@@ -19,6 +19,7 @@
           <span class="blog-card-cat" style="position:static;">{{ $post->category }}</span>
           <small><i class="bi bi-calendar3"></i> {{ $post->created_at->format('d M Y') }}</small>
           <small><i class="bi bi-chat-dots"></i> {{ $post->totalComments() }} commentaire(s)</small>
+          <small><i class="bi bi-eye"></i> {{ $views }} vue(s)</small>
           <small class="blog-article-stars">
             @for($i = 1; $i <= 5; $i++)
               <i class="bi bi-star{{ $i <= round($post->avgRating()) ? '-fill' : '' }}"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Subscriber;
+use App\Models\PageView;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -28,7 +29,14 @@ class BlogController extends Controller
 
     public function show(Post $post)
     {
-        return view('pages.blog-show', compact('post'));
+        PageView::create([
+            'url' => request()->url(),
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
+
+        $views = PageView::countFor(request()->url());
+        return view('pages.blog-show', compact('post', 'views'));
     }
 
     public function subscribe(Request $request)
