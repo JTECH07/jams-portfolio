@@ -67,146 +67,99 @@
     </div>
   </div>
 
-  <div class="marquee-wrap" style="padding: 30px 0;">
-    <div class="marquee-track cert-marquee" style="animation-duration:30s;">
+  {{-- Diagonal upward scroll --}}
+  <div class="cert-diagonal-wrap">
+    <div class="cert-diagonal-track">
       {{-- Cert 1 --}}
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--accent),var(--accent-2));">
-            <i class="bi bi-palette-fill"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">Google</small>
-            <h4>UI/UX Design</h4>
-            <p>Fondamentaux du design d'interface et expérience utilisateur</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> 2024</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_uiux.png') }}" alt="Certificat UI/UX" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-palette-fill\'></i><span>UI/UX Design</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>Google · 2024</small>
+          <h4>UI/UX Design</h4>
+          <p>Fondamentaux du design d'interface et expérience utilisateur</p>
         </div>
       </article>
 
       {{-- Cert 2 --}}
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--accent-2),var(--ok));">
-            <i class="bi bi-robot"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">FuturCraft Institut</small>
-            <h4>IA Générative</h4>
-            <p>Usages concrets de l'IA générative et productivité numérique</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> Déc 2024</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_ia.png') }}" alt="Certificat IA" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-robot\'></i><span>IA Générative</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>FuturCraft · 2024</small>
+          <h4>IA Générative</h4>
+          <p>Usages concrets de l'IA générative et productivité numérique</p>
         </div>
       </article>
 
       {{-- Cert 3 --}}
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--yellow),#f59e0b);">
-            <i class="bi bi-laptop"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">SENANTIC</small>
-            <h4>Maintenance Informatique</h4>
-            <p>Support technique et maintenance d'équipements</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> Avr 2025</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_maintenance.png') }}" alt="Certificat Maintenance" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-laptop\'></i><span>Maintenance</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>SENANTIC · 2025</small>
+          <h4>Maintenance Informatique</h4>
+          <p>Support technique et maintenance d'équipements</p>
         </div>
       </article>
 
       {{-- Cert 4 --}}
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--ok),#059669);">
-            <i class="bi bi-file-earmark-check"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">UATM GASA</small>
-            <h4>Licence SIL</h4>
-            <p>Systèmes Informatiques et Logiciels — L2 validée</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> 2024 - 2026</span>
-              <span><i class="bi bi-patch-check-fill"></i> En cours</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_sil.png') }}" alt="Licence SIL" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-file-earmark-check\'></i><span>Licence SIL</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>UATM GASA · 2024-2026</small>
+          <h4>Licence SIL</h4>
+          <p>Systèmes Informatiques et Logiciels — L2</p>
         </div>
       </article>
 
       {{-- Duplicates for seamless loop --}}
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--accent),var(--accent-2));">
-            <i class="bi bi-palette-fill"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">Google</small>
-            <h4>UI/UX Design</h4>
-            <p>Fondamentaux du design d'interface et expérience utilisateur</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> 2024</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_uiux.png') }}" alt="Certificat UI/UX" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-palette-fill\'></i><span>UI/UX Design</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>Google · 2024</small>
+          <h4>UI/UX Design</h4>
+          <p>Fondamentaux du design d'interface et expérience utilisateur</p>
         </div>
       </article>
 
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--accent-2),var(--ok));">
-            <i class="bi bi-robot"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">FuturCraft Institut</small>
-            <h4>IA Générative</h4>
-            <p>Usages concrets de l'IA générative et productivité numérique</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> Déc 2024</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_ia.png') }}" alt="Certificat IA" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-robot\'></i><span>IA Générative</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>FuturCraft · 2024</small>
+          <h4>IA Générative</h4>
+          <p>Usages concrets de l'IA générative et productivité numérique</p>
         </div>
       </article>
 
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--yellow),#f59e0b);">
-            <i class="bi bi-laptop"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">SENANTIC</small>
-            <h4>Maintenance Informatique</h4>
-            <p>Support technique et maintenance d'équipements</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> Avr 2025</span>
-              <span><i class="bi bi-patch-check-fill"></i> Vérifié</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_maintenance.png') }}" alt="Certificat Maintenance" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-laptop\'></i><span>Maintenance</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>SENANTIC · 2025</small>
+          <h4>Maintenance Informatique</h4>
+          <p>Support technique et maintenance d'équipements</p>
         </div>
       </article>
 
-      <article class="cert-card-cert">
-        <div class="cert-card-inner">
-          <div class="cert-badge" style="background:linear-gradient(135deg,var(--ok),#059669);">
-            <i class="bi bi-file-earmark-check"></i>
-          </div>
-          <div class="cert-content">
-            <small class="cert-org">UATM GASA</small>
-            <h4>Licence SIL</h4>
-            <p>Systèmes Informatiques et Logiciels — L2 validée</p>
-            <div class="cert-meta">
-              <span><i class="bi bi-calendar3"></i> 2024 - 2026</span>
-              <span><i class="bi bi-patch-check-fill"></i> En cours</span>
-            </div>
-          </div>
+      <article class="cert-diag-card">
+        <div class="cert-diag-img">
+          <img src="{{ asset('images/cert_sil.png') }}" alt="Licence SIL" onerror="this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'bi bi-file-earmark-check\'></i><span>Licence SIL</span></div>'" />
+        </div>
+        <div class="cert-diag-info">
+          <small>UATM GASA · 2024-2026</small>
+          <h4>Licence SIL</h4>
+          <p>Systèmes Informatiques et Logiciels — L2</p>
         </div>
       </article>
     </div>
@@ -214,39 +167,58 @@
 </section>
 
 <style>
-  .cert-marquee{display:flex;gap:24px;width:max-content}
-  .cert-card-cert{
-    min-width:300px;max-width:300px;
+  .cert-diagonal-wrap{
+    overflow:hidden;width:100vw;position:relative;
+    padding:40px 0;
+    /* clip to show only the diagonal movement area */
+    height:420px;
+  }
+  .cert-diagonal-track{
+    display:flex;gap:28px;width:max-content;
+    animation:certDiagScroll 25s linear infinite;
+    /* start from bottom-left, move to top-right */
+    transform:rotate(-8deg) translateX(0);
+    transform-origin:center center;
+  }
+  .cert-diag-card{
+    min-width:260px;max-width:260px;flex-shrink:0;
     background:rgba(255,255,255,.06);
     border:1px solid rgba(255,255,255,.1);
     border-radius:16px;overflow:hidden;
     transition:all .3s;
   }
-  .cert-card-cert:hover{
-    border-color:var(--accent);
-    transform:translateY(-4px);
-    box-shadow:0 12px 40px rgba(37,99,235,.2);
+  .cert-diag-card:hover{
+    border-color:var(--yellow);
+    transform:translateY(-6px);
+    box-shadow:0 16px 48px rgba(255,215,0,.15);
   }
-  .cert-card-inner{padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-  .cert-badge{
-    width:56px;height:56px;border-radius:14px;
+  .cert-diag-img{
+    width:100%;height:170px;overflow:hidden;
+    background:rgba(0,0,0,.2);
     display:grid;place-items:center;
-    font-size:1.5rem;color:var(--white);
-    box-shadow:0 8px 24px rgba(0,0,0,.3);
   }
-  .cert-content{display:flex;flex-direction:column;gap:6px}
-  .cert-org{font-family:var(--font-mono);font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
-  .cert-content h4{font-size:1.05rem;color:var(--white);margin:0}
-  .cert-content p{font-size:.85rem;color:var(--muted);line-height:1.5;margin:0}
-  .cert-meta{display:flex;gap:12px;justify-content:center;margin-top:4px}
-  .cert-meta span{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:4px}
-  .cert-meta .bi-patch-check-fill{color:var(--ok)}
+  .cert-diag-img img{width:100%;height:100%;object-fit:cover}
+  .cert-placeholder{
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--muted);
+  }
+  .cert-placeholder i{font-size:2.5rem;color:var(--yellow)}
+  .cert-placeholder span{font-size:.85rem;font-weight:500}
+  .cert-diag-info{padding:16px;display:flex;flex-direction:column;gap:4px}
+  .cert-diag-info small{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+  .cert-diag-info h4{font-size:.95rem;color:var(--white);margin:0}
+  .cert-diag-info p{font-size:.8rem;color:var(--muted);line-height:1.4;margin:0}
 
-  body.light .cert-card-cert{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
-  body.light .cert-card-cert:hover{border-color:var(--accent);box-shadow:0 12px 40px rgba(37,99,235,.1)}
-  body.light .cert-content h4{color:var(--black)}
-  body.light .cert-content p{color:#475569}
-  body.light .cert-org{color:var(--accent)}
-  body.light .cert-meta span{color:#64748b}
+  @keyframes certDiagScroll{
+    0%{transform:rotate(-8deg) translateX(0)}
+    100%{transform:rotate(-8deg) translateX(-50%)}
+  }
+
+  body.light .cert-diag-card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
+  body.light .cert-diag-card:hover{border-color:var(--yellow);box-shadow:0 16px 48px rgba(255,215,0,.1)}
+  body.light .cert-diag-info h4{color:var(--black)}
+  body.light .cert-diag-info p{color:#475569}
+  body.light .cert-placeholder{color:#64748b}
+  body.light .cert-placeholder i{color:var(--yellow)}
 </style>
 @endsection
