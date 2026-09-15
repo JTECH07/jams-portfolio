@@ -25,6 +25,8 @@
   <link rel="canonical" href="{{ url()->current() }}" />
 
   <link rel="icon" type="image/png" href="{{ asset('images/me.png') }}" />
+  <link rel="manifest" href="{{ asset('manifest.json') }}" />
+  <meta name="theme-color" content="#0F172A" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,5 +58,10 @@
   </button>
 
   @stack('scripts')
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
 </body>
 </html>
