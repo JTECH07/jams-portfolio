@@ -135,10 +135,11 @@ const countObs = new IntersectionObserver((entries) => {
     const el = entry.target.querySelector('[data-count]');
     if (!el) return;
     const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
     if (isNaN(target)) return;
     let value = 0;
     const step = Math.max(1, Math.ceil(target / 45));
-    const run = () => { value = Math.min(target, value + step); el.textContent = value; if (value < target) requestAnimationFrame(run); };
+    const run = () => { value = Math.min(target, value + step); el.textContent = value + suffix; if (value < target) requestAnimationFrame(run); };
     requestAnimationFrame(run);
     countObs.unobserve(entry.target);
   });

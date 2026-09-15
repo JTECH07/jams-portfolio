@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio de Joseph ALAYE, développeur web et mobile. Projets concrets, compétences full-stack et collaboration pour missions freelance, stages et recrutements." />
   <title>Joseph ALAYE | Portfolio</title>
+  <link rel="icon" type="image/png" href="{{ asset('images/me.png') }}" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +26,7 @@
 
   @include('partials.navbar')
 
-  <main style="padding-top: var(--nav-h);">
+  <main style="padding-top: 80px;">
     @yield('content')
   </main>
 

@@ -150,6 +150,10 @@
           <p style="color:var(--accent-2);">Projets réalisés</p>
         </article>
         <article class="fact reveal" style="background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.2);">
+          <div class="n" data-count="95" data-suffix="%" style="color:var(--white);">0</div>
+          <p style="color:var(--yellow);">Clients satisfaits (%)</p>
+        </article>
+        <article class="fact reveal" style="background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.2);">
           <div class="n plus" data-count="4" style="color:var(--white);">0</div>
           <p style="color:var(--yellow);">Services JAMS TECH</p>
         </article>

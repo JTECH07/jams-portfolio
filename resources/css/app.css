@@ -154,7 +154,7 @@ body.intro-lock{overflow:hidden}
   font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);
   transition:color .3s;white-space:nowrap;
 }
-.pill-link:hover,.pill-link.active{color:var(--white)}
+.pill-link:hover,.pill-link.active{color:#fff!important}
 .pill-indicator{
   position:absolute;top:4px;height:32px;border-radius:100px;
   background:rgba(255,255,255,.08);
@@ -525,7 +525,7 @@ body.light::after{
 body.light .nav.scrolled{background:transparent}
 body.light .nav-pill-inner{background:rgba(15,23,42,.88);border-color:rgba(255,255,255,.1)}
 body.light .pill-link{color:rgba(255,255,255,.45)}
-body.light .pill-link:hover,.pill-link.active{color:var(--white)!important}
+body.light .pill-link:hover,body.light .pill-link.active{color:#fff!important}
 body.light .pill-indicator{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.12)}
 body.light .pill-menu-btn{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:var(--white)}
 body.light .glass{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08)}
@@ -539,7 +539,7 @@ body.light .hero-name-highlight{background:linear-gradient(135deg,var(--yellow),
 body.light .hero-role-text{color:var(--yellow)}
 body.light .hero-right p{color:rgba(255,255,255,.6)}
 body.light .hero-right strong{color:#FFFFFF}
-body.light .hero-big-name{color:rgba(0,0,0,.06);-webkit-text-fill-color:rgba(0,0,0,.06)}
+body.light .hero-big-name{color:rgba(255,255,255,.07)!important;-webkit-text-fill-color:rgba(255,255,255,.07)!important}
 body.light .fact{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08)}
 body.light .fact .n{color:var(--black)}
 body.light .fact p{color:var(--muted)}
