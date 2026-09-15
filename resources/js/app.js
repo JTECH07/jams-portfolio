@@ -241,7 +241,16 @@ const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 if (themeToggle && themeIcon) {
   const saved = localStorage.getItem('theme');
-  if (saved === 'light') { document.body.classList.add('light'); themeIcon.className = 'bi bi-sun-fill'; }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (saved === 'light') {
+    document.body.classList.add('light');
+    themeIcon.className = 'bi bi-sun-fill';
+  } else if (!saved && !prefersDark) {
+    document.body.classList.add('light');
+    themeIcon.className = 'bi bi-sun-fill';
+  }
+
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light');
     const isLight = document.body.classList.contains('light');
