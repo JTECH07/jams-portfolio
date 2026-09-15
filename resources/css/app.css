@@ -230,16 +230,27 @@ body.intro-lock{overflow:hidden}
   color:var(--muted);font-size:1rem;line-height:1.8;
   max-width:380px;margin-bottom:14px;
 }
-.hero-intro-text{font-size:1.1rem!important;color:var(--muted)!important}
+.hero-intro-text{font-size:1rem!important;color:var(--muted)!important;letter-spacing:.02em}
 .hero-name-highlight{
-  font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;
-  background:linear-gradient(135deg,var(--yellow),var(--accent));
+  font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;
+  background:linear-gradient(135deg,var(--yellow),#f59e0b,var(--accent));
+  background-size:200% 200%;
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   display:inline;
+  animation:heroNameShimmer 4s ease-in-out infinite;
+}
+@keyframes heroNameShimmer{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
 }
 .hero-role-text{
-  font-family:var(--font-mono);font-size:.95rem;color:var(--yellow);
-  letter-spacing:.05em;margin-bottom:14px;
+  font-family:var(--font-mono);font-size:.88rem;color:var(--yellow);
+  letter-spacing:.06em;margin-bottom:14px;
+  animation:fadeInUp .8s ease-out .3s both;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
 }
 .hero-right strong{color:var(--white)}
 .hero-tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
@@ -513,8 +524,8 @@ body.light::after{
 }
 body.light .nav.scrolled{background:transparent}
 body.light .nav-pill-inner{background:rgba(15,23,42,.88);border-color:rgba(255,255,255,.1)}
-body.light .pill-link{color:rgba(255,255,255,.5)}
-body.light .pill-link:hover,body.light .pill-link.active{color:var(--white)}
+body.light .pill-link{color:rgba(255,255,255,.45)}
+body.light .pill-link:hover,.pill-link.active{color:var(--white)!important}
 body.light .pill-indicator{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.12)}
 body.light .pill-menu-btn{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:var(--white)}
 body.light .glass{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08)}
@@ -666,6 +677,8 @@ body.light .marquee-wrap::after{background:linear-gradient(-90deg,var(--bg),tran
   .pill-menu-btn{display:flex}
   .pill-cv{padding:6px 14px;font-size:.75rem}
   body.light .pill-links{background:rgba(15,23,42,.95)}
+  body.light .pill-link{color:rgba(255,255,255,.5)}
+  body.light .pill-link:hover{color:var(--white)}
   .value-grid{grid-template-columns:1fr}
   .home-services-grid{grid-template-columns:1fr}
   .home-projects-grid{grid-template-columns:1fr}

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BlogController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -30,8 +31,13 @@ Route::get('/parcours', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
-    
+
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog.subscribe');
 
 // Basic back-office route
 Route::prefix('admin')->group(function () {
