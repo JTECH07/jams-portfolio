@@ -3,10 +3,22 @@
 @section('content')
 <section class="section" id="blog" style="background:var(--bg);">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow" style="color:var(--yellow);">Blog</p>
-      <h2>Articles & réflexions</h2>
-      <p>Partages sur le développement, l'IA, les outils et mon expérience terrain.</p>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:32px;">
+      <div class="section-head reveal" style="margin-bottom:0;">
+        <p class="eyebrow" style="color:var(--yellow);">Blog</p>
+        <h2>Articles & réflexions</h2>
+        <p>Partages sur le développement, l'IA, les outils et mon expérience terrain.</p>
+      </div>
+      <form class="blog-search" action="{{ route('blog') }}" method="GET" style="display:flex;gap:8px;">
+        <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher..." style="
+          padding:10px 16px;border-radius:100px;border:1px solid var(--line);
+          background:rgba(255,255,255,.04);color:var(--text);font-size:.88rem;
+          font-family:var(--font-body);outline:none;width:220px;transition:border-color .3s;
+        " />
+        <button class="btn btn-main" type="submit" style="border-radius:100px;padding:10px 18px;">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
     </div>
 
     <div class="blog-layout">

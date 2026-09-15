@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::published()->latest()->get();
+        $query = Post::published();
+
+        if ($request->has('q') && $request->q !== '') {
+            $q = $request->q;
+            $query->where(function ($sub) use ($q) {
+                $sub->where('title', 'like', "%{$q}%")
+                    ->orWhere('excerpt', 'like', "%{$q}%")
+                    ->orWhere('body', 'like', "%{$q}%")
+                    ->orWhere('category', 'like', "%{$q}%");
+            });
+        }
+
+        $posts = $query->latest()->get();
         return view('pages.blog', compact('posts'));
     }
 
