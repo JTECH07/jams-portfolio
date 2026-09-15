@@ -14,6 +14,7 @@
       <a href="{{ route('timeline') }}" class="pill-link {{ request()->routeIs('timeline') ? 'active' : '' }}">Parcours</a>
       <a href="{{ route('contact') }}" class="pill-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
       <a href="{{ route('blog') }}" class="pill-link {{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a>
+      <a href="{{ route('admin.dashboard') }}" class="pill-link {{ request()->routeIs('admin.*') ? 'active' : '' }}" style="font-size:.75rem;opacity:.7;"><i class="bi bi-gear"></i></a>
     </div>
 
     <a class="pill-cv" href="{{ asset('CV_Joseph_ALAYE.pdf') }}" target="_blank" rel="noopener">
