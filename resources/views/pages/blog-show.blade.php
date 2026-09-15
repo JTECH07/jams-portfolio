@@ -32,6 +32,23 @@
         <div class="blog-article-body">
           {!! $post->body !!}
         </div>
+
+        {{-- Social Share --}}
+        <div class="blog-share">
+          <span class="blog-share-label"><i class="bi bi-share"></i> Partager :</span>
+          <a class="blog-share-btn twitter" href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ urlencode(url('/blog/' . $post->slug)) }}" target="_blank" rel="noopener">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a class="blog-share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url('/blog/' . $post->slug)) }}" target="_blank" rel="noopener">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a class="blog-share-btn whatsapp" href="https://wa.me/?text={{ urlencode($post->title . ' ' . url('/blog/' . $post->slug)) }}" target="_blank" rel="noopener">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+          <a class="blog-share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/blog/' . $post->slug)) }}" target="_blank" rel="noopener">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </div>
       </div>
     </article>
 
@@ -190,6 +207,23 @@
     margin:16px 0;font-style:italic;
   }
   .blog-article-body img{border-radius:12px;max-width:100%;margin:16px 0}
+
+  /* Social Share */
+  .blog-share{
+    display:flex;align-items:center;gap:10px;margin-top:24px;
+    padding-top:20px;border-top:1px solid var(--line);
+  }
+  .blog-share-label{font-size:.85rem;color:var(--muted);font-weight:500}
+  .blog-share-btn{
+    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);
+    color:var(--muted);font-size:1rem;transition:all .3s;
+  }
+  .blog-share-btn:hover{transform:translateY(-2px)}
+  .blog-share-btn.twitter:hover{color:#fff;background:#000;border-color:#000}
+  .blog-share-btn.linkedin:hover{color:#fff;background:#0077b5;border-color:#0077b5}
+  .blog-share-btn.whatsapp:hover{color:#fff;background:#25d366;border-color:#25d366}
+  .blog-share-btn.facebook:hover{color:#fff;background:#1877f2;border-color:#1877f2}
 
   /* Star rating input */
   .star-input{display:flex;align-items:center;gap:4px}
