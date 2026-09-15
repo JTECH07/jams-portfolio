@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /comment
+Disallow: /rating
+
+Sitemap: {{ url('/') }}/sitemap.xml

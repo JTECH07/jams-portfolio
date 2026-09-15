@@ -45,6 +45,11 @@ Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog
 Route::post('/comment', [CommentController::class, 'storeComment'])->name('comment.store');
 Route::post('/rating', [CommentController::class, 'storeRating'])->name('rating.store');
 
+// SEO
+Route::get('/sitemap.xml', function () {
+    return response()->view('sitemap', [], 200)->header('Content-Type', 'application/xml');
+})->name('sitemap');
+
 // Basic back-office route
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');

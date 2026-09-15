@@ -3,8 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio de Joseph ALAYE, développeur web et mobile. Projets concrets, compétences full-stack et collaboration pour missions freelance, stages et recrutements." />
-  <title>Joseph ALAYE | Portfolio</title>
+  <meta name="description" content="@yield('meta_description', 'Portfolio de Joseph ALAYE, développeur web et mobile. Projets concrets, compétences full-stack et collaboration pour missions freelance, stages et recrutements.')" />
+  <title>@yield('meta_title', 'Joseph ALAYE | Portfolio')</title>
+
+  {{-- Open Graph --}}
+  <meta property="og:title" content="@yield('og_title', 'Joseph ALAYE | Développeur Web & Mobile')" />
+  <meta property="og:description" content="@yield('og_description', 'Développeur web et mobile basé à Porto-Novo, Bénin. Laravel, Flutter, Python, IA.')" />
+  <meta property="og:image" content="@yield('og_image', asset('images/me.png'))" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ url()->current() }}" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Joseph ALAYE Portfolio" />
+
+  {{-- Twitter Card --}}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="@yield('og_title', 'Joseph ALAYE | Développeur Web & Mobile')" />
+  <meta name="twitter:description" content="@yield('og_description', 'Développeur web et mobile basé à Porto-Novo, Bénin.')" />
+  <meta name="twitter:image" content="@yield('og_image', asset('images/me.png'))" />
+
+  {{-- Canonical --}}
+  <link rel="canonical" href="{{ url()->current() }}" />
+
   <link rel="icon" type="image/png" href="{{ asset('images/me.png') }}" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
