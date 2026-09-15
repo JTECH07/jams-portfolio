@@ -22,4 +22,24 @@ class Post extends Model
     {
         return $query->where('published', true);
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function ratings()
+    {
+        return $this->morphMany(Rating::class, 'rateable');
+    }
+
+    public function avgRating()
+    {
+        return $this->ratings()->avg('stars') ?? 0;
+    }
+
+    public function totalComments()
+    {
+        return $this->comments()->count();
+    }
 }

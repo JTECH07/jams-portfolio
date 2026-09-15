@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -38,6 +39,10 @@ Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog.subscribe');
+
+// Comments & Ratings
+Route::post('/comment', [CommentController::class, 'storeComment'])->name('comment.store');
+Route::post('/rating', [CommentController::class, 'storeRating'])->name('rating.store');
 
 // Basic back-office route
 Route::prefix('admin')->group(function () {
