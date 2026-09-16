@@ -254,6 +254,24 @@ window.addEventListener('mousemove', e => {
   trailer.animate({ transform: `translate(${e.clientX - 8}px, ${e.clientY - 8}px)` }, { duration: 700, fill: 'forwards' });
 }, { passive: true });
 
+/* ─── Lazy Loading ─── */
+document.querySelectorAll('img:not([loading])').forEach(img => {
+  if (!img.closest('.hero-bg-slider')) img.setAttribute('loading', 'lazy');
+});
+
+/* ─── Toast notification ─── */
+function showToast(msg, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = 'site-toast ' + type;
+  toast.innerHTML = '<i class="bi bi-' + (type === 'success' ? 'check-circle-fill' : 'exclamation-circle-fill') + '"></i> ' + msg;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+  setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
+}
+document.querySelectorAll('[data-toast]').forEach(el => {
+  el.addEventListener('click', () => showToast(el.dataset.toast));
+});
+
 /* ─── Theme Toggle ─── */
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');

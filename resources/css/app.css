@@ -764,3 +764,16 @@ body.light .marquee-wrap::after{background:linear-gradient(-90deg,var(--bg),tran
   .projects-viewport{height:460px!important}
   .project{width:300px}
 }
+
+/* ─── TOAST ─── */
+.site-toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  padding:14px 24px;border-radius:12px;
+  font-size:.88rem;font-weight:500;color:#fff;
+  transform:translateY(20px);opacity:0;transition:all .4s;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+}
+.site-toast.show{transform:translateY(0);opacity:1}
+.site-toast.success{background:linear-gradient(135deg,#10b981,#059669);border:1px solid rgba(16,185,129,.3)}
+.site-toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);border:1px solid rgba(239,68,68,.3)}

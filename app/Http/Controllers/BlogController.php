@@ -53,4 +53,15 @@ class BlogController extends Controller
 
         return redirect()->route('blog')->with('subscribed', true);
     }
+
+    public function unsubscribeConfirm($email)
+    {
+        return view('pages.unsubscribe', ['email' => $email]);
+    }
+
+    public function unsubscribe($email)
+    {
+        Subscriber::where('email', $email)->update(['active' => false]);
+        return redirect()->route('blog')->with('unsubscribed', true);
+    }
 }

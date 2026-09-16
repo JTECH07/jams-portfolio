@@ -63,6 +63,8 @@
           <div class="alert-success" style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--ok); background: rgba(16,185,129,0.1); color: var(--ok); margin-bottom: 20px; font-weight: 500;">
             <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
           </div>
+          <script>document.addEventListener('DOMContentLoaded',()=>showToast('{{ session('success') }}'))</script>
+          </div>
         @endif
 
         <form class="contact-form" id="laravelContactForm"

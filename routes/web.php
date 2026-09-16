@@ -36,16 +36,18 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send')->middleware('throttle:5,1');
 
 // Blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
-Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog.subscribe');
+Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog.subscribe')->middleware('throttle:3,1');
+Route::get('/unsubscribe/{email}', [BlogController::class, 'unsubscribeConfirm'])->name('blog.unsubscribe');
+Route::post('/unsubscribe/{email}', [BlogController::class, 'unsubscribe'])->name('blog.unsubscribe.post');
 
 // Comments & Ratings
-Route::post('/comment', [CommentController::class, 'storeComment'])->name('comment.store');
-Route::post('/rating', [CommentController::class, 'storeRating'])->name('rating.store');
+Route::post('/comment', [CommentController::class, 'storeComment'])->name('comment.store')->middleware('throttle:10,1');
+Route::post('/rating', [CommentController::class, 'storeRating'])->name('rating.store')->middleware('throttle:5,1');
 
 // SEO
 Route::get('/sitemap.xml', function () {
