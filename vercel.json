@@ -13,12 +13,7 @@
   "routes": [
     { "src": "/build/(.*)", "dest": "/build/$1" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
-    { "src": "/manifest.json", "dest": "/manifest.json" },
-    { "src": "/sw.js", "dest": "/sw.js" },
-    { "src": "/robots.txt", "dest": "/robots.txt" },
-    { "src": "/sitemap.xml", "dest": "/index.php" },
-    { "src": "/feed", "dest": "/index.php" },
-    { "src": "/favicon.ico", "dest": "/images/me.png" },
+    { "src": "/(.*\\.(ico|json|txt|js|css))$", "dest": "/$1" },
     { "src": "/(.*)", "dest": "/index.php" }
   ]
 }
