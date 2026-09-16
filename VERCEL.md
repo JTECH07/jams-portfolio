@@ -1,6 +1,44 @@
-# Deploy to Vercel
+# Deploy Laravel + Supabase sur Vercel
 
-## Option 1: Vercel CLI (recommandé)
+## Étape 1: Supabase
+
+1. Aller sur https://supabase.com → Start your project
+2. Créer un compte GitHub
+3. Créer un nouveau project:
+   - Name: `pf`
+   - Password: (note ce mot de passe)
+   - Region: West Europe (Amsterdam)
+4. Aller dans **Settings → Database**
+5. Copier les infos de connexion
+
+## Étape 2: Configurer les variables Vercel
+
+Dans le dashboard Vercel → ton project → Settings → Environment Variables, ajouter:
+
+```
+APP_NAME=Laravel
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:5/4sNdaWVWvdr3DGqQhCFkOovFoPU4JeoO1NAwl+Sms=
+APP_URL=https://ton-app.vercel.app
+
+DB_CONNECTION=pgsql
+DB_HOST=db.xxxxx.supabase.co
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=postgres
+DB_PASSWORD=ton-mot-de-passe-supabase
+
+SESSION_DRIVER=database
+CACHE_STORE=database
+QUEUE_CONNECTION=sync
+
+MAIL_MAILER=log
+```
+
+**IMPORTANT**: Remplacer `db.xxxxx.supabase.co` et `ton-mot-de-passe-supabase` par tes vraies infos.
+
+## Étape 3: Deploy
 
 ```bash
 # Installer Vercel CLI
@@ -9,82 +47,39 @@ npm i -g vercel
 # Se connecter
 vercel login
 
-# Déployer (depuis la racine du projet)
+# Déployer
+cd /home/jams/Documents/myProjects/Pf
 vercel
 
-# Déployer en production
-vercel --prod
+# Suivre les instructions (appuyer sur Entrée pour les défauts)
 ```
 
-## Option 2: GitHub + Vercel Dashboard
+## Étape 4: Migrations
 
-1. Push le code sur GitHub
-2. Aller sur vercel.com/new
-3. Importer le repository
-4. Framework: **Other**
-5. Build Command: `composer install --no-dev && npm install && npx vite build`
-6. Output Directory: `public`
-7. Environment Variables (voir ci-dessous)
+Après le premier déploiement, aller sur le dashboard Vercel → ton project → Functions → onglet "Logs" pour voir si tout fonctionne.
 
-## Variables d'environnement (Vercel Dashboard)
-
-```
-APP_ENV=production
-APP_DEBUG=false
-APP_KEY=base64:5/4sNdaWVWvdr3DGqQhCFkOovFoPU4JeoO1NAwl+Sms=
-APP_URL=https://ton-domaine.vercel.app
-DB_CONNECTION=mysql
-DB_HOST=ton-host-mysql
-DB_PORT=3306
-DB_DATABASE=pf
-DB_USERNAME=ton-user
-DB_PASSWORD=ton-password
-SESSION_DRIVER=database
-CACHE_STORE=database
-QUEUE_CONNECTION=database
-MAIL_MAILER=log
+Pour exécuter les migrations manuellement:
+```bash
+vercel env pull .env.production
+php artisan migrate --force --env=production
+php artisan db:seed --force --env=production
 ```
 
-## Base de données
+## Étape 5: Configurer le domaine
 
-### Option A: PlanetScale (gratuit)
-1. Créer un compte sur planetscale.com
-2. Créer une database "pf"
-3. Copier les credentials dans Vercel
+Dans Vercel → ton project → Settings → Domains:
+- Ajouter `msjoseph-alaye.vercel.app`
+- Ou un domaine personnalisé
 
-### Option B: Supabase (gratuit)
-1. Créer un compte sur supabase.com
-2. Créer un projet
-3. Utiliser les credentials PostgreSQL
-
-### Option C: ClearDB (gratuit sur Heroku)
-1. Créer un compte ClearDB
-2. Créer une database MySQL
-3. Copier les credentials
-
-## APRÈS le déploiement
+## Commandes utiles
 
 ```bash
-# Sur Vercel, exécuter les migrations
+# Voir les logs
+vercel logs
+
+# Redéployer
+vercel --prod
+
+# Pull les variables d'env
 vercel env pull .env.local
-php artisan migrate --force
-php artisan db:seed --force
-```
-
-## Structure des fichiers
-
-```
-/
-├── app/
-├── config/
-├── database/
-├── public/          ← Output directory
-│   ├── index.php
-│   ├── build/
-│   ├── images/
-│   └── ...
-├── resources/
-├── routes/
-├── vercel.json      ← Config Vercel
-└── .vercelignore
 ```

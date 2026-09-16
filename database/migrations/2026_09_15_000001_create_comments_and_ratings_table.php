@@ -22,7 +22,7 @@ return new class extends Migration
             $table->id();
             $table->string('author_name');
             $table->string('author_email')->nullable();
-            $table->tinyInteger('stars')->unsigned()->default(5); // 1-5
+            $table->smallInteger('stars')->unsigned()->default(5); // 1-5
             $table->text('review')->nullable();
             $table->nullableMorphs('rateable'); // post ou service
             $table->timestamps();
