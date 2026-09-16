@@ -181,7 +181,7 @@ body.intro-lock{overflow:hidden}
 /* ─── HERO ─── */
 .hero{
   position:relative;min-height:100vh;display:flex;align-items:center;
-  margin-top:calc(-1 * var(--nav-h));padding:var(--nav-h) 0 0;overflow:hidden;
+  margin-top:-80px;overflow:hidden;
 }
 .hero .wrap{z-index:2;position:relative;width:100%;padding:0 20px 80px}
 .hero-layout{
@@ -281,6 +281,65 @@ body.intro-lock{overflow:hidden}
   color:var(--yellow);font-weight:300;
 }
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Hero name typing */
+.hero-name-cursor{
+  font-weight:800;color:var(--yellow);animation:cursorBlink 1s step-end infinite;margin-left:2px;
+}
+
+/* ─── HOLOGRAPHIC BUTTONS ─── */
+.holo-btn{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:12px;cursor:pointer;
+  text-decoration:none;color:var(--white);font-weight:600;font-size:.88rem;
+  font-family:var(--font-head);overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);
+  border:1px solid rgba(255,215,0,.3);
+  background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(37,99,235,.08));
+}
+.holo-btn .holo-btn-frame{
+  position:absolute;inset:0;border-radius:12px;
+  border:1px solid transparent;
+  background:linear-gradient(135deg,rgba(255,215,0,.4),rgba(6,182,212,.4),rgba(37,99,235,.4)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .4s;
+}
+.holo-btn:hover .holo-btn-frame{opacity:1}
+.holo-btn .holo-btn-glow{
+  position:absolute;inset:-2px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(6,182,212,.2),rgba(37,99,235,.2));
+  filter:blur(12px);opacity:0;transition:opacity .4s;z-index:-1;
+}
+.holo-btn:hover .holo-btn-glow{opacity:1}
+.holo-btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,215,0,.5);
+  box-shadow:0 8px 32px rgba(255,215,0,.15),0 0 60px rgba(37,99,235,.1);
+}
+.holo-btn .holo-btn-text{position:relative;z-index:1}
+.holo-btn::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent,rgba(255,215,0,.15),transparent,rgba(6,182,212,.15),transparent);
+  animation:holoSpin 4s linear infinite;opacity:0;transition:opacity .4s;
+}
+.holo-btn:hover::before{opacity:1}
+@keyframes holoSpin{to{transform:rotate(360deg)}}
+
+.holo-btn-alt{
+  border-color:rgba(6,182,212,.3);
+  background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(37,99,235,.08));
+}
+.holo-btn-alt .holo-btn-frame{
+  background:linear-gradient(135deg,rgba(6,182,212,.4),rgba(37,99,235,.4),rgba(255,215,0,.4)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.holo-btn-alt:hover{
+  border-color:rgba(6,182,212,.5);
+  box-shadow:0 8px 32px rgba(6,182,212,.15),0 0 60px rgba(37,99,235,.1);
+}
 
 /* ─── HOME VALUE GRID ─── */
 .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -562,6 +621,11 @@ body.light .social-link:hover{color:var(--black);border-color:var(--accent)}
 body.light .hero .btn-outline{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.15);color:var(--black);backdrop-filter:blur(8px)}
 body.light .hero .btn-outline:hover{background:rgba(37,99,235,.1);border-color:var(--accent);color:var(--accent)}
 body.light .hero .btn-main{box-shadow:0 8px 24px rgba(37,99,235,.2)}
+body.light .holo-btn{background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(37,99,235,.1));border-color:rgba(255,215,0,.5);color:var(--black)}
+body.light .holo-btn:hover{border-color:rgba(255,215,0,.7);box-shadow:0 8px 32px rgba(255,215,0,.2),0 0 60px rgba(37,99,235,.08)}
+body.light .holo-btn-alt{background:linear-gradient(135deg,rgba(6,182,212,.12),rgba(37,99,235,.1));border-color:rgba(6,182,212,.5);color:var(--black)}
+body.light .holo-btn-alt:hover{border-color:rgba(6,182,212,.7);box-shadow:0 8px 32px rgba(6,182,212,.2),0 0 60px rgba(37,99,235,.08)}
+body.light .holo-btn .holo-btn-text{color:var(--black)}
 body.light .hero-tag{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--ok)}
 body.light .hero .hero-big-name{color:rgba(0,0,0,.03)}
 body.light .tech-tag{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1);color:#475569}

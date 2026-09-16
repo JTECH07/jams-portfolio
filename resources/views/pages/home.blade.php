@@ -72,7 +72,7 @@
         {{-- RIGHT --}}
         <div class="hero-right reveal">
           <p class="hero-intro-text">
-            Hi, je suis <strong class="hero-name-highlight">Joseph ALAYE</strong>
+            Hi, je suis <strong class="hero-name-highlight" id="heroNameTyped"></strong><span class="hero-name-cursor">|</span>
           </p>
           <p class="hero-role-text">développeur web &amp; mobile</p>
           <p>
@@ -84,6 +84,18 @@
             <span class="tech-tag"><i class="bi bi-phone"></i> Flutter</span>
             <span class="tech-tag"><i class="bi bi-filetype-py"></i> Python</span>
             <span class="tech-tag"><i class="bi bi-filetype-js"></i> JavaScript</span>
+          </div>
+          <div class="hero-cta-row" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="holo-btn" href="{{ route('contact') }}">
+              <span class="holo-btn-frame"></span>
+              <span class="holo-btn-glow"></span>
+              <span class="holo-btn-text"><i class="bi bi-envelope"></i> Me contacter</span>
+            </a>
+            <a class="holo-btn holo-btn-alt" href="{{ route('projects') }}">
+              <span class="holo-btn-frame"></span>
+              <span class="holo-btn-glow"></span>
+              <span class="holo-btn-text"><i class="bi bi-arrow-right"></i> Projets</span>
+            </a>
           </div>
         </div>
 

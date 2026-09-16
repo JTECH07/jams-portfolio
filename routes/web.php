@@ -6,6 +6,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
 
+use App\Http\Controllers\AuthController;
+
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
@@ -55,8 +57,13 @@ Route::get('/feed', function () {
     return response()->view('rss', compact('posts'), 200)->header('Content-Type', 'application/rss+xml');
 })->name('feed');
 
+// Auth
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
 // Basic back-office route
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts');
 

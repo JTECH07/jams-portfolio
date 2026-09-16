@@ -37,7 +37,7 @@ self.addEventListener('fetch', (e) => {
         }
         return res;
       });
-      return cached || fetched;
+      return cached || fetched.catch(() => new Response('Hors ligne', { status: 503, headers: { 'Content-Type': 'text/plain' } }));
     })
   );
 });

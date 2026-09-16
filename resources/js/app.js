@@ -76,6 +76,24 @@ if (cursorText) {
   setTimeout(typeCursor, 1200);
 }
 
+/* ─── Hero Name Typing ─── */
+const heroNameEl = document.getElementById('heroNameTyped');
+if (heroNameEl) {
+  const fullName = 'Joseph ALAYE';
+  let nameIdx = 0, nameDeleting = false;
+  function typeName() {
+    heroNameEl.textContent = nameDeleting ? fullName.slice(0, nameIdx--) : fullName.slice(0, nameIdx++);
+    let delay = nameDeleting ? 40 : 80;
+    if (!nameDeleting && nameIdx > fullName.length) { nameDeleting = true; delay = 3000; }
+    if (nameDeleting && nameIdx < 0) {
+      nameDeleting = false;
+      delay = 600;
+    }
+    setTimeout(typeName, delay);
+  }
+  setTimeout(typeName, 800);
+}
+
 /* ─── Pill Nav: scroll + sliding indicator ─── */
 const nav = document.getElementById('mainNav');
 const pillLinks = document.getElementById('navLinks');

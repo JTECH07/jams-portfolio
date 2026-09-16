@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::updateOrCreate(
+            ['email' => 'admin@josephalaye.com'],
+            ['name' => 'Joseph ALAYE', 'password' => bcrypt('password'), 'email_verified_at' => now()]
+        );
+
         $this->call([
             PostSeeder::class,
         ]);

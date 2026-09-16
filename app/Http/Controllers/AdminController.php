@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Subscriber;
-use App\Models\Subscriber;
 use App\Mail\NewPostNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
