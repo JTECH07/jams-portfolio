@@ -1,0 +1,11 @@
+node_modules/
+vendor/
+.git/
+tests/
+database/*.sqlite
+.env
+.env.*
+storage/logs/*
+storage/framework/views/*
+storage/framework/cache/*
+storage/framework/sessions/*
