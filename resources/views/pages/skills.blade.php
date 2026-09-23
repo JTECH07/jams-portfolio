@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="section" id="skills">
+<section class="section" id="skills" style="background:var(--bg);">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
       <p class="eyebrow" style="color: var(--yellow);">Compétences</p>
-      <h2>Stack technique et outils</h2>
-      <p>Technologies et méthodes utilisées pour concevoir des produits maintenables, performants et orientés usage.</p>
+      <h2 style="text-align:center;">Stack technique et outils</h2>
+      <p style="color:var(--muted);text-align:center;margin-bottom:24px;">
+        Technologies et méthodes utilisées pour concevoir des produits maintenables, performants et orientés usage.
+      </p>
     </div>
 
     <div class="skills-grid">
@@ -26,13 +28,13 @@
           </li>
           <li>
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="skill-logo" />
             PHP & Python
           </li>
           <li>
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="skill-logo" />
             Java, C++, Dart
           </li>
         </ul>
@@ -49,7 +51,7 @@
           </li>
           <li>
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="skill-logo" />
             Bootstrap / Tailwind
           </li>
           <li>
@@ -58,7 +60,7 @@
           </li>
           <li>
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="skill-logo" />
             Django / React (bases)
           </li>
         </ul>
@@ -74,11 +76,11 @@
             MySQL
           </li>
           <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="skill-logo" />
             PostgreSQL
           </li>
           <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unix/unix-original.svg" alt="Merise" class="skill-logo" style="filter:brightness(1.5) sepia(1) hue-rotate(10deg);" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/unix/unix-original.svg" alt="Merise" class="skill-logo" style="filter:brightness(1.5) sepia(1) hue-rotate(10deg);" />
             Modélisation UML / Merise
           </li>
         </ul>
@@ -91,7 +93,7 @@
         <ul style="display: grid; gap: 15px;">
           <li>
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/deviconicons/github/github-original.svg" alt="GitHub" class="skill-logo" />
             Git / GitHub / GitLab
           </li>
           <li>
@@ -99,7 +101,7 @@
             Figma (UI/UX)
           </li>
           <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" class="skill-logo" />
+            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" class="skill-logo" />
             WordPress
           </li>
           <li>
@@ -112,8 +114,14 @@
   </div>
 </section>
 
-<style>
-  .skill-logo{width:28px;height:28px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:6px}
-  body.light .skill-logo{filter:none}
-</style>
+<!-- Navigation entre pages -->
+<div style="text-align:center;margin-top:32px;">
+  <a href="{{ route('profil') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
+    <i class="bi bi-arrow-left"></i> Retour à propos
+  </a>
+  <a href="{{ route('competences') }}" class="btn btn-main" style="font-size:.85rem;padding:8px 16px;margin-left:12px;">
+    <i class="bi bi-grid"></i> Voir les compétences
+  </a>
+</div>
+
 @endsection

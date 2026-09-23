@@ -367,3 +367,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 @endsection
+
+<!-- Navigation entre pages -->
+<div style="text-align:center;margin-top:32px;">
+  <a href="{{ route('about') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
+    <i class="bi bi-arrow-left"></i> Retour à propos
+  </a>
+  <a href="{{ route('competences') }}" class="btn btn-main" style="font-size:.85rem;padding:8px 16px;margin-left:12px;">
+    <i class="bi bi-grid"></i> Voir les compétences
+  </a>
+</div>
