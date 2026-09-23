@@ -133,4 +133,11 @@
     </div>
   </div>
 </section>
+
+<!-- Navigation -->
+<div style="text-align:center;margin-top:32px;">
+  <a href="{{ route('home') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
+    <i class="bi bi-house-door"></i> Accueil
+  </a>
+</div>
 @endsection
