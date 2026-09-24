@@ -7,8 +7,12 @@ APP_ENV="${APP_ENV:-production}"
 APP_KEY="${APP_KEY:-}"
 APP_DEBUG="${APP_DEBUG:-true}"
 APP_URL="${APP_URL:-http://localhost:8000}"
-DB_CONNECTION="${DB_CONNECTION:-sqlite}"
-DB_DATABASE="${DB_DATABASE:-/var/www/html/database/database.sqlite}"
+DB_CONNECTION="${DB_CONNECTION:-mysql}"
+DB_HOST="${DB_HOST:-127.0.0.1}"
+DB_PORT="${DB_PORT:-3306}"
+DB_DATABASE="${DB_DATABASE:-pf}"
+DB_USERNAME="${DB_USERNAME:-root}"
+DB_PASSWORD="${DB_PASSWORD:-}"
 SESSION_DRIVER="${SESSION_DRIVER:-database}"
 CACHE_STORE="${CACHE_STORE:-database}"
 QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
@@ -25,7 +29,13 @@ if grep -q '^APP_NAME=' .env; then
     fi
 fi
 
-touch /var/www/html/database/database.sqlite
+# Création du dossier de base de données s'il n'existe pas
+mkdir -p /var/www/html/database
+
+# Si MySQL/PostgreSQL, s'assurer que le dossier de la base existe
+if [ "$DB_CONNECTION" = "mysql" ] || [ "$DB_CONNECTION" = "pgsql" ]; then
+    touch /var/www/html/database/database.sqlite 2>/dev/null || true
+fi
 
 php artisan config:clear
 php artisan route:clear
