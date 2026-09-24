@@ -91,7 +91,7 @@
               <span class="holo-btn-glow"></span>
               <span class="holo-btn-text"><i class="bi bi-envelope"></i> Me contacter</span>
             </a>
-            <a class="holo-btn holo-btn-alt" href="{{ route('projects') }}" style="text-color:white;">
+            <a class="holo-btn holo-btn-alt" href="{{ route('projects') }}" style="color:white;">
               <span class="holo-btn-frame"></span>
               <span class="holo-btn-glow"></span>
               <span class="holo-btn-text"><i class="bi bi-arrow-right"></i> Projets</span>
