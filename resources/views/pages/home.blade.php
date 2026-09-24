@@ -91,7 +91,7 @@
               <span class="holo-btn-glow"></span>
               <span class="holo-btn-text"><i class="bi bi-envelope"></i> Me contacter</span>
             </a>
-            <a class="holo-btn holo-btn-alt" href="{{ route('projects') }}">
+            <a class="holo-btn holo-btn-alt" href="{{ route('projects') }}" style="text-color:white;">
               <span class="holo-btn-frame"></span>
               <span class="holo-btn-glow"></span>
               <span class="holo-btn-text"><i class="bi bi-arrow-right"></i> Projets</span>
@@ -181,116 +181,6 @@
           <div class="n">∞</div>
           <p style="color:var(--muted);">Ambition infinie</p>
         </article>
-      </div>
-    </div>
-  </section>
-
-  {{-- ═══════════ SKILLS PREVIEW ═══════════ --}}
-  <section class="section" style="background:var(--bg);">
-    <div class="wrap">
-      <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
-        <p class="eyebrow" style="justify-content:center;color:var(--accent);">
-          <span style="width:32px;height:2px;background:var(--accent);border-radius:2px;"></span>
-          Compétences
-        </p>
-        <h2 style="text-align:center;">Mon arsenal technique</h2>
-        <p style="text-align:center;max-width:560px;margin:12px auto 0;color:var(--muted);">Les technologies que je maîtrise pour construire des produits solides et scalables.</p>
-      </div>
-
-      <div class="marquee-wrap">
-        <div class="marquee-track">
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-html" style="color:#E34F26;font-size:1.4rem;"></i><span>HTML5</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-css" style="color:#264DE4;font-size:1.4rem;"></i><span>CSS3</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-js" style="color:#F7DF1E;font-size:1.4rem;"></i><span>JavaScript</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-php" style="color:#777BB4;font-size:1.4rem;"></i><span>PHP</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-boxes" style="color:#FF2D20;font-size:1.4rem;"></i><span>Laravel</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#02569B;font-size:1.4rem;"></i><span>Flutter</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-java" style="color:#007396;font-size:1.4rem;"></i><span>Java</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#4479A1;font-size:1.4rem;"></i><span>MySQL</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#336791;font-size:1.4rem;"></i><span>PostgreSQL</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-git" style="color:#F05032;font-size:1.4rem;"></i><span>Git</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-pen" style="color:#F24E1E;font-size:1.4rem;"></i><span>Figma</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-py" style="color:#3776AB;font-size:1.4rem;"></i><span>Python</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-braces" style="color:#9C27B0;font-size:1.4rem;"></i><span>C++</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#0175C2;font-size:1.4rem;"></i><span>Dart</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-wordpress" style="color:#21759B;font-size:1.4rem;"></i><span>WordPress</span></div>
-          {{-- Duplicate for seamless loop --}}
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-html" style="color:#E34F26;font-size:1.4rem;"></i><span>HTML5</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-css" style="color:#264DE4;font-size:1.4rem;"></i><span>CSS3</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-js" style="color:#F7DF1E;font-size:1.4rem;"></i><span>JavaScript</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-php" style="color:#777BB4;font-size:1.4rem;"></i><span>PHP</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-boxes" style="color:#FF2D20;font-size:1.4rem;"></i><span>Laravel</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#02569B;font-size:1.4rem;"></i><span>Flutter</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-java" style="color:#007396;font-size:1.4rem;"></i><span>Java</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#4479A1;font-size:1.4rem;"></i><span>MySQL</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#336791;font-size:1.4rem;"></i><span>PostgreSQL</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-git" style="color:#F05032;font-size:1.4rem;"></i><span>Git</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-pen" style="color:#F24E1E;font-size:1.4rem;"></i><span>Figma</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-filetype-py" style="color:#3776AB;font-size:1.4rem;"></i><span>Python</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-braces" style="color:#9C27B0;font-size:1.4rem;"></i><span>C++</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#0175C2;font-size:1.4rem;"></i><span>Dart</span></div>
-          <div class="home-skill-pill glass"><i class="bi bi-wordpress" style="color:#21759B;font-size:1.4rem;"></i><span>WordPress</span></div>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:32px;" class="reveal">
-        <a class="btn btn-outline" href="{{ route('skills') }}">
-          <i class="bi bi-arrow-right"></i> Voir toutes les compétences
-        </a>
-      </div>
-
-      <div class="home-code-visual reveal" style="margin-top:48px;">
-        <img src="https://illustrations.popsy.co/white/coding.svg" alt="Code" style="max-width:360px;width:100%;margin:0 auto;display:block;opacity:.7;" onerror="this.style.display='none'" />
-      </div>
-    </div>
-  </section>
-
-  {{-- ═══════════ SERVICES PREVIEW ═══════════ --}}
-  <section class="section" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-    <div class="wrap">
-      <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
-        <p class="eyebrow" style="justify-content:center;color:var(--accent-2);">
-          <span style="width:32px;height:2px;background:var(--accent-2);border-radius:2px;"></span>
-          Services
-        </p>
-        <h2 style="text-align:center;">Ce que je peux faire pour vous</h2>
-      </div>
-
-      <div class="home-services-grid">
-        <div class="home-service-card glass reveal">
-          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
-            <i class="bi bi-globe2" style="color:var(--accent-2);font-size:1.3rem;"></i>
-          </div>
-          <h4 style="color:var(--white);margin-top:8px;">Sites Web</h4>
-          <p style="color:var(--muted);font-size:.88rem;">Sites vitrines, e-commerce, plateformes — de la maquette au déploiement.</p>
-        </div>
-        <div class="home-service-card glass reveal">
-          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
-            <i class="bi bi-phone-fill" style="color:var(--accent-2);font-size:1.3rem;"></i>
-          </div>
-          <h4 style="color:var(--white);margin-top:8px;">Applications Mobile</h4>
-          <p style="color:var(--muted);font-size:.88rem;">Apps natives et cross-platform avec Flutter pour iOS et Android.</p>
-        </div>
-        <div class="home-service-card glass reveal">
-          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
-            <i class="bi bi-palette-fill" style="color:var(--accent-2);font-size:1.3rem;"></i>
-          </div>
-          <h4 style="color:var(--white);margin-top:8px;">UI/UX Design</h4>
-          <p style="color:var(--muted);font-size:.88rem;">Interfaces intuitives et esthétiques centrées sur l'expérience utilisateur.</p>
-        </div>
-        <div class="home-service-card glass reveal">
-          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
-            <i class="bi bi-robot" style="color:var(--accent-2);font-size:1.3rem;"></i>
-          </div>
-          <h4 style="color:var(--white);margin-top:8px;">IA & Automatisation</h4>
-          <p style="color:var(--muted);font-size:.88rem;">Intégration d'IA et automatisation de workflows pour optimiser vos process.</p>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:36px;" class="reveal">
-        <a class="btn btn-outline" href="{{ route('services') }}">
-          <i class="bi bi-arrow-right"></i> Découvrir tous les services
-        </a>
       </div>
     </div>
   </section>
@@ -430,6 +320,176 @@
       <a class="btn btn-main" href="{{ route('projects') }}">
         <i class="bi bi-grid-3x3-gap"></i> Voir tous les projets (15+)
       </a>
+    </div>
+  </section>
+
+  {{-- ═══════════ CTA BANNER ═══════════ --}}
+  <section class="section" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:60px 0;">
+    <div class="wrap" style="text-align:center;">
+      <div class="reveal">
+        <img src="https://illustrations.popsy.co/white/contact-us.svg" alt="Contact" style="max-width:280px;width:100%;margin:0 auto 24px;display:block;opacity:.8;" onerror="this.style.display='none'" />
+        <h2 style="margin-bottom:12px;">Un projet en tête ?</h2>
+        <p style="color:var(--muted);max-width:480px;margin:0 auto 28px;font-size:1.05rem;">Parlons-en. Je suis disponible pour des missions freelance, des stages et des collaborations.</p>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn btn-main" href="{{ route('contact') }}">
+            <i class="bi bi-envelope"></i> Démarrer un projet
+          </a>
+          <a class="btn btn-outline" href="https://wa.me/22969423587" target="_blank">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{-- ═══════════ SERVICES PREVIEW ═══════════ --}}
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
+        <p class="eyebrow" style="justify-content:center;color:var(--accent-2);">
+          <span style="width:32px;height:2px;background:var(--accent-2);border-radius:2px;"></span>
+          Services
+        </p>
+        <h2 style="text-align:center;">Ce que je peux faire pour vous</h2>
+      </div>
+
+      <div class="home-services-grid">
+        <div class="home-service-card glass reveal">
+          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
+            <i class="bi bi-globe2" style="color:var(--accent-2);font-size:1.3rem;"></i>
+          </div>
+          <h4 style="color:var(--white);margin-top:8px;">Sites Web</h4>
+          <p style="color:var(--muted);font-size:.88rem;">Sites vitrines, e-commerce, plateformes — de la maquette au déploiement.</p>
+        </div>
+        <div class="home-service-card glass reveal">
+          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
+            <i class="bi bi-phone-fill" style="color:var(--accent-2);font-size:1.3rem;"></i>
+          </div>
+          <h4 style="color:var(--white);margin-top:8px;">Applications Mobile</h4>
+          <p style="color:var(--muted);font-size:.88rem;">Apps natives et cross-platform avec Flutter pour iOS et Android.</p>
+        </div>
+        <div class="home-service-card glass reveal">
+          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
+            <i class="bi bi-palette-fill" style="color:var(--accent-2);font-size:1.3rem;"></i>
+          </div>
+          <h4 style="color:var(--white);margin-top:8px;">UI/UX Design</h4>
+          <p style="color:var(--muted);font-size:.88rem;">Interfaces intuitives et esthétiques centrées sur l'expérience utilisateur.</p>
+        </div>
+        <div class="home-service-card glass reveal">
+          <div class="futuristic-glow" style="width:52px;height:52px;border-radius:12px;">
+            <i class="bi bi-robot" style="color:var(--accent-2);font-size:1.3rem;"></i>
+          </div>
+          <h4 style="color:var(--white);margin-top:8px;">IA & Automatisation</h4>
+          <p style="color:var(--muted);font-size:.88rem;">Intégration d'IA et automatisation de workflows pour optimiser vos process.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:36px;" class="reveal">
+        <a class="btn btn-outline" href="{{ route('services') }}">
+          <i class="bi bi-arrow-right"></i> Découvrir tous les services
+        </a>
+      </div></br>
+      <div class="btn-row" style="justify-content:center;">
+          <a class="btn btn-main" href="{{ route('contact') }}">
+            <i class="bi bi-envelope"></i> Démarrer un projet
+          </a>
+          <a class="btn btn-outline" href="https://wa.me/22969423587" target="_blank">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+    </div>
+  </section>
+
+  <!-- SECTION "Mais qui suis-je ?" (À propos de moi)-->
+  <section class="section" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
+        <p class="eyebrow" style="justify-content:center;color:var(--accent-2);">
+          <span style="width:32px;height:2px;background:var(--accent-2);border-radius:2px;"></span>
+          À propos de moi
+        </p>
+        <h2 style="text-align:center;">Mais qui suis-je ?</h2>
+        <p style="text-align:center;max-width:560px;margin:12px auto 0;color:var(--muted);">Un développeur passionné par la création de solutions numériques qui font la différence.</p>
+      </div>
+
+      <div class="about-me-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;">
+        <div class="about-me-text reveal" style="max-width:560px; margin:0 auto; text-align:left; font-size:1rem; line-height:1.6; color:var(--white);">
+          <p>Je suis Joseph ALAYE, un développeur web et mobile basé à Porto-Novo, Bénin. Avec plus de 3 ans d'expérience dans le développement de solutions numériques, je me spécialise dans la création d'applications performantes et intuitives.</p>
+          <p>Mon approche est centrée sur l'utilisateur, en veillant à ce que chaque projet que je réalise soit non seulement fonctionnel mais aussi agréable à utiliser. Je suis toujours à la recherche de nouvelles technologies et méthodes pour améliorer mes compétences et offrir le meilleur à mes clients.</p>
+          <div class="btn-row" style="margin-top:24px;">
+            <a class="btn btn-main" href="{{ route('contact') }}">
+              <i class="bi bi-envelope"></i> Me contacter
+            </a>
+            <a class="btn btn-outline" href="{{ route('about') }}">
+              <i class="bi bi-arrow-right"></i> En savoir plus
+            </a>
+          </div>
+        </div>
+        <div class="about-me-image reveal">
+          <img src="{{ asset('images/me_about.png') }}" style="width:100%;height:auto;" alt="Photo de Joseph ALAYE" onerror="this.src='{{ asset('images/me-in-workspace.png') }}'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {{-- ═══════════ SKILLS PREVIEW ═══════════ --}}
+  <section class="section" style="background:var(--bg);">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
+        <p class="eyebrow" style="justify-content:center;color:var(--accent);">
+          <span style="width:32px;height:2px;background:var(--accent);border-radius:2px;"></span>
+          Compétences
+        </p>
+        <h2 style="text-align:center;">Mon arsenal technique</h2>
+        <p style="text-align:center;max-width:560px;margin:12px auto 0;color:var(--muted);">Les technologies que je maîtrise pour construire des produits solides et scalables.</p>
+      </div>
+
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-html" style="color:#E34F26;font-size:1.4rem;"></i><span>HTML5</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-css" style="color:#264DE4;font-size:1.4rem;"></i><span>CSS3</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-js" style="color:#F7DF1E;font-size:1.4rem;"></i><span>JavaScript</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-php" style="color:#777BB4;font-size:1.4rem;"></i><span>PHP</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-boxes" style="color:#FF2D20;font-size:1.4rem;"></i><span>Laravel</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#02569B;font-size:1.4rem;"></i><span>Flutter</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-java" style="color:#007396;font-size:1.4rem;"></i><span>Java</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#4479A1;font-size:1.4rem;"></i><span>MySQL</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#336791;font-size:1.4rem;"></i><span>PostgreSQL</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-git" style="color:#F05032;font-size:1.4rem;"></i><span>Git</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-pen" style="color:#F24E1E;font-size:1.4rem;"></i><span>Figma</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-py" style="color:#3776AB;font-size:1.4rem;"></i><span>Python</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-braces" style="color:#9C27B0;font-size:1.4rem;"></i><span>C++</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#0175C2;font-size:1.4rem;"></i><span>Dart</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-wordpress" style="color:#21759B;font-size:1.4rem;"></i><span>WordPress</span></div>
+          {{-- Duplicate for seamless loop --}}
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-html" style="color:#E34F26;font-size:1.4rem;"></i><span>HTML5</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-css" style="color:#264DE4;font-size:1.4rem;"></i><span>CSS3</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-js" style="color:#F7DF1E;font-size:1.4rem;"></i><span>JavaScript</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-php" style="color:#777BB4;font-size:1.4rem;"></i><span>PHP</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-boxes" style="color:#FF2D20;font-size:1.4rem;"></i><span>Laravel</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#02569B;font-size:1.4rem;"></i><span>Flutter</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-java" style="color:#007396;font-size:1.4rem;"></i><span>Java</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#4479A1;font-size:1.4rem;"></i><span>MySQL</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-database" style="color:#336791;font-size:1.4rem;"></i><span>PostgreSQL</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-git" style="color:#F05032;font-size:1.4rem;"></i><span>Git</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-pen" style="color:#F24E1E;font-size:1.4rem;"></i><span>Figma</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-filetype-py" style="color:#3776AB;font-size:1.4rem;"></i><span>Python</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-braces" style="color:#9C27B0;font-size:1.4rem;"></i><span>C++</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-phone" style="color:#0175C2;font-size:1.4rem;"></i><span>Dart</span></div>
+          <div class="home-skill-pill glass"><i class="bi bi-wordpress" style="color:#21759B;font-size:1.4rem;"></i><span>WordPress</span></div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:32px;" class="reveal">
+        <a class="btn btn-outline" href="{{ route('skills') }}">
+          <i class="bi bi-arrow-right"></i> Voir toutes les compétences
+        </a>
+      </div>
+
+      <div class="home-code-visual reveal" style="margin-top:48px;">
+        <img src="https://illustrations.popsy.co/white/coding.svg" alt="Code" style="max-width:360px;width:100%;margin:0 auto;display:block;opacity:.7;" onerror="this.style.display='none'" />
+      </div>
     </div>
   </section>
 
