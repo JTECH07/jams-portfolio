@@ -199,7 +199,7 @@
     </div>
 
     <div class="marquee-wrap" style="padding:10px 0 30px;">
-      <div class="marquee-track projects-marquee" style="animation-duration:40s;">
+      <div class="marquee-track projects-marquee" style="animation-duration:40s;animation-direction:alternate;">
         <article class="home-project-card glass">
           <figure><img src="{{ asset('images/desktop_code.jpg') }}" alt="Green World Builders" /></figure>
           <div class="home-project-body">
