@@ -7,7 +7,7 @@
     <div class="pill-links" id="navLinks">
       <div class="pill-indicator" id="pillIndicator"></div>
       <!-- <a href="{{ route('home') }}" class="pill-link {{ request()->routeIs('home') ? 'active' : '' }}">Accueil</a> -->
-      <a href="{{ route('about') }}" class="pill-link {{ request()->routeIs('about') ? 'active' : '' }}">Profil</a>
+      <a href="{{ route('about') }}" class="pill-link {{ request()->routeIs('about') ? 'active' : '' }}">Qui suis-je ?</a>
       <a href="{{ route('skills') }}" class="pill-link {{ request()->routeIs('skills') ? 'active' : '' }}">Compétences</a>
       <a href="{{ route('projects') }}" class="pill-link {{ request()->routeIs('projects') ? 'active' : '' }}">Projets</a>
       <a href="{{ route('services') }}" class="pill-link {{ request()->routeIs('services') ? 'active' : '' }}">Services</a>
