@@ -162,7 +162,7 @@ const countObs = new IntersectionObserver((entries) => {
     countObs.unobserve(entry.target);
   });
 }, { threshold: 0.3 });
-document.querySelectorAll('.fact').forEach(card => countObs.observe(card));
+document.querySelectorAll('[data-count]').forEach(card => countObs.observe(card));
 
 /* ─── Projects 3D Carousel ─── */
 const projectsArmoire = document.getElementById('projectsArmoire');
