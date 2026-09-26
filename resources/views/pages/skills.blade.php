@@ -3,124 +3,75 @@
 @section('content')
 <section class="section" id="skills" style="background:var(--bg);">
   <div class="wrap">
-    <div class="section-head reveal" style="text-align:center;margin-bottom:40px;">
-      <p class="eyebrow" style="color: var(--yellow);">Compétences</p>
-      <h2 style="text-align:center;">Stack technique et outils</h2>
-      <p style="color:var(--muted);text-align:center;margin-bottom:24px;">
+    <div class="section-head reveal" style="text-align:center;margin-bottom:48px;">
+      <p class="eyebrow" style="color:var(--yellow);justify-content:center;">Compétences</h2>
+      <h2 style="text-align:center;margin-bottom:24px;">Stack technique et outils</h2>
+      <p style="color:var(--muted);text-align:center;font-size:1.05rem;margin-bottom:0;">
         Technologies et méthodes utilisées pour concevoir des produits maintenables, performants et orientés usage.
       </p>
     </div>
 
-    <div class="skills-grid">
-      <article class="skill-box glass reveal" style="border-top: 4px solid var(--accent);">
-        <h3 style="color: var(--white); display: flex; align-items: center; gap: 10px;">
-          <i class="bi bi-braces" style="color: var(--accent);"></i> Langages
-        </h3>
-        <ul style="display: grid; gap: 15px;">
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="skill-logo" />
-            HTML5 & CSS3
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" class="skill-logo" />
-            JavaScript (ES6+)
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="skill-logo" />
-            PHP & Python
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="skill-logo" />
-            Java, C++, Dart
-          </li>
-        </ul>
-      </article>
+    <div class="skills-container reveal">
+      {{-- Section Langages --}}
+      <div class="skills-section" style="margin-bottom:40px;">
+        <div class="section-title" style="text-align:center;margin-bottom:24px;">
+          <h3 style="color:var(--white);font-size:1.5rem;">Langages</h3>
+        </div>
+        <div class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;">
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">HTML5</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">CSS3</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">JavaScript</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">PHP</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Python</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Java</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">C++</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Dart</div>
+          <div class="skill-pill" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--accent);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Figma</div>
+        </div>
+      </div>
 
-      <article class="skill-box glass reveal" style="border-top: 4px solid var(--accent-2);">
-        <h3 style="color: var(--white); display: flex; align-items: center; gap: 10px;">
-          <i class="bi bi-layers" style="color: var(--accent-2);"></i> Frameworks
-        </h3>
-        <ul style="display: grid; gap: 15px;">
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" class="skill-logo" />
-            Laravel
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="skill-logo" />
-            Bootstrap / Tailwind
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="skill-logo" />
-            Flutter (Mobile)
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="skill-logo" />
-            Django / React (bases)
-          </li>
-        </ul>
-      </article>
+      {{-- Section Frameworks --}}
+      <div class="skills-section" style="margin-bottom:40px;">
+        <div class="section-title" style="text-align:center;margin-bottom:24px;">
+          <h3 style="color:var(--white);font-size:1.5rem;">Frameworks</h3>
+        </div>
+        <div class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;">
+          <div class="skill-pill" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--accent-2);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Laravel</div>
+          <div class="skill-pill" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--accent-2);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Bootstrap</div>
+          <div class="skill-pill" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--accent-2);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Flutter</div>
+          <div class="skill-pill" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--accent-2);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Django</div>
+          <div class="skill-pill" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--accent-2);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">React</div>
+        </div>
+      </div>
 
-      <article class="skill-box glass reveal" style="border-top: 4px solid var(--yellow);">
-        <h3 style="color: var(--white); display: flex; align-items: center; gap: 10px;">
-          <i class="bi bi-database" style="color: var(--yellow);"></i> Bases de données
-        </h3>
-        <ul style="display: grid; gap: 15px;">
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="skill-logo" />
-            MySQL
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="skill-logo" />
-            PostgreSQL
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/unix/unix-original.svg" alt="Merise" class="skill-logo" style="filter:brightness(1.5) sepia(1) hue-rotate(10deg);" />
-            Modélisation UML / Merise
-          </li>
-        </ul>
-      </article>
+      {{-- Section Bases de données --}}
+      <div class="skills-section" style="margin-bottom:40px;">
+        <div class="section-title" style="text-align:center;margin-bottom:24px;">
+          <h3 style="color:var(--white);font-size:1.5rem;">Bases de données</h3>
+        </div>
+        <div class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;">
+          <div class="skill-pill" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--yellow);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">MySQL</div>
+          <div class="skill-pill" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--yellow);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">PostgreSQL</div>
+          <div class="skill-pill" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--yellow);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">MongoDB</div>
+          <div class="skill-pill" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--yellow);padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">SQLite</div>
+        </div>
+      </div>
 
-      <article class="skill-box glass reveal" style="border-top: 4px solid var(--white);">
-        <h3 style="color: var(--white); display: flex; align-items: center; gap: 10px;">
-          <i class="bi bi-tools" style="color: var(--white);"></i> Outils & Méthodes
-        </h3>
-        <ul style="display: grid; gap: 15px;">
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="skill-logo" />
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/deviconicons/github/github-original.svg" alt="GitHub" class="skill-logo" />
-            Git / GitHub / GitLab
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="skill-logo" />
-            Figma (UI/UX)
-          </li>
-          <li>
-            <img src="https://cdn.jsdelivr.dev/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" class="skill-logo" />
-            WordPress
-          </li>
-          <li>
-            <i class="bi bi-people" style="color:var(--white);font-size:1.4rem;"></i>
-            Travail Collaboratif Agile
-          </li>
-        </ul>
-      </article>
+      {{-- Section Outils & Méthodes --}}
+      <div class="skills-section">
+        <div class="section-title" style="text-align:center;margin-bottom:24px;">
+          <h3 style="color:var(--white);font-size:1.5rem;">Outils & Méthodes</h3>
+        </div>
+        <div class="skills-grid" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;">
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Git</div>
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">GitHub</div>
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">WordPress</div>
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Figma</div>
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Jira</div>
+          <div class="skill-pill" style="background:rgba(128,128,128,.1);border:1px solid rgba(128,128,128,.3);color:#6c757d;padding:10px 16px;border-radius:100px;font-size:.85rem;font-weight:600;">Docker</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- Navigation entre pages -->
-<div style="text-align:center;margin-top:32px;">
-<a href="{{ route('about') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
-    <i class="bi bi-arrow-left"></i> Retour à propos
-  </a>
-  <a href="{{ route('skills') }}" class="btn btn-main" style="font-size:.85rem;padding:8px 16px;margin-left:12px;">
-    <i class="bi bi-grid"></i> Voir les compétences
-  </a>
-</div>
 @endsection
