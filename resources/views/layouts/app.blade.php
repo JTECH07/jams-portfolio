@@ -24,13 +24,13 @@
   {{-- Canonical --}}
   <link rel="canonical" href="{{ url()->current() }}" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/me.png') }}" />
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/me.png') }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/me.png') }}" />
+  <link rel="icon" type="image/png" sizes="32x32 " href="{{ asset('images/me_professionnel.png') }}" />
+  <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('images/me_professionnel.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/me_professionnel.png') }}" />
   <link rel="manifest" href="{{ asset('manifest.json') }}" />
   <meta name="theme-color" content="#0F172A" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/css/app.css', 'resources/js/app.jsx'])
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -40,11 +40,12 @@
 <body class="intro-lock">
   <!-- Binary Rain Intro Overlay -->
   <div id="siteIntroOverlay" aria-hidden="false">
-    <div class="intro-binary" aria-hidden="true" id="introBinary"></div>
+    <div class="intro-binary skip-link" aria-hidden="true" id="introBinary"></div>
     <div class="intro-core">
       <h1 class="intro-name">JOSEPH ALAYE</h1>
       <p class="intro-subtitle">UNIVERS DIGITAL</p>
     </div>
+    
   </div>
 
   @include('partials.navbar')

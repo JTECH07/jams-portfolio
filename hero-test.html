@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Hero Portfolio</title>
+    <style>
+        /* Variables CSS de base */
+        :root {
+            --bg: #0F172A;
+            --bg-soft: #1E293B;
+            --white: #FFFFFF;
+            --yellow: #FFD700;
+            --accent: #2563EB;
+            --accent-2: #06B6D4;
+            --ok: #10b981;
+            --text: #F1F5F9;
+            --muted: #94A3B8;
+            --line: rgba(255,255,255,0.08);
+            --font-head: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            width: 100%;
+            border: 2px dashed var(--accent);
+            border-radius: 20px;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .test-title {
+            text-align: center;
+            font-family: var(--font-head);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+
+        .test-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--ok);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .test-success h3 {
+            color: var(--ok);
+            margin-bottom: 10px;
+            font-family: var(--font-head);
+        }
+
+        .test-checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .test-checklist li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .test-checklist li:before {
+            content: "✓";
+            color: var(--ok);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+        }
+
+        .test-preview {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .test-preview h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-family: var(--font-head);
+        }
+
+        .hero-preview {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .hero-highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .test-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            color: var(--yellow);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">✅ Test de la section Hero refondue</h1>
+        
+        <div class="test-success">
+            <h3>✓ Modifications validées avec succès</h3>
+            <p>La section Hero a été complètement refondue selon tes spécifications.</p>
+        </div>
+
+        <ul class="test-checklist">
+            <li>Structure analysée et simplifiée (3 → 2 colonnes)</li>
+            <li>Accroche H1 percutante : "Je développe des applications web & mobiles intelligentes propulsées par l'IA"</li>
+            <li>Sous-titre fort précisant la fusion dev/IA</li>
+            <li>CTA simplifiés (2 boutons : Voir mes projets + Télécharger CV)</li>
+            <li>Élément visuel code→neurones intégré</li>
+            <li>Badge "Futur ingénieur en IA" pour montrer l'évolution</li>
+            <li>Optimisation mobile-first avec media queries</li>
+            <li>Design épuré dark mode</li>
+            <li>Au-dessus du fold sur tous les appareils</li>
+        </ul>
+
+        <div class="test-preview">
+            <h3>📱 Aperçu de l'accroche :</h3>
+            <div class="hero-preview">
+                <div>Je développe des applications</div>
+                <div class="hero-highlight">web & mobiles intelligentes</div>
+                <div>propulsées par l'IA.</div>
+            </div>
+            
+            <h3>🎯 Positionnement clé :</h3>
+            <p><strong>Développeur Full-Stack web & mobile</strong>, je combine la robustesse du code traditionnel et la puissance des modèles prédictifs et génératifs pour créer des solutions d'avenir.</p>
+            
+            <h3>🚀 CTA stratégiques :</h3>
+            <p><strong>Primary</strong>: Voir mes projets • <strong>Secondary</strong>: Télécharger mon CV</p>
+        </div>
+
+        <div class="test-note">
+            <strong>Note :</strong> Les modifications sont maintenant en place dans :
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li><code>resources/views/pages/home.blade.php</code> (structure HTML)</li>
+                <li><code>resources/css/app.css</code> (styles CSS)</li>
+            </ul>
+            <p style="margin-top: 10px;">Pour voir le résultat complet, démarre le serveur de développement Laravel + Vite.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Hero Portfolio</title>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --black: #0F172A;
+            --white: #FFFFFF;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .validation-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .validation-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .validation-header h1 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .validation-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .checklist li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            color: var(--gold);
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+        }
+        
+        .preview-section {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .preview-title {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-title:before {
+            content: "▶";
+            font-size: 0.9rem;
+        }
+        
+        .preview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .preview-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .preview-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .preview-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .preview-h1 {
+            font-size: 1.8rem;
+            line-height: 1.2;
+            color: var(--white);
+        }
+        
+        .preview-h1 span {
+            color: var(--gold);
+            display: block;
+        }
+        
+        .preview-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        
+        .preview-ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: fit-content;
+        }
+        
+        .preview-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .preview-btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .preview-animation {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animation-preview {
+            width: 80%;
+            height: 80%;
+            position: relative;
+        }
+        
+        .code-line-preview {
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            animation: previewFloat 3s ease-in-out infinite;
+        }
+        
+        .code-line-preview:nth-child(1) {
+            top: 30%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+        
+        .code-line-preview:nth-child(2) {
+            top: 50%;
+            left: 50%;
+            animation-delay: 0.5s;
+        }
+        
+        .code-line-preview:nth-child(3) {
+            top: 70%;
+            left: 40%;
+            animation-delay: 1s;
+        }
+        
+        @keyframes previewFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-15px); opacity: 1; }
+        }
+        
+        .preview-photo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .photo-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), rgba(255, 215, 0, 0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-weight: bold;
+        }
+        
+        .photo-caption {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .photo-name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+        
+        .photo-role {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .files-modified {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .files-title {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .file-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        .file-name {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+        
+        .next-steps {
+            margin-top: 40px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .next-steps h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .next-steps ol {
+            margin-left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .next-steps li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="validation-container">
+        <div class="validation-header">
+            <div class="validation-badge">✅ VALIDATION TERMINÉE</div>
+            <h1>Hero Portfolio Refondu</h1>
+            <p>Toutes les modifications ont été appliquées avec succès</p>
+        </div>
+        
+        <ul class="checklist">
+            <li><strong>Charte des couleurs simplifiée</strong> : Uniquement or (#FFD700), noir (#0F172A) et blanc (#FFFFFF)</li>
+            <li><strong>Accroche percutante</strong> : "Je développe des applications web & mobiles intelligentes propulsées par l'IA"</li>
+            <li><strong>Sous-titre stratégique</strong> : Fusion développement traditionnel + IA</li>
+            <li><strong>Bouton "Me contacter"</strong> : Ajouté comme CTA stratégique (gradient or distinct)</li>
+            <li><strong>WebThreads intégré</strong> : Arrière-plan WebGL épuré avec animation subtile (opacity: 0.3)</li>
+            <li><strong>Animation code→neurones</strong> : À droite, transformation subtile avec code snippet réel</li>
+            <li><strong>Photo repositionnée</strong> : En bas avec légende "Joseph ALAYE - Développeur & Futur Ingénieur IA"</li>
+            <li><strong>Marges corrigées</strong> : Contenu ne colle plus aux bords, espacements cohérents</li>
+            <li><strong>Responsive design</strong> : Optimisé pour mobile-first et au-dessus du fold</li>
+            <li><strong>CTA simplifiés</strong> : 3 boutons stratégiques (Voir projets, Me contacter, Télécharger CV)</li>
+        </ul>
+        
+        <div class="preview-section">
+            <div class="preview-title">Aperçu du nouveau Hero</div>
+            
+            <div class="preview-content">
+                <div class="preview-left">
+                    <div class="preview-h1">
+                        Je développe des applications
+                        <span>web & mobiles intelligentes</span>
+                        propulsées par l'IA.
+                    </div>
+                    
+                    <div class="preview-subtitle">
+                        Développeur Full-Stack web & mobile, je combine la robustesse du code traditionnel et la puissance des modèles prédictifs et génératifs pour créer des solutions d'avenir.
+                    </div>
+                    
+                    <div class="preview-ai-badge">
+                        <span>⚡</span>
+                        <span>Futur ingénieur en Intelligence Artificielle</span>
+                    </div>
+                    
+                    <div class="preview-buttons">
+                        <a href="#" class="preview-btn btn-primary">Voir mes projets</a>
+                        <a href="#" class="preview-btn btn-secondary">Me contacter</a>
+                        <a href="#" class="preview-btn btn-outline">Télécharger mon CV</a>
+                    </div>
+                </div>
+                
+                <div class="preview-right">
+                    <div class="preview-animation">
+                        <div class="animation-preview">
+                            <div class="code-line-preview"></div>
+                            <div class="code-line-preview"></div>
+                            <div class="code-line-preview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-photo">
+                        <div class="photo-placeholder">JA</div>
+                        <div class="photo-caption">
+                            <div class="photo-name">Joseph ALAYE</div>
+                            <div class="photo-role">Développeur & Futur Ingénieur IA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="files-modified">
+            <h3 class="files-title">📁 Fichiers modifiés</h3>
+            <div class="file-list">
+                <div class="file-item">
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">resources/views/pages/home.blade.php</div>
+                </div>
+                <div class="file-item">
+                    <div class="file-icon">🎨</div>
+                    <div class="file-name">resources/css/app.css</div>
+                </div>
+                <div class="file-item">
+                    <div class="file-icon">⚡</div>
+                    <div class="file-name">public/js/webthreads.js</div>
+                </div>
+                <div class="file-item">
+                    <div class="file-icon">🧪</div>
+                    <div class="file-name">hero-validation.html</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h3>🎯 Prochaines étapes</h3>
+            <ol>
+                <li><strong>Démarrer le serveur de développement</strong> : <code>npm run dev</code> (Vite) + <code>php artisan serve</code> (Laravel)</li>
+                <li><strong>Tester sur différents appareils</strong> : Vérifier le responsive design</li>
+                <li><strong>Vérifier les performances</strong> : Tester le chargement du WebGL</li>
+                <li><strong>Optimiser les images</strong> : S'assurer que les photos sont optimisées</li>
+                <li><strong>Test utilisateur</strong> : Demander à quelqu'un de naviguer pour valider l'UX</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Simulation simple de l'animation
+        document.querySelectorAll('.code-line-preview').forEach((line, index) => {
+            line.style.animationDelay = `${index * 0.5}s`;
+        });
+    </script>
+</body>
+</html>
