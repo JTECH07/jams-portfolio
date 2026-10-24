@@ -11,28 +11,28 @@ const services = [
     title: 'Sites Web',
     desc: 'Sites vitrines, e-commerce, plateformes — de la maquette au déploiement.',
     href: '/services',
-    img: '/images/desktop_code.jpg',
+    img: '/images/Site Stats-cuate.svg',
   },
   {
     icon: 'bi-phone-fill',
     title: 'Applications Mobile',
     desc: 'Apps natives et cross-platform avec Flutter pour iOS et Android.',
     href: '/services',
-    img: '/images/laptop_code.jpg',
+    img: '/images/Course app.gif',
   },
   {
     icon: 'bi-palette-fill',
     title: 'UI/UX Design',
     desc: "Interfaces intuitives et esthétiques centrées sur l'expérience utilisateur.",
     href: '/services',
-    img: '/images/code.jpg',
+    img: '/images/Website Creator.gif',
   },
   {
     icon: 'bi-robot',
     title: 'IA & Automatisation',
     desc: "Intégration d'IA et automatisation de workflows.",
     href: '/services',
-    img: '/images/recognize_face.png',
+    img: '/images/artificial-intelligence-animate.svg',
   },
 ];
 
@@ -92,12 +92,19 @@ export default function ServicesSection() {
           ))}
         </motion.div>
 
-        <ScrollReveal delay={0.4} style={{ textAlign: 'center', marginTop: 48 }}>
-          <MagneticButton strength={0.2}>
-            <a className="btn btn-main" href="/contact">
-              <i className="bi bi-envelope" /> Démarrer un projet
-            </a>
-          </MagneticButton>
+        <ScrollReveal delay={0.4} style={{ marginTop: 48 }}>
+          <div className="btn-row services-cta-row">
+            <MagneticButton strength={0.2}>
+              <a className="btn btn-main btn-lg" href="/contact">
+                <i className="bi bi-rocket-takeoff" /> Démarrer un projet
+              </a>
+            </MagneticButton>
+            <MagneticButton strength={0.2}>
+              <a className="btn btn-ghost btn-lg" href="/contact">
+                <i className="bi bi-envelope-fill" /> Me contacter
+              </a>
+            </MagneticButton>
+          </div>
         </ScrollReveal>
       </div>
     </section>
