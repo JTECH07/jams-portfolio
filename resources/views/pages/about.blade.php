@@ -2,6 +2,9 @@
 
 @section('content')
 <section class="section" id="about" style="background:var(--bg);">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
   <div class="wrap">
     {{-- Hero --}}
     <div class="about-hero reveal" style="text-align:center;padding:100px 0 48px;">
