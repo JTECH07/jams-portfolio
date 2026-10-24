@@ -2,6 +2,9 @@
 
 @section('content')
 <section class="section" id="services" style="background:var(--bg);">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
   <div class="wrap">
     {{-- Hero --}}
     <div class="section-head reveal" style="text-align:center;max-width:760px;margin:0 auto 56px;">
@@ -96,6 +99,27 @@
         <span class="svc-step-num">04</span>
         <h4>Livraison &amp; suivi</h4>
         <p>Mise en ligne, documentation et accompagnement. Le produit reste entretenu après la livraison.</p>
+      </div>
+    </div>
+
+    {{-- Collaboration (visuel latéral) --}}
+    <div class="media-split reveal" style="margin-top:64px;">
+      <figure class="media-visual">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=75"
+             alt="Poste de travail avec du code sur écran" loading="lazy" />
+      </figure>
+      <div class="media-copy">
+        <p class="eyebrow" style="margin-bottom:10px;"><span class="eyebrow-line"></span> Collaboration</p>
+        <h2>Une collaboration claire, du premier échange à la mise en ligne</h2>
+        <p>
+          Vous savez toujours où en est votre projet. Les décisions se prennent ensemble,
+          les livraisons sont démontrables et le code reste lisible par une autre équipe.
+        </p>
+        <ul>
+          <li><i class="bi bi-check2-circle"></i> Un point court chaque semaine sur l’avancement</li>
+          <li><i class="bi bi-check2-circle"></i> Des versions testables à chaque étape clé</li>
+          <li><i class="bi bi-check2-circle"></i> Un interlocuteur unique, réactif sous 24h</li>
+        </ul>
       </div>
     </div>
 
