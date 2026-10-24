@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import ProjectsShowcase from './components/sections/ProjectsShowcase';
+import DepthRibbon from './components/sections/DepthRibbon';
 
 /* ─── Lenis Smooth Scroll ─── */
 import Lenis from 'lenis';
@@ -28,6 +29,20 @@ if (rootEl) {
 const projectsRoot = document.getElementById('projects-showcase-root');
 if (projectsRoot) {
   createRoot(projectsRoot).render(<ProjectsShowcase />);
+}
+
+/* ─── Page Parcours : ruban de certifications 3D ─── */
+const certRoot = document.getElementById('cert-ribbon-root');
+if (certRoot) {
+  let certItems = [];
+  try {
+    certItems = JSON.parse(document.getElementById('cert-ribbon-data')?.textContent || '[]');
+  } catch (error) {
+    certItems = [];
+  }
+  if (certItems.length) {
+    createRoot(certRoot).render(<DepthRibbon items={certItems} />);
+  }
 }
 
 /* ─── Intro Overlay (Binary Rain) ─── */
