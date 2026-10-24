@@ -16,7 +16,7 @@ class CommentController extends Controller
             'author_email' => 'nullable|email|max:255',
             'body' => 'required|max:1000',
             'commentable_type' => 'required|in:post',
-            'commentable_id' => 'required|integer',
+            'commentable_id' => 'required|integer|exists:posts,id',
         ]);
 
         Comment::create([
@@ -45,6 +45,17 @@ class CommentController extends Controller
             'post' => 'App\\Models\\Post',
             default => 'App\\Models\\Post',
         };
+
+        if ($request->filled('author_email')) {
+            $alreadyRated = Rating::where('rateable_type', $type)
+                ->where('rateable_id', $request->rateable_id)
+                ->where('author_email', $request->author_email)
+                ->exists();
+
+            if ($alreadyRated) {
+                return redirect()->back()->with('rating_error', 'Vous avez déjà évalué cet article avec cet e-mail.');
+            }
+        }
 
         Rating::create([
             'author_name' => $request->author_name,
