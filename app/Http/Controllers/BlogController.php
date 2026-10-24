@@ -40,6 +40,8 @@ class BlogController extends Controller
 
     public function show(Post $post)
     {
+        abort_unless($post->published || auth()->check(), 404);
+
         $sessionKey = 'post_viewed_' . $post->id;
 
         if (! session()->has($sessionKey)) {
