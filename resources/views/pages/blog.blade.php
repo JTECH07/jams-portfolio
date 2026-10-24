@@ -1,40 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="section" id="blog" style="background:var(--bg);">
+<section class="section blog-page" id="blog">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
+
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:32px;">
-      <div class="section-head reveal" style="margin-bottom:0;">
-        <p class="eyebrow" style="color:var(--yellow);">Blog</p>
-        <h2>Articles & réflexions</h2>
-        <p>Partages sur le développement, l'IA, les outils et mon expérience terrain.</p>
+    {{-- Hero --}}
+    <div class="blog-hero reveal">
+      <p class="eyebrow" style="justify-content:center;color:var(--yellow);"><span class="eyebrow-line"></span> Le carnet</p>
+      <h1>Articles &amp; <span>réflexions</span></h1>
+      <p class="blog-hero-lead">
+        Développement web &amp; mobile, IA, outils et retours de terrain. J’écris ce que j’apprends
+        en construisant — sans jargon inutile.
+      </p>
+      <div class="blog-tags">
+        <span><i class="bi bi-code-slash"></i> Développement</span>
+        <span><i class="bi bi-cpu"></i> IA &amp; automatisation</span>
+        <span><i class="bi bi-phone"></i> Mobile</span>
+        <span><i class="bi bi-tools"></i> Outils</span>
       </div>
-      <form class="blog-search" action="{{ route('blog') }}" method="GET" style="display:flex;gap:8px;">
-        <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher..." style="
-          padding:10px 16px;border-radius:100px;border:1px solid var(--line);
-          background:rgba(255,255,255,.04);color:var(--text);font-size:.88rem;
-          font-family:var(--font-body);outline:none;width:220px;transition:border-color .3s;
-        " />
-        <button class="btn btn-main" type="submit" style="border-radius:100px;padding:10px 18px;">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
     </div>
 
+    {{-- Recherche --}}
+    <form class="blog-search reveal" action="{{ route('blog') }}" method="GET">
+      <i class="bi bi-search"></i>
+      <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher un article, une techno, un sujet..." aria-label="Rechercher un article" />
+      <button class="btn btn-main" type="submit">Rechercher</button>
+    </form>
+    @if(request('q'))
+      <p class="blog-search-info">
+        Résultats pour « {{ request('q') }} » — <a href="{{ route('blog') }}">réinitialiser</a>
+      </p>
+    @endif
+
     <div class="blog-layout">
-      {{-- Articles grid --}}
+      {{-- Articles --}}
       <div class="blog-grid">
         @forelse($posts as $post)
           <article class="blog-card glass reveal">
             <figure class="blog-card-img">
               @if($post->image)
-                <img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" />
+                <img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" loading="lazy" />
               @else
                 <div class="blog-card-placeholder">
                   <i class="bi bi-journal-richtext"></i>
                 </div>
               @endif
-              <span class="blog-card-cat">{{ $post->category }}</span>
+              <span class="blog-card-cat">{{ $post->category ?: 'Article' }}</span>
             </figure>
             <div class="blog-card-body">
               <small class="blog-card-date">
@@ -43,21 +57,36 @@
               <h3>{{ $post->title }}</h3>
               <p>{{ $post->excerpt }}</p>
               <a class="btn btn-outline" href="{{ route('blog.show', $post->slug) }}" style="padding:6px 14px;font-size:.82rem;">
-                Lire <i class="bi bi-arrow-right"></i>
+                Lire l’article <i class="bi bi-arrow-right"></i>
               </a>
             </div>
           </article>
         @empty
-          <div class="blog-empty glass reveal" style="grid-column:1/-1;text-align:center;padding:60px 20px;">
-            <i class="bi bi-journal-plus" style="font-size:3rem;color:var(--yellow);margin-bottom:16px;display:block;"></i>
-            <h3 style="margin-bottom:8px;">Bientôt disponible</h3>
-            <p style="color:var(--muted);">Les articles arrivent. En attendant, abonnez-vous pour être notifié.</p>
+          <div class="blog-empty glass reveal">
+            <div class="blog-empty-art">
+              <i class="bi bi-journal-richtext"></i>
+            </div>
+            <h3>Les premiers articles arrivent</h3>
+            <p>
+              Je prépare des contenus concrets sur Laravel, React, l’IA appliquée et mes projets.
+              Abonnez-vous pour être prévenu dès la publication.
+            </p>
+            <div class="btn-row" style="justify-content:center;">
+              <a href="{{ route('projects') }}" class="btn btn-outline"><i class="bi bi-grid-fill"></i> Voir mes projets</a>
+              <a href="{{ route('contact') }}" class="btn btn-main"><i class="bi bi-send-fill"></i> Me contacter</a>
+            </div>
           </div>
         @endforelse
       </div>
 
-      {{-- Sidebar: Subscribe --}}
+      {{-- Colonne latérale --}}
       <aside class="blog-sidebar reveal">
+        <figure class="blog-side-visual">
+          <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=70"
+               alt="Espace de travail de développeur" loading="lazy" />
+          <figcaption>Apprendre en construisant, chaque jour.</figcaption>
+        </figure>
+
         <div class="blog-subscribe glass">
           <div class="blog-sub-icon">
             <i class="bi bi-envelope-paper-fill"></i>
@@ -73,29 +102,52 @@
 
           <form class="blog-sub-form" action="{{ route('blog.subscribe') }}" method="POST">
             @csrf
-            <input type="email" name="email" placeholder="votre@email.com" required />
-            <input type="text" name="name" placeholder="Votre nom (optionnel)" />
+            <input type="email" name="email" placeholder="votre@email.com" required aria-label="Votre e-mail" />
+            <input type="text" name="name" placeholder="Votre nom (optionnel)" aria-label="Votre nom" />
             <button class="btn btn-main" type="submit" style="width:100%;">
-              <i class="bi bi-bell-fill"></i> S'abonner
+              <i class="bi bi-bell-fill"></i> S’abonner
             </button>
           </form>
         </div>
 
         <div class="blog-info glass">
           <h4><i class="bi bi-info-circle"></i> À propos du blog</h4>
-          <p>Je partage ici mon expérience en développement web/mobile, des tutoriels, des retours d'expérience sur des projets concrets et mes réflexions sur l'IA et les nouvelles technologies.</p>
+          <p>Je partage ici mon expérience en développement web/mobile, des tutoriels, des retours d’expérience sur des projets concrets et mes réflexions sur l’IA et les nouvelles technologies.</p>
         </div>
       </aside>
+    </div>
+
+    <div class="blog-back reveal">
+      <a href="{{ route('home') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
+        <i class="bi bi-house-door"></i> Retour à l’accueil
+      </a>
     </div>
   </div>
 </section>
 
 <style>
-  .blog-layout{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start}
+  .blog-page{overflow:hidden}
+  .blog-hero{text-align:center;max-width:780px;margin:0 auto 34px;padding-top:24px}
+  .blog-hero h1{color:var(--white);font-size:clamp(2.4rem,6vw,4rem);letter-spacing:-.04em;margin-bottom:14px}
+  .blog-hero h1 span{color:var(--yellow)}
+  .blog-hero-lead{color:var(--muted);font-size:1.05rem;line-height:1.8;margin:0 auto 22px;max-width:640px}
+  .blog-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .blog-tags span{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-size:.8rem}
+  .blog-tags i{color:var(--accent)}
+
+  .blog-search{display:flex;align-items:center;gap:10px;max-width:640px;margin:0 auto 12px;padding:8px 8px 8px 18px;border-radius:100px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+  .blog-search>i{color:var(--muted);font-size:1rem}
+  .blog-search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:.92rem;font-family:var(--font-body);padding:8px 0;min-width:0}
+  .blog-search input::placeholder{color:var(--muted)}
+  .blog-search .btn{padding:10px 22px;border-radius:100px}
+  .blog-search-info{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:26px}
+  .blog-search-info a{color:var(--yellow)}
+
+  .blog-layout{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start;margin-top:34px}
   .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
   .blog-card{border-radius:16px;overflow:hidden;transition:all .3s}
   .blog-card:hover{transform:translateY(-4px);border-color:var(--yellow)}
-  .blog-card-img{height:180px;overflow:hidden;position:relative}
+  .blog-card-img{height:180px;overflow:hidden;position:relative;margin:0}
   .blog-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
   .blog-card:hover .blog-card-img img{transform:scale(1.05)}
   .blog-card-placeholder{
@@ -113,7 +165,25 @@
   .blog-card-body h3{font-size:1.1rem;color:var(--white);margin:0}
   .blog-card-body p{font-size:.88rem;color:var(--muted);line-height:1.5;margin:0}
 
+  .blog-empty{
+    grid-column:1/-1;text-align:center;padding:52px 28px;border-radius:20px;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .blog-empty-art{
+    width:72px;height:72px;border-radius:20px;display:grid;place-items:center;
+    font-size:1.9rem;color:var(--black);margin-bottom:8px;
+    background:linear-gradient(135deg,var(--yellow),#f59e0b);
+    box-shadow:0 12px 30px rgba(232,197,71,.25);
+  }
+  .blog-empty h3{color:var(--white);font-size:1.3rem;margin:0}
+  .blog-empty p{color:var(--muted);font-size:.92rem;line-height:1.7;max-width:520px;margin:0 0 10px}
+
   .blog-sidebar{display:flex;flex-direction:column;gap:20px;position:sticky;top:100px}
+  .blog-side-visual{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);margin:0}
+  .blog-side-visual img{width:100%;height:170px;object-fit:cover;display:block}
+  .blog-side-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78),transparent 62%);pointer-events:none}
+  .blog-side-visual figcaption{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;color:#fff;font-size:.8rem;font-weight:500}
+
   .blog-subscribe{padding:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
   .blog-sub-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),#f59e0b);display:grid;place-items:center;font-size:1.4rem;color:var(--black);box-shadow:0 8px 24px rgba(255,215,0,.3)}
   .blog-subscribe h3{font-size:1.1rem;color:var(--white)}
@@ -134,11 +204,17 @@
   .blog-info h4{font-size:.95rem;color:var(--white);margin-bottom:8px;display:flex;align-items:center;gap:6px}
   .blog-info p{font-size:.82rem;color:var(--muted);line-height:1.6;margin:0}
 
+  .blog-back{text-align:center;margin-top:36px}
+
   body.light .blog-card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-card:hover{border-color:var(--yellow)}
   body.light .blog-card-body h3{color:var(--black)}
   body.light .blog-card-body p{color:#475569}
   body.light .blog-card-cat{background:var(--yellow);color:var(--black)}
+  body.light .blog-empty h3{color:var(--black)}
+  body.light .blog-empty p{color:#475569}
+  body.light .blog-tags span{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1)}
+  body.light .blog-search{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1)}
   body.light .blog-subscribe{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-subscribe h3{color:var(--black)}
   body.light .blog-subscribe p{color:#475569}
@@ -152,12 +228,9 @@
     .blog-grid{grid-template-columns:1fr}
     .blog-sidebar{position:static}
   }
+  @media(max-width:560px){
+    .blog-search{padding:6px 6px 6px 14px;flex-wrap:wrap}
+    .blog-search .btn{padding:9px 16px}
+  }
 </style>
 @endsection
-
-<!-- Navigation -->
-<div style="text-align:center;margin-top:32px;">
-  <a href="{{ route('home') }}" class="btn btn-outline" style="font-size:.85rem;padding:8px 16px;">
-    <i class="bi bi-house-door"></i> Accueil
-  </a>
-</div>
