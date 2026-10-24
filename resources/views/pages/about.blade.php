@@ -3,7 +3,7 @@
 @section('content')
 <section class="section" id="about" style="background:var(--bg);">
   <div class="page-bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1600&q=70" alt="" />
+    <img src="{{ asset('images/bg/about.jpg') }}" alt="" />
   </div>
   <div class="wrap">
     {{-- Hero --}}
