@@ -26,6 +26,7 @@
               <strong style="font-size:.9rem;">{{ $comment->author_name }}</strong>
               <div style="display:flex;align-items:center;gap:8px;">
                 @if(!$comment->approved)
+                  <span style="font-size:.72rem;color:var(--yellow);"><i class="bi bi-hourglass-split"></i> En attente</span>
                   <form action="{{ route('admin.comments.approve', $comment) }}" method="POST" style="display:inline;">
                     @csrf
                     <button class="btn btn-outline" style="padding:4px 10px;font-size:.75rem;color:var(--ok);border-color:var(--ok);" type="submit"><i class="bi bi-check"></i> Approuver</button>
