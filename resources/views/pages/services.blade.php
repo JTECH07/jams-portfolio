@@ -3,7 +3,7 @@
 @section('content')
 <section class="section" id="services" style="background:var(--bg);">
   <div class="page-bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=70" alt="" />
+    <img src="{{ asset('images/bg/services.jpg') }}" alt="" />
   </div>
   <div class="wrap">
     {{-- Hero --}}
@@ -105,7 +105,7 @@
     {{-- Collaboration (visuel latéral) --}}
     <div class="media-split reveal" style="margin-top:64px;">
       <figure class="media-visual">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=75"
+        <img src="{{ asset('images/bg/services-collab.jpg') }}"
              alt="Poste de travail avec du code sur écran" loading="lazy" />
       </figure>
       <div class="media-copy">
