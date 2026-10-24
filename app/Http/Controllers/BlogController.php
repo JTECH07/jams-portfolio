@@ -13,7 +13,7 @@ class BlogController extends Controller
     {
         $query = Post::published();
 
-        if ($request->has('q') && $request->q !== '') {
+        if ($request->filled('q')) {
             $q = $request->q;
             $query->where(function ($sub) use ($q) {
                 $sub->where('title', 'like', "%{$q}%")
@@ -23,20 +23,55 @@ class BlogController extends Controller
             });
         }
 
-        $posts = $query->latest()->get();
-        return view('pages.blog', compact('posts'));
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+
+        $categories = Post::published()
+            ->selectRaw('category, COUNT(*) as total')
+            ->groupBy('category')
+            ->orderBy('category')
+            ->get();
+
+        $posts = $query->latest()->paginate(4)->withQueryString();
+
+        return view('pages.blog', compact('posts', 'categories'));
     }
 
     public function show(Post $post)
     {
-        PageView::create([
-            'url' => request()->url(),
-            'ip' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-        ]);
+        $sessionKey = 'post_viewed_' . $post->id;
+
+        if (! session()->has($sessionKey)) {
+            PageView::create([
+                'url' => request()->url(),
+                'ip' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+            session()->put($sessionKey, true);
+        }
 
         $views = PageView::countFor(request()->url());
-        return view('pages.blog-show', compact('post', 'views'));
+        $comments = $post->approvedComments()->get();
+        $related = Post::published()
+            ->where('category', $post->category)
+            ->whereKeyNot($post->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        if ($related->count() < 3) {
+            $extra = Post::published()
+                ->whereKeyNot($post->id)
+                ->whereNotIn('id', $related->pluck('id'))
+                ->latest()
+                ->take(3 - $related->count())
+                ->get();
+
+            $related = $related->concat($extra);
+        }
+
+        return view('pages.blog-show', compact('post', 'views', 'comments', 'related'));
     }
 
     public function subscribe(Request $request)
