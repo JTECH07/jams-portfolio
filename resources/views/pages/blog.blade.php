@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
+@section('meta_title', 'Blog — Joseph ALAYE | Développement, IA & Mobile')
+@section('meta_description', 'Articles et réflexions de Joseph ALAYE sur le développement web et mobile, l’IA générative, les outils et les retours d’expérience terrain.')
+@section('og_title', 'Blog — Joseph ALAYE')
+@section('og_description', 'Développement web & mobile, IA, outils et retours d’expérience.')
+@section('og_image', asset('images/bg/blog.jpg'))
+
 @section('content')
 <section class="section blog-page" id="blog">
   <div class="page-bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=70" alt="" />
+    <img src="{{ asset('images/bg/blog.jpg') }}" alt="" />
   </div>
 
   <div class="wrap">
@@ -16,16 +22,28 @@
         en construisant — sans jargon inutile.
       </p>
       <div class="blog-tags">
-        <span><i class="bi bi-code-slash"></i> Développement</span>
-        <span><i class="bi bi-cpu"></i> IA &amp; automatisation</span>
-        <span><i class="bi bi-phone"></i> Mobile</span>
-        <span><i class="bi bi-tools"></i> Outils</span>
+        <a href="{{ route('blog', array_filter(['q' => request('q')])) }}"
+           class="blog-tag {{ !request('category') || request('category') === 'all' ? 'active' : '' }}">
+          <i class="bi bi-grid-fill"></i> Tous <span>{{ $categories->sum('total') }}</span>
+        </a>
+        @foreach($categories as $category)
+          @php $slug = $category->category; @endphp
+          <a href="{{ route('blog', array_filter(['q' => request('q'), 'category' => $slug])) }}"
+             class="blog-tag {{ request('category') === $slug ? 'active' : '' }}">
+            <i class="bi bi-tag-fill"></i>
+            {{ \App\Models\Post::CATEGORIES[$slug] ?? ucfirst($slug) }}
+            <span>{{ $category->total }}</span>
+          </a>
+        @endforeach
       </div>
     </div>
 
     {{-- Recherche --}}
     <form class="blog-search reveal" action="{{ route('blog') }}" method="GET">
       <i class="bi bi-search"></i>
+      @if(request('category'))
+        <input type="hidden" name="category" value="{{ request('category') }}" />
+      @endif
       <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher un article, une techno, un sujet..." aria-label="Rechercher un article" />
       <button class="btn btn-main" type="submit">Rechercher</button>
     </form>
@@ -37,7 +55,8 @@
 
     <div class="blog-layout">
       {{-- Articles --}}
-      <div class="blog-grid">
+      <div class="blog-main">
+        <div class="blog-grid">
         @forelse($posts as $post)
           <article class="blog-card glass reveal">
             <figure class="blog-card-img">
@@ -48,7 +67,7 @@
                   <i class="bi bi-journal-richtext"></i>
                 </div>
               @endif
-              <span class="blog-card-cat">{{ $post->category ?: 'Article' }}</span>
+              <span class="blog-card-cat">{{ $post->categoryLabel() }}</span>
             </figure>
             <div class="blog-card-body">
               <small class="blog-card-date">
@@ -77,12 +96,19 @@
             </div>
           </div>
         @endforelse
+        </div>
+
+        @if($posts->hasPages())
+          <div class="blog-pagination">
+            {{ $posts->links('partials.pagination') }}
+          </div>
+        @endif
       </div>
 
       {{-- Colonne latérale --}}
       <aside class="blog-sidebar reveal">
         <figure class="blog-side-visual">
-          <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=70"
+          <img src="{{ asset('images/bg/blog-side.jpg') }}"
                alt="Espace de travail de développeur" loading="lazy" />
           <figcaption>Apprendre en construisant, chaque jour.</figcaption>
         </figure>
@@ -132,8 +158,16 @@
   .blog-hero h1 span{color:var(--yellow)}
   .blog-hero-lead{color:var(--muted);font-size:1.05rem;line-height:1.8;margin:0 auto 22px;max-width:640px}
   .blog-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-  .blog-tags span{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-size:.8rem}
-  .blog-tags i{color:var(--accent)}
+  .blog-tag{
+    display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;
+    border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
+    font-size:.8rem;transition:border-color .3s,color .3s,background .3s;
+  }
+  .blog-tag span{font-family:var(--font-mono);font-size:.68rem;color:var(--muted)}
+  .blog-tag i{color:var(--accent)}
+  .blog-tag:hover{border-color:rgba(232,197,71,.5);color:var(--yellow)}
+  .blog-tag.active{background:var(--yellow);border-color:var(--yellow);color:#000;font-weight:600}
+  .blog-tag.active i,.blog-tag.active span{color:#000}
 
   .blog-search{display:flex;align-items:center;gap:10px;max-width:640px;margin:0 auto 12px;padding:8px 8px 8px 18px;border-radius:100px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
   .blog-search>i{color:var(--muted);font-size:1rem}
@@ -144,7 +178,21 @@
   .blog-search-info a{color:var(--yellow)}
 
   .blog-layout{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start;margin-top:34px}
+  .blog-main{min-width:0}
   .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+
+  .blog-pagination{margin-top:30px}
+  .pager{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+  .pager-btn{
+    min-width:40px;height:40px;padding:0 12px;border-radius:12px;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.88rem;transition:border-color .3s,color .3s,background .3s;
+  }
+  .pager-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .pager-btn.active{background:var(--yellow);color:#000;border-color:var(--yellow);font-weight:700}
+  .pager-btn.disabled{opacity:.35;pointer-events:none}
+  .pager-dots{color:var(--muted);padding:0 4px}
   .blog-card{border-radius:16px;overflow:hidden;transition:all .3s}
   .blog-card:hover{transform:translateY(-4px);border-color:var(--yellow)}
   .blog-card-img{height:180px;overflow:hidden;position:relative;margin:0}
@@ -213,7 +261,9 @@
   body.light .blog-card-cat{background:var(--yellow);color:var(--black)}
   body.light .blog-empty h3{color:var(--black)}
   body.light .blog-empty p{color:#475569}
-  body.light .blog-tags span{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1)}
+  body.light .blog-tag{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1)}
+  body.light .pager-btn{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.1)}
+  body.light .pager-btn.active{background:var(--yellow);border-color:var(--yellow);color:#000}
   body.light .blog-search{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1)}
   body.light .blog-subscribe{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-subscribe h3{color:var(--black)}
