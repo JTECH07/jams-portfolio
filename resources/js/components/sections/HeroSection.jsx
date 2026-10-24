@@ -121,7 +121,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Salut, moi c'est <strong>Joseph ALAYE</strong> - je conçois des applications web et mobiles performantes, propulsées par l'IA.
+            Salut, moi c'est <strong>Joseph ALAYE</strong> | Je conçois des applications web et mobiles performantes, propulsées par l'IA.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
