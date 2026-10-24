@@ -17,7 +17,7 @@
       <div class="admin-stat glass">
         <i class="bi bi-chat-dots" style="color:var(--accent-2);"></i>
         <div class="admin-stat-n">{{ $stats['comments'] }}</div>
-        <p>Commentaires</p>
+        <p>Commentaires @if($stats['pending_comments'] > 0)<span style="color:var(--yellow);">· {{ $stats['pending_comments'] }} en attente</span>@endif</p>
       </div>
       <div class="admin-stat glass">
         <i class="bi bi-envelope-check" style="color:var(--ok);"></i>
@@ -50,7 +50,12 @@
           <div style="padding:10px 0;border-bottom:1px solid var(--line);">
             <div style="display:flex;justify-content:space-between;">
               <strong style="font-size:.88rem;">{{ $comment->author_name }}</strong>
-              <small style="color:var(--muted);">{{ $comment->created_at->diffForHumans() }}</small>
+              <div style="display:flex;align-items:center;gap:8px;">
+                @if(!$comment->approved)
+                  <small style="color:var(--yellow);font-size:.7rem;">En attente</small>
+                @endif
+                <small style="color:var(--muted);">{{ $comment->created_at->diffForHumans() }}</small>
+              </div>
             </div>
             <p style="font-size:.85rem;color:var(--muted);margin:4px 0 0;">{{ Str::limit($comment->body, 80) }}</p>
           </div>
