@@ -2,6 +2,9 @@
 
 @section('content')
 <section class="section" id="contact">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
   <div class="wrap">
     <div class="section-head reveal" style="max-width:720px;">
       <p class="eyebrow" style="color: var(--yellow);"><span class="eyebrow-line"></span> Contact</p>
