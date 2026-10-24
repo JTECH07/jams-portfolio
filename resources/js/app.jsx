@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import ProjectsShowcase from './components/sections/ProjectsShowcase';
 
 /* ─── Lenis Smooth Scroll ─── */
 import Lenis from 'lenis';
@@ -21,6 +22,12 @@ requestAnimationFrame(raf);
 const rootEl = document.getElementById('react-root');
 if (rootEl) {
   createRoot(rootEl).render(<App />);
+}
+
+/* ─── Page Projets : carrousel + étude de cas ─── */
+const projectsRoot = document.getElementById('projects-showcase-root');
+if (projectsRoot) {
+  createRoot(projectsRoot).render(<ProjectsShowcase />);
 }
 
 /* ─── Intro Overlay (Binary Rain) ─── */
@@ -154,3 +161,24 @@ if (themeToggle && themeIcon) {
 document.querySelectorAll('img:not([loading])').forEach(img => {
   if (!img.closest('.hero-bg-slider')) img.setAttribute('loading', 'lazy');
 });
+
+/* ─── Reveal on scroll ─── */
+const revealEls = document.querySelectorAll('.reveal');
+if (revealEls.length) {
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('on');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    revealEls.forEach(el => revealObserver.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('on'));
+  }
+}
