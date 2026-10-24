@@ -52,6 +52,9 @@
 
 @section('content')
 <section class="section" id="skills" style="background:var(--bg);">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
   <div class="wrap">
     {{-- Hero --}}
     <div class="section-head reveal" style="text-align:center;max-width:760px;margin:0 auto 52px;">
