@@ -30,6 +30,7 @@
   <link rel="manifest" href="{{ asset('manifest.json') }}" />
   <meta name="theme-color" content="#0F172A" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  @viteReactRefresh
   @vite(['resources/css/app.css', 'resources/js/app.jsx'])
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
