@@ -1,0 +1,203 @@
+.depth-ribbon {
+  --ribbon-radius: 440px;
+  position: relative;
+  height: 520px;
+  perspective: 1500px;
+  perspective-origin: 50% 44%;
+  overflow: hidden;
+  isolation: isolate;
+  animation: ribbonIn .9s ease both;
+}
+
+@keyframes ribbonIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.depth-ribbon-glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(72%, 760px);
+  height: 260px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(232, 197, 71, .18), transparent 65%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.depth-ribbon-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(-10deg) rotateY(0deg);
+  transition: transform .35s ease-out;
+  will-change: transform;
+}
+
+.depth-ribbon-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.depth-ribbon-card {
+  position: absolute;
+  width: 200px;
+  height: 268px;
+  margin: -134px 0 0 -100px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(17, 17, 17, .92);
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.depth-ribbon-media {
+  position: relative;
+  height: 150px;
+  margin: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.depth-ribbon-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.9);
+}
+
+.depth-ribbon-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 17, 17, .9), transparent 65%);
+}
+
+.depth-ribbon-year {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--yellow);
+  color: #000;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.depth-ribbon-copy {
+  padding: 12px 15px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+.depth-ribbon-issuer {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.depth-ribbon-copy h4 {
+  color: #fff;
+  font-size: .92rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.depth-ribbon-desc {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.depth-ribbon-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  z-index: 4;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, .6);
+  border: 1px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: .72rem;
+  color: rgba(255, 255, 255, .7);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.depth-ribbon-hint i { color: var(--accent); }
+
+body.light .depth-ribbon-glow {
+  background: radial-gradient(ellipse, rgba(232, 197, 71, .24), transparent 65%);
+}
+
+body.light .depth-ribbon-card {
+  background: rgba(255, 255, 255, .94);
+  border-color: rgba(0, 0, 0, .1);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, .18);
+}
+
+body.light .depth-ribbon-media::after {
+  background: linear-gradient(to top, rgba(255, 255, 255, .9), transparent 65%);
+}
+
+body.light .depth-ribbon-copy h4 { color: #0f172a; }
+
+body.light .depth-ribbon-hint {
+  background: rgba(255, 255, 255, .8);
+  border-color: rgba(0, 0, 0, .1);
+  color: #475569;
+}
+
+@media (max-width: 760px) {
+  .depth-ribbon {
+    --ribbon-radius: 250px;
+    height: 390px;
+    perspective: 1000px;
+  }
+
+  .depth-ribbon-card {
+    width: 170px;
+    height: 226px;
+    margin: -113px 0 0 -85px;
+  }
+
+  .depth-ribbon-media { height: 122px; }
+  .depth-ribbon-copy { padding: 10px 12px 12px; }
+  .depth-ribbon-copy h4 { font-size: .82rem; }
+  .depth-ribbon-hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-ribbon { animation: none; }
+  .depth-ribbon-stage { transition: none; }
+}
