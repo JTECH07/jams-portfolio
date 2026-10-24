@@ -3,61 +3,66 @@
 @section('content')
 <section class="section" id="timeline">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow" style="color: var(--white);">Parcours</p>
-      <h2>Formation et expériences</h2>
-      <p>Mon parcours est marqué par une progression constante et des expériences concrètes.</p>
+    <div class="section-head reveal" style="text-align:center;max-width:740px;margin:0 auto 48px;">
+      <p class="eyebrow" style="justify-content:center;"><span class="eyebrow-line"></span> Parcours</p>
+      <h2 style="text-align:center;">Un parcours construit par la pratique</h2>
+      <p style="text-align:center;">Formation, stages et projets : chaque étape a ajouté une compétence concrète et une méthode de travail plus solide.</p>
     </div>
 
-    <div class="timeline" style="border-left: 2px solid var(--accent); padding-left: 30px;">
+    <div class="timeline" style="border-left: 2px solid var(--line); padding-left: 30px; max-width: 820px; margin: 0 auto;">
+      <article class="tl-item glass reveal">
+        <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--white);border-radius:50%;box-shadow:0 0 10px var(--white);"></div>
+        <small>En cours · Porto-Novo, Bénin</small>
+        <h3>Développeur Full-Stack — JAMS TECH</h3>
+        <p>Conception de projets web et de solutions digitales orientées innovation et impact local. Du cadrage à la mise en ligne, avec une attention particulière à la qualité et à la maintenabilité.</p>
+      </article>
+
       <article class="tl-item glass reveal">
         <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent);"></div>
-        <small>2024 - 2026 | Porto-Novo, Bénin</small>
-        <h3>Licence 2 - Systèmes Informatiques et Logiciels</h3>
-        <p>SIL - UATM Gasa Formation. Renforcement en génie logiciel, développement applicatif et résolution de problèmes techniques.</p>
+        <small>Juil — Sept 2025 · Porto-Novo, Bénin</small>
+        <h3>Stagiaire Développement Web Laravel — DigiWeb SARL</h3>
+        <p>Réalisation de fonctionnalités en conditions réelles : CRUD de posts, gestion de bibliothèques et authentification avec confirmation par e-mail. Première expérience d’un cycle de développement complet en équipe.</p>
       </article>
 
       <article class="tl-item glass reveal">
         <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--yellow);border-radius:50%;box-shadow:0 0 10px var(--yellow);"></div>
-        <small>2025 - Now | Porto-Novo, Bénin</small>
-        <h3>Membre du Club IA - CAEB</h3>
-        <p>Exploration de l'IA, programmation Python, Machine Learning et applications pratiques au sein du laboratoire numérique du CAEB.</p>
+        <small>2025 — aujourd’hui · Porto-Novo, Bénin</small>
+        <h3>Membre du Club IA — CAEB</h3>
+        <p>Exploration de l’intelligence artificielle, programmation Python et machine learning, avec des applications pratiques au sein du laboratoire numérique du CAEB.</p>
       </article>
 
       <article class="tl-item glass reveal">
         <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent);"></div>
-        <small>Juil - Sept 2025 | Porto-Novo, Bénin</small>
-        <h3>Stagiaire Développement Web Laravel - DigiWeb SARL</h3>
-        <p>Réalisation de projets fonctionnels : CRUD de posts, gestion de bibliothèques et système d'authentification avec confirmation par mail.</p>
-      </article>
-
-      <article class="tl-item glass reveal">
-        <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--accent-2);border-radius:50%;box-shadow:0 0 10px var(--accent-2);"></div>
-        <small>Déc 2024 | Sèmè-Podji, Bénin</small>
-        <h3>Formation IA Générative - FuturCraft Institut</h3>
-        <p>Programme FUTUR orienté usages concrets de l'IA générative, productivité et nouvelles méthodes de création numérique.</p>
+        <small>2024 — 2026 · Porto-Novo, Bénin</small>
+        <h3>Licence 2 — Systèmes Informatiques et Logiciels</h3>
+        <p>UATM Gasa Formation : génie logiciel, développement applicatif et résolution de problèmes techniques. Le socle théorique qui structure ma pratique.</p>
       </article>
 
       <article class="tl-item glass reveal">
         <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--ok);border-radius:50%;box-shadow:0 0 10px var(--ok);"></div>
-        <small>Avr 2025 | Porto-Novo, Bénin</small>
-        <h3>Apprenti en maintenance informatique - SENANTIC</h3>
-        <p>Support technique, maintenance de base des équipements et assistance à la continuité opérationnelle.</p>
+        <small>Avr 2025 · Porto-Novo, Bénin</small>
+        <h3>Apprenti en maintenance informatique — SENANTIC</h3>
+        <p>Support technique, maintenance des équipements et assistance à la continuité opérationnelle. Une immersion dans le terrain et le service aux utilisateurs.</p>
       </article>
 
       <article class="tl-item glass reveal">
-        <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--white);border-radius:50%;box-shadow:0 0 10px var(--white);"></div>
-        <small>En cours</small>
-        <h3>Développeur Full-Stack - JAMS TECH</h3>
-        <p>Développement de projets web et solutions digitales, avec une orientation forte vers l'innovation et l'impact local.</p>
+        <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--accent-2);border-radius:50%;box-shadow:0 0 10px var(--accent-2);"></div>
+        <small>Déc 2024 · Sèmè-Podji, Bénin</small>
+        <h3>Formation IA Générative — FuturCraft Institut</h3>
+        <p>Programme FUTUR orienté usages concrets de l’IA générative, productivité et nouvelles méthodes de création numérique.</p>
       </article>
 
       <article class="tl-item glass reveal">
         <div style="position:absolute;left:-42px;top:20px;width:20px;height:20px;background:var(--muted);border-radius:50%;box-shadow:0 0 6px var(--muted);"></div>
-        <small>2023 - 2024 | Porto-Novo, Bénin</small>
-        <h3>Baccalauréat D - CEG AGBOKOU</h3>
-        <p>Base scientifique solide qui soutient l'approche analytique en programmation et en conception de solutions.</p>
+        <small>2023 — 2024 · Porto-Novo, Bénin</small>
+        <h3>Baccalauréat D — CEG AGBOKOU</h3>
+        <p>Base scientifique solide, qui soutient encore aujourd’hui l’approche analytique en programmation et en conception de solutions.</p>
       </article>
+    </div>
+
+    <div class="btn-row reveal" style="justify-content:center;margin-top:36px;">
+      <a href="{{ route('contact') }}" class="btn btn-main"><i class="bi bi-send-fill"></i> Travaillons ensemble</a>
+      <a href="{{ route('projects') }}" class="btn btn-outline"><i class="bi bi-grid-fill"></i> Voir mes projets</a>
     </div>
 
     {{-- ═══════════ CERTIFICATIONS ═══════════ --}}
