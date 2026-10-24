@@ -3,10 +3,10 @@
 @section('content')
 <section class="section" id="contact">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow" style="color: var(--yellow);">Contact</p>
-      <h2>Discutons de votre besoin</h2>
-      <p>Projet, recrutement, mission freelance ou stage : je réponds rapidement avec une proposition claire.</p>
+    <div class="section-head reveal" style="max-width:720px;">
+      <p class="eyebrow" style="color: var(--yellow);"><span class="eyebrow-line"></span> Contact</p>
+      <h2>Discutons de votre projet</h2>
+      <p>Une idée, un besoin ou une opportunité ? Décrivez-moi votre contexte : je reviens vers vous sous 24h avec une réponse claire et des prochaines étapes concrètes.</p>
     </div>
 
     <div class="split">
@@ -14,6 +14,10 @@
       <article class="panel glass reveal">
         <h3 style="color: var(--yellow); font-size: 1.5rem; margin-bottom: 16px;">Coordonnées & réseaux</h3>
         <p style="color: var(--muted); margin-bottom: 24px;">Joignable rapidement pour cadrer une mission, une opportunité ou un projet digital.</p>
+
+        <span class="hero-availability" style="margin-bottom: 24px;">
+          <span class="hero-availability-dot"></span> Réponse sous 24h
+        </span>
 
         <div class="contact-cards">
           <div class="contact-card">
@@ -48,6 +52,23 @@
           </a>
         </div>
 
+        <div class="contact-next" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line);">
+          <h4 style="color: var(--white); font-size: .95rem; margin-bottom: 14px;">
+            <i class="bi bi-signpost-2" style="color: var(--accent);"></i> Ce qui se passe ensuite
+          </h4>
+          <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px; color: var(--muted); font-size: .86rem; line-height: 1.5;">
+              <span style="color: var(--accent); font-family: var(--font-mono);">01</span> Vous décrivez votre besoin en quelques lignes.
+            </li>
+            <li style="display: flex; gap: 10px; color: var(--muted); font-size: .86rem; line-height: 1.5;">
+              <span style="color: var(--accent); font-family: var(--font-mono);">02</span> Je vous réponds sous 24h avec mes questions ou une proposition.
+            </li>
+            <li style="display: flex; gap: 10px; color: var(--muted); font-size: .86rem; line-height: 1.5;">
+              <span style="color: var(--accent); font-family: var(--font-mono);">03</span> On cale un échange et on démarre.
+            </li>
+          </ol>
+        </div>
+
         <div class="btn-row" style="margin-top: 24px;">
           <a class="btn btn-main" href="{{ asset('CV_Joseph_ALAYE.pdf') }}" target="_blank" rel="noopener">
             <i class="bi bi-file-earmark-pdf"></i> Télécharger CV
@@ -57,14 +78,13 @@
 
       {{-- Formulaire --}}
       <article class="panel glass reveal">
-        <h3 style="color: var(--accent-2); font-size: 1.5rem; margin-bottom: 16px;">Formulaire de contact</h3>
+        <h3 style="color: var(--accent-2); font-size: 1.5rem; margin-bottom: 16px;">Parlez-moi de votre projet</h3>
 
         @if(session('success'))
           <div class="alert-success" style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--ok); background: rgba(16,185,129,0.1); color: var(--ok); margin-bottom: 20px; font-weight: 500;">
             <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
           </div>
           <script>document.addEventListener('DOMContentLoaded',()=>showToast('{{ session('success') }}'))</script>
-          </div>
         @endif
 
         <form class="contact-form" id="laravelContactForm"
