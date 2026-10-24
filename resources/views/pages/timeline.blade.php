@@ -2,6 +2,9 @@
 
 @section('content')
 <section class="section" id="timeline">
+  <div class="page-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=70" alt="" />
+  </div>
   <div class="wrap">
     <div class="section-head reveal" style="text-align:center;max-width:740px;margin:0 auto 48px;">
       <p class="eyebrow" style="justify-content:center;"><span class="eyebrow-line"></span> Parcours</p>
