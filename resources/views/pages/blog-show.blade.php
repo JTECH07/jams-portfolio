@@ -126,7 +126,7 @@
 
       @if(session('commented'))
         <div class="blog-alert success">
-          <i class="bi bi-check-circle-fill"></i> Commentaire publié !
+          <i class="bi bi-check-circle-fill"></i> Merci ! Votre commentaire sera affiché après modération.
         </div>
       @endif
       @if($errors->has('body') || ($errors->has('author_name') && !$errors->has('stars')))
@@ -178,6 +178,9 @@
         <button class="btn btn-main" type="submit" style="margin-top:12px;">
           <i class="bi bi-chat-left-text-fill"></i> Publier
         </button>
+        <small style="display:block;color:var(--muted);font-size:.75rem;margin-top:8px;">
+          <i class="bi bi-shield-check"></i> Les commentaires sont modérés avant publication.
+        </small>
       </form>
     </div>
 
