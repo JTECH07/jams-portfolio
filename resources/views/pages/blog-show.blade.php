@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('meta_title', $post->title . ' — Blog de Joseph ALAYE')
+@section('meta_description', $post->excerpt)
+@section('og_title', $post->title)
+@section('og_description', $post->excerpt)
+@section('og_image', $post->image ? asset('images/' . $post->image) : asset('images/bg/blog.jpg'))
+
 @section('content')
 <section class="section" style="background:var(--bg);">
   <div class="wrap">
@@ -16,15 +22,16 @@
 
       <div class="blog-article-content">
         <div class="blog-article-meta">
-          <span class="blog-card-cat" style="position:static;">{{ $post->category }}</span>
+          <span class="blog-card-cat" style="position:static;">{{ $post->categoryLabel() }}</span>
           <small><i class="bi bi-calendar3"></i> {{ $post->created_at->format('d M Y') }}</small>
+          <small><i class="bi bi-clock"></i> {{ $post->readingTime() }} min de lecture</small>
           <small><i class="bi bi-chat-dots"></i> {{ $post->totalComments() }} commentaire(s)</small>
           <small><i class="bi bi-eye"></i> {{ $views }} vue(s)</small>
-          <small class="blog-article-stars">
+          <small class="blog-article-stars" title="{{ $post->ratingCount() }} évaluation(s)">
             @for($i = 1; $i <= 5; $i++)
               <i class="bi bi-star{{ $i <= round($post->avgRating()) ? '-fill' : '' }}"></i>
             @endfor
-            <span>{{ number_format($post->avgRating(), 1) }}</span>
+            <span>{{ number_format($post->avgRating(), 1) }} ({{ $post->ratingCount() }})</span>
           </small>
         </div>
 
@@ -59,8 +66,18 @@
       <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;">Votre note aide les autres à trouver du contenu de qualité.</p>
 
       @if(session('rated'))
-        <div style="padding:10px 16px;border-radius:10px;font-size:.85rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--ok);margin-bottom:16px;">
+        <div class="blog-alert success">
           <i class="bi bi-check-circle-fill"></i> Merci pour votre évaluation !
+        </div>
+      @endif
+      @if(session('rating_error'))
+        <div class="blog-alert error">
+          <i class="bi bi-exclamation-circle-fill"></i> {{ session('rating_error') }}
+        </div>
+      @endif
+      @if($errors->has('stars') || $errors->has('author_name') || $errors->has('author_email') || $errors->has('review'))
+        <div class="blog-alert error">
+          <i class="bi bi-exclamation-circle-fill"></i> {{ $errors->first() }}
         </div>
       @endif
 
@@ -108,13 +125,18 @@
       </h3>
 
       @if(session('commented'))
-        <div style="padding:10px 16px;border-radius:10px;font-size:.85rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--ok);margin-bottom:16px;">
+        <div class="blog-alert success">
           <i class="bi bi-check-circle-fill"></i> Commentaire publié !
+        </div>
+      @endif
+      @if($errors->has('body') || ($errors->has('author_name') && !$errors->has('stars')))
+        <div class="blog-alert error">
+          <i class="bi bi-exclamation-circle-fill"></i> {{ $errors->first() }}
         </div>
       @endif
 
       {{-- Existing comments --}}
-      @forelse($post->comments as $comment)
+      @forelse($comments as $comment)
         <div class="comment-item">
           <div class="comment-avatar">{{ substr($comment->author_name, 0, 1) }}</div>
           <div class="comment-content">
@@ -159,18 +181,54 @@
       </form>
     </div>
 
+    {{-- Related posts --}}
+    @if($related->isNotEmpty())
+      <section class="blog-related reveal" aria-labelledby="blogRelatedTitle">
+        <div class="blog-related-head">
+          <p class="eyebrow" style="margin-bottom:6px;">À lire aussi</p>
+          <h3 id="blogRelatedTitle">Dans la même catégorie</h3>
+        </div>
+        <div class="blog-related-grid">
+          @foreach($related as $item)
+            <a class="blog-related-card" href="{{ route('blog.show', $item->slug) }}">
+              @if($item->image)
+                <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->title }}" loading="lazy" />
+              @endif
+              <div>
+                <small>{{ $item->categoryLabel() }} · {{ $item->readingTime() }} min</small>
+                <h4>{{ $item->title }}</h4>
+              </div>
+            </a>
+          @endforeach
+        </div>
+      </section>
+    @endif
+
     {{-- Subscribe CTA --}}
-    <div class="blog-article-sub glass reveal" style="margin-top:32px;text-align:center;padding:40px;">
-      <h3>Vous avez aimé cet article ?</h3>
-      <p style="color:var(--muted);margin-bottom:20px;">Abonnez-vous pour ne manquer aucun prochain article.</p>
-      <form class="blog-sub-form" action="{{ route('blog.subscribe') }}" method="POST" style="max-width:400px;margin:0 auto;">
+    <section class="blog-follow reveal" aria-labelledby="blogFollowTitle">
+      <div class="blog-follow-icon" aria-hidden="true">
+        <i class="bi bi-envelope-paper-heart-fill"></i>
+      </div>
+      <div class="blog-follow-copy">
+        <p class="blog-follow-eyebrow">Newsletter</p>
+        <h3 id="blogFollowTitle">Vous avez aimé cet article ?</h3>
+        <p>Recevez les prochains articles, retours d’expérience et ressources directement par e-mail. Pas de spam, désinscription en un clic.</p>
+      </div>
+
+      @if(session('subscribed'))
+        <div class="blog-follow-success">
+          <i class="bi bi-check-circle-fill"></i> Merci ! Votre abonnement est bien enregistré.
+        </div>
+      @endif
+
+      <form class="blog-follow-form" action="{{ route('blog.subscribe') }}" method="POST">
         @csrf
-        <input type="email" name="email" placeholder="votre@email.com" required />
-        <button class="btn btn-main" type="submit" style="width:100%;">
-          <i class="bi bi-bell-fill"></i> S'abonner
+        <input type="email" name="email" placeholder="votre@email.com" required aria-label="Votre adresse e-mail" />
+        <button class="btn btn-main" type="submit">
+          <i class="bi bi-send-fill"></i> S’abonner
         </button>
       </form>
-    </div>
+    </section>
   </div>
 </section>
 
@@ -253,6 +311,99 @@
   .comment-header small{font-size:.75rem;color:var(--muted)}
   .comment-content p{font-size:.9rem;color:var(--muted);line-height:1.6;margin:0}
 
+  .blog-alert{
+    display:flex;align-items:center;gap:8px;padding:10px 14px;
+    border-radius:10px;font-size:.85rem;margin-bottom:16px;
+  }
+  .blog-alert.success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--ok)}
+  .blog-alert.error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171}
+
+  /* Related posts */
+  .blog-related{
+    margin-top:40px;padding:30px 32px;border-radius:20px;
+    border:1px solid var(--line);background:rgba(255,255,255,.02);
+  }
+  .blog-related-head{margin-bottom:18px}
+  .blog-related-head h3{color:var(--white);font-size:1.2rem;margin:0}
+  .blog-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .blog-related-card{
+    display:flex;flex-direction:column;overflow:hidden;border-radius:14px;
+    border:1px solid var(--line);background:var(--surface-light);
+    transition:transform .3s,border-color .3s,box-shadow .3s;
+  }
+  .blog-related-card:hover{
+    transform:translateY(-3px);border-color:var(--accent);
+    box-shadow:0 14px 30px rgba(0,0,0,.25);
+  }
+  .blog-related-card img{width:100%;height:110px;object-fit:cover;display:block}
+  .blog-related-card div{padding:12px 14px}
+  .blog-related-card small{
+    font-family:var(--font-mono);font-size:.64rem;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--accent);
+  }
+  .blog-related-card h4{color:var(--white);font-size:.88rem;line-height:1.35;margin:6px 0 0}
+
+  @media(max-width:768px){
+    .blog-related{padding:22px}
+    .blog-related-grid{grid-template-columns:1fr}
+  }
+
+  /* Newsletter CTA */
+  .blog-follow{
+    position:relative;overflow:hidden;margin-top:40px;padding:38px 40px;border-radius:22px;
+    display:grid;grid-template-columns:auto 1fr;gap:22px 26px;align-items:center;
+    border:1px solid rgba(232,197,71,.28);
+    background:
+      radial-gradient(ellipse at 12% 18%,rgba(232,197,71,.16),transparent 55%),
+      rgba(255,255,255,.03);
+  }
+  .blog-follow-icon{
+    width:62px;height:62px;border-radius:18px;display:grid;place-items:center;
+    font-size:1.6rem;color:#000;
+    background:linear-gradient(135deg,var(--yellow),#f59e0b);
+    box-shadow:0 14px 36px rgba(232,197,71,.28);
+  }
+  .blog-follow-copy h3{color:var(--white);font-size:1.35rem;margin:0 0 6px}
+  .blog-follow-copy p{color:var(--muted);font-size:.92rem;line-height:1.6;margin:0;max-width:560px}
+  .blog-follow-eyebrow{
+    font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:6px;
+  }
+  .blog-follow-form{grid-column:1/-1;display:flex;gap:10px;align-items:center;max-width:560px}
+  .blog-follow-form input{
+    flex:1;min-width:0;padding:13px 18px;border-radius:100px;border:1px solid var(--line);
+    background:rgba(255,255,255,.06);color:var(--text);font-family:var(--font-body);
+    font-size:.92rem;outline:none;transition:border-color .3s,box-shadow .3s;
+  }
+  .blog-follow-form input::placeholder{color:var(--muted)}
+  .blog-follow-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,197,71,.12)}
+  .blog-follow-form .btn{border-radius:100px;padding:13px 24px;white-space:nowrap}
+  .blog-follow-success{
+    grid-column:1/-1;display:inline-flex;align-items:center;gap:8px;
+    font-size:.85rem;color:var(--ok);
+  }
+
+  body.light .blog-follow{
+    background:
+      radial-gradient(ellipse at 12% 18%,rgba(232,197,71,.18),transparent 55%),
+      rgba(255,255,255,.7);
+    border-color:rgba(232,197,71,.4);
+  }
+  body.light .blog-follow-copy h3{color:var(--black)}
+  body.light .blog-follow-copy p{color:#475569}
+  body.light .blog-follow-form input{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.12)}
+
+  @media(max-width:640px){
+    .blog-follow{padding:26px;grid-template-columns:1fr;gap:18px}
+    .blog-follow-icon{width:52px;height:52px;font-size:1.35rem}
+    .blog-follow-form{flex-direction:column;align-items:stretch;max-width:none}
+    .blog-follow-form .btn{width:100%}
+  }
+
+  body.light .blog-related{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
+  body.light .blog-related-head h3{color:var(--black)}
+  body.light .blog-related-card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
+  body.light .blog-related-card h4{color:var(--black)}
   body.light .blog-article{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-article-content h1{color:var(--black)}
   body.light .blog-article-body{color:#475569}
