@@ -19,6 +19,7 @@ class Post extends Model
         'mobile' => 'Mobile',
         'design' => 'Design',
         'tools' => 'Outils',
+        'conseil' => 'Conseil',
     ];
 
     public function categoryLabel(): string
