@@ -25,6 +25,7 @@ class CommentController extends Controller
             'body' => $request->body,
             'commentable_type' => 'App\\Models\\Post',
             'commentable_id' => $request->commentable_id,
+            'approved' => false,
         ]);
 
         return redirect()->back()->with('commented', true);
