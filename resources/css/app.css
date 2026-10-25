@@ -2260,6 +2260,24 @@ body.light .skill-pill:hover{
   margin-bottom: 15px;
 }
 
+
+/* Lien d'évitement (accessibilité clavier) */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  background: var(--accent);
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 0 0 10px 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-to-content:focus {
+  left: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --animation-duration: 0s !important;
