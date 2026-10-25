@@ -71,7 +71,7 @@
             </figure>
             <div class="blog-card-body">
               <small class="blog-card-date">
-                <i class="bi bi-calendar3"></i> {{ $post->created_at->format('d M Y') }}
+                <i class="bi bi-calendar3"></i> {{ ($post->published_at ?? $post->created_at)->format('d M Y') }}
               </small>
               <h3>{{ $post->title }}</h3>
               <p>{{ $post->excerpt }}</p>
@@ -125,11 +125,28 @@
               <i class="bi bi-check-circle-fill"></i> Merci ! Vous êtes abonné(e).
             </div>
           @endif
+          @if(session('subscribe_pending'))
+            <div class="blog-sub-success">
+              <i class="bi bi-envelope-check-fill"></i> Vérifiez votre boîte mail pour confirmer votre abonnement.
+            </div>
+          @endif
+          @if(session('unsubscribed'))
+            <div class="blog-sub-success" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3);color:#ef4444;">
+              <i class="bi bi-envelope-slash-fill"></i> Vous êtes bien désabonné(e).
+            </div>
+          @endif
 
           <form class="blog-sub-form" action="{{ route('blog.subscribe') }}" method="POST">
             @csrf
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
             <input type="email" name="email" placeholder="votre@email.com" required aria-label="Votre e-mail" />
             <input type="text" name="name" placeholder="Votre nom (optionnel)" aria-label="Votre nom" />
+            <label style="display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:.7rem;color:var(--muted);line-height:1.5;">
+              <input type="checkbox" name="consent" value="1" required style="margin-top:2px;width:auto;" />
+              <span>J’accepte de recevoir les nouveaux articles. <a href="{{ route('legal.privacy') }}" style="color:var(--yellow);">Politique de confidentialité</a>.</span>
+            </label>
+            @error('email')<p style="color:#ef4444;font-size:.72rem;margin:0;text-align:left;">{{ $message }}</p>@enderror
+            @error('consent')<p style="color:#ef4444;font-size:.72rem;margin:0;text-align:left;">{{ $message }}</p>@enderror
             <button class="btn btn-main" type="submit" style="width:100%;">
               <i class="bi bi-bell-fill"></i> S’abonner
             </button>
@@ -242,12 +259,12 @@
     width:100%;
   }
   .blog-sub-form{display:flex;flex-direction:column;gap:10px;width:100%}
-  .blog-sub-form input{
+  .blog-sub-form input[type="email"],.blog-sub-form input[type="text"]{
     padding:10px 14px;border-radius:10px;border:1px solid var(--line);
     background:rgba(255,255,255,.04);color:var(--text);font-size:.88rem;
     font-family:var(--font-body);outline:none;transition:border-color .3s;
   }
-  .blog-sub-form input:focus{border-color:var(--accent)}
+  .blog-sub-form input[type="email"]:focus,.blog-sub-form input[type="text"]:focus{border-color:var(--accent)}
   .blog-info{padding:20px}
   .blog-info h4{font-size:.95rem;color:var(--white);margin-bottom:8px;display:flex;align-items:center;gap:6px}
   .blog-info p{font-size:.82rem;color:var(--muted);line-height:1.6;margin:0}
@@ -268,7 +285,7 @@
   body.light .blog-subscribe{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-subscribe h3{color:var(--black)}
   body.light .blog-subscribe p{color:#475569}
-  body.light .blog-sub-form input{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1);color:var(--text)}
+  body.light .blog-sub-form input[type="email"],body.light .blog-sub-form input[type="text"]{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1);color:var(--text)}
   body.light .blog-info{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
   body.light .blog-info h4{color:var(--black)}
   body.light .blog-info p{color:#475569}
