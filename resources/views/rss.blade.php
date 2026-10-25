@@ -12,7 +12,7 @@
       <title><![CDATA[{{ $post->title }}]]></title>
       <link>{{ url('/blog/' . $post->slug) }}</link>
       <guid>{{ url('/blog/' . $post->slug) }}</guid>
-      <pubDate>{{ $post->created_at->toRfc2822String() }}</pubDate>
+      <pubDate>{{ ($post->published_at ?? $post->created_at)->toRfc2822String() }}</pubDate>
       <description><![CDATA[{{ $post->excerpt }}]]></description>
     </item>
     @endforeach
