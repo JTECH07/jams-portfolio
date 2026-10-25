@@ -1,7 +1,7 @@
 <nav class="nav-pill" id="mainNav">
   <div class="nav-pill-inner">
     <a href="{{ route('home') }}" class="pill-brand">
-      <span class="pill-badge"><img src="{{ asset('images/me_professionnel.png') }}" alt="Joseph ALAYE | JAMS" class="pill-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></span>
+      <span class="pill-badge"><img src="{{ asset('images/favicon.png') }}" alt="Joseph ALAYE | JAMS" class="pill-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"></span>
     </a>
 
     <div class="pill-links" id="navLinks">
