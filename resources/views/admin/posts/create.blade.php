@@ -9,6 +9,8 @@
       <h2>Nouvel article</h2>
     </div>
 
+    @include('partials.form-errors')
+
     <form class="glass reveal" style="padding:32px;border-radius:16px;max-width:700px;" action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="field">
@@ -42,8 +44,13 @@
           </select>
         </div>
       </div>
+      <div class="field" style="margin-top:16px;">
+        <label>Date de publication</label>
+        <input type="datetime-local" name="published_at" value="{{ old('published_at') }}" />
+        <small style="color:var(--muted);font-size:.75rem;">Laisser vide pour publier maintenant. Une date future planifie l'article.</small>
+      </div>
       <label style="display:flex;align-items:center;gap:8px;margin-top:16px;cursor:pointer;font-size:.9rem;color:var(--muted);">
-        <input type="checkbox" name="published" {{ old('published') ? 'checked' : '' }} /> Publier immédiatement
+        <input type="checkbox" name="published" {{ old('published') ? 'checked' : '' }} /> Publier
       </label>
       <button class="btn btn-main" type="submit" style="margin-top:20px;"><i class="bi bi-check-lg"></i> Créer l'article</button>
     </form>
