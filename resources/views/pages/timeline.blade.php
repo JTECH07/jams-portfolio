@@ -13,7 +13,7 @@
       'title' => 'IA Générative',
       'issuer' => 'FuturCraft',
       'year' => '2024',
-      'image' => 'images/me-thinking.png',
+      'image' => 'images/me-thinking.webp',
       'desc' => "Usages concrets de l'IA générative et productivité numérique.",
     ],
     [
@@ -34,14 +34,14 @@
       'title' => 'Développement Web',
       'issuer' => 'DigiWeb SARL',
       'year' => '2025',
-      'image' => 'images/me-in-workspace.png',
+      'image' => 'images/me-in-workspace.webp',
       'desc' => 'Cycle complet de développement en équipe.',
     ],
     [
       'title' => 'Python & Data',
       'issuer' => 'Club IA · CAEB',
       'year' => '2025',
-      'image' => 'images/me-coding.png',
+      'image' => 'images/me-coding.webp',
       'desc' => 'Machine learning et applications pratiques.',
     ],
   ];
