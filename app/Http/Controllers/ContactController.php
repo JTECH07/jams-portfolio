@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -10,6 +11,10 @@ class ContactController extends Controller
 {
     public function send(Request $request)
     {
+        if ($request->filled('website')) {
+            return redirect()->back()->with('success', 'Votre message a été envoyé avec succès. Je vous répondrai rapidement !');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -23,20 +28,21 @@ class ContactController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'proposal' => $validated['proposal'],
-            'subject' => $validated['subject'],
+            'subject' => $validated['subject'] ?? null,
             'collab_items' => $validated['collab_item'] ?? [],
             'message' => $validated['message'],
         ]);
 
         // Send email (currently logged to storage/logs/laravel.log based on .env)
-        Mail::to('alayejoseph1@gmail.com')->send(new \App\Mail\ContactMessage($contact));
+        Mail::to(config('mail.contact_address'))->queue(new ContactMessage($contact));
 
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès. Je vous répondrai rapidement !');
     }
 
     public function index()
     {
-        $contacts = Contact::latest()->get();
+        $contacts = Contact::latest()->paginate(20);
+
         return view('admin.contacts.index', compact('contacts'));
     }
 }
