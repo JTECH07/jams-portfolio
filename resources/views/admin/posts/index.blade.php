@@ -34,19 +34,21 @@
               <td><strong style="color:var(--white);">{{ $post->title }}</strong></td>
               <td><span style="padding:3px 10px;border-radius:100px;font-size:.72rem;background:rgba(37,99,235,.1);color:var(--accent);">{{ $post->category }}</span></td>
               <td>
-                @if($post->published)
+                @if($post->published && $post->published_at?->isFuture())
+                  <span style="color:var(--yellow);"><i class="bi bi-calendar-event"></i> Planifié</span>
+                @elseif($post->published)
                   <span style="color:var(--ok);"><i class="bi bi-check-circle-fill"></i> Publié</span>
                 @else
                   <span style="color:var(--muted);"><i class="bi bi-clock"></i> Brouillon</span>
                 @endif
               </td>
-              <td style="color:var(--muted);font-size:.85rem;">{{ $post->created_at->format('d/m/Y') }}</td>
+              <td style="color:var(--muted);font-size:.85rem;">{{ ($post->published_at ?? $post->created_at)->format('d/m/Y') }}</td>
               <td>
                 <div style="display:flex;gap:6px;">
-                  <a class="btn btn-outline" href="{{ route('admin.posts.edit', $post) }}" style="padding:4px 10px;font-size:.78rem;"><i class="bi bi-pencil"></i></a>
+                  <a class="btn btn-outline" href="{{ route('admin.posts.edit', $post) }}" style="padding:4px 10px;font-size:.78rem;" aria-label="Modifier l'article {{ $post->title }}"><i class="bi bi-pencil" aria-hidden="true"></i></a>
                   <form action="{{ route('admin.posts.delete', $post) }}" method="POST" onsubmit="return confirm('Supprimer cet article ?')">
                     @csrf @method('DELETE')
-                    <button class="btn btn-outline" style="padding:4px 10px;font-size:.78rem;color:var(--ok);border-color:var(--ok);" type="submit"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-outline" style="padding:4px 10px;font-size:.78rem;color:var(--ok);border-color:var(--ok);" type="submit" aria-label="Supprimer l'article {{ $post->title }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
                   </form>
                 </div>
               </td>
@@ -56,6 +58,10 @@
           @endforelse
         </tbody>
       </table>
+    </div>
+
+    <div style="margin-top:20px;">
+      {{ $posts->links('partials.pagination') }}
     </div>
   </div>
 </section>
