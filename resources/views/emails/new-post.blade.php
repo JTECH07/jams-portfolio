@@ -43,7 +43,7 @@
               <p style="margin:0;color:#64748B;font-size:12px;">
                 Vous recevez cet email car vous êtes abonné(e) au blog de Joseph ALAYE.<br/>
                 <a href="{{ url('/blog') }}" style="color:#94A3B8;">Voir le blog</a> ·
-                <a href="{{ url('/unsubscribe/' . urlencode('subscriber')) }}" style="color:#94A3B8;">Se désabonner</a>
+                <a href="{{ $unsubscribeUrl }}" style="color:#94A3B8;">Se désabonner</a>
               </p>
             </td>
           </tr>
