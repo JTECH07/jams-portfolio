@@ -15,7 +15,7 @@ const projects = [
   },
   {
     num: '02',
-    img: '/images/recognize_face.png',
+    img: '/images/recognize_face.webp',
     alt: 'Reconnaissance Faciale',
     tags: ['Python', 'OpenCV', 'ML'],
     title: 'Reconnaissance Faciale',
