@@ -15,7 +15,7 @@
         <strong style="color:var(--white);">{{ $email }}</strong>
       </p>
       <div style="display:flex;gap:12px;justify-content:center;">
-        <form action="{{ route('blog.unsubscribe.post', $email) }}" method="POST">
+        <form action="{{ $unsubscribeUrl }}" method="POST">
           @csrf
           <button class="btn btn-main" type="submit">
             <i class="bi bi-check-lg"></i> Oui, me désabonner
