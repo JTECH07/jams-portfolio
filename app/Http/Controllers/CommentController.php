@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Rating;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
     public function storeComment(Request $request)
     {
+        if ($request->filled('website')) {
+            return redirect()->back()->with('commented', true);
+        }
+
         $request->validate([
             'author_name' => 'required|max:255',
             'author_email' => 'nullable|email|max:255',
@@ -33,6 +36,10 @@ class CommentController extends Controller
 
     public function storeRating(Request $request)
     {
+        if ($request->filled('website')) {
+            return redirect()->back()->with('rated', true);
+        }
+
         $request->validate([
             'author_name' => 'required|max:255',
             'author_email' => 'nullable|email|max:255',
@@ -42,7 +49,7 @@ class CommentController extends Controller
             'rateable_id' => 'required|integer',
         ]);
 
-        $type = match($request->rateable_type) {
+        $type = match ($request->rateable_type) {
             'post' => 'App\\Models\\Post',
             default => 'App\\Models\\Post',
         };
