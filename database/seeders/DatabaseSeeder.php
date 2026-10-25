@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         User::updateOrCreate(
             ['email' => 'admin@josephalaye.com'],
-            ['name' => 'Joseph ALAYE', 'password' => bcrypt('password'), 'email_verified_at' => now()]
+            ['name' => 'Joseph ALAYE', 'password' => bcrypt(env('ADMIN_PASSWORD') ?: 'password'), 'email_verified_at' => now()]
         );
 
         $this->call([
