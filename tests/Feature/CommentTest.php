@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Post;
-use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
@@ -23,6 +22,31 @@ class CommentTest extends TestCase
         ])->assertRedirect()->assertSessionHas('commented');
 
         $this->assertDatabaseHas('comments', ['author_name' => 'Testeur', 'body' => 'Super article !']);
+    }
+
+    public function test_comment_honeypot_is_silently_ignored(): void
+    {
+        $post = Post::factory()->create();
+
+        $this->post('/comment', [
+            'author_name' => 'Bot',
+            'body' => 'Spam',
+            'commentable_type' => 'post',
+            'commentable_id' => $post->id,
+            'website' => 'https://spam.example',
+        ])->assertRedirect()->assertSessionHas('commented');
+
+        $this->assertDatabaseCount('comments', 0);
+    }
+
+    public function test_comment_requires_a_name_and_body(): void
+    {
+        $post = Post::factory()->create();
+
+        $this->post('/comment', [
+            'commentable_type' => 'post',
+            'commentable_id' => $post->id,
+        ])->assertSessionHasErrors(['author_name', 'body']);
     }
 
     public function test_store_rating(): void
