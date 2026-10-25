@@ -9,6 +9,8 @@
       <h2>Modifier : {{ $post->title }}</h2>
     </div>
 
+    @include('partials.form-errors')
+
     <form class="glass reveal" style="padding:32px;border-radius:16px;max-width:700px;" action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data">
       @csrf @method('PUT')
       <div class="field">
@@ -45,6 +47,11 @@
             @endforeach
           </select>
         </div>
+      </div>
+      <div class="field" style="margin-top:16px;">
+        <label>Date de publication</label>
+        <input type="datetime-local" name="published_at" value="{{ old('published_at', $post->published_at?->format('Y-m-d\TH:i')) }}" />
+        <small style="color:var(--muted);font-size:.75rem;">Laisser vide pour publier maintenant. Une date future planifie l'article.</small>
       </div>
       <label style="display:flex;align-items:center;gap:8px;margin-top:16px;cursor:pointer;font-size:.9rem;color:var(--muted);">
         <input type="checkbox" name="published" {{ old('published', $post->published) ? 'checked' : '' }} /> Publié
