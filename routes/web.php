@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\AdminController;
-
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
+use App\Models\Post;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -40,10 +40,15 @@ Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.
 
 // Blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/blog/subscribe', [BlogController::class, 'subscribe'])->name('blog.subscribe')->middleware('throttle:3,1');
-Route::get('/unsubscribe/{email}', [BlogController::class, 'unsubscribeConfirm'])->name('blog.unsubscribe');
-Route::post('/unsubscribe/{email}', [BlogController::class, 'unsubscribe'])->name('blog.unsubscribe.post');
+Route::get('/newsletter/confirm/{subscriber}', [BlogController::class, 'confirmSubscription'])->name('blog.subscribe.confirm')->middleware('signed');
+Route::get('/unsubscribe/{subscriber}', [BlogController::class, 'unsubscribeConfirm'])->name('blog.unsubscribe')->middleware('signed');
+Route::post('/unsubscribe/{subscriber}', [BlogController::class, 'unsubscribe'])->name('blog.unsubscribe.post')->middleware('signed');
+
+// Pages légales
+Route::view('/mentions-legales', 'pages.legal.mentions')->name('legal.mentions');
+Route::view('/politique-confidentialite', 'pages.legal.privacy')->name('legal.privacy');
 
 // Comments & Ratings
 Route::post('/comment', [CommentController::class, 'storeComment'])->name('comment.store')->middleware('throttle:10,1');
@@ -55,7 +60,8 @@ Route::get('/sitemap.xml', function () {
 })->name('sitemap');
 
 Route::get('/feed', function () {
-    $posts = \App\Models\Post::published()->latest()->get();
+    $posts = Post::published()->orderByDesc('published_at')->orderByDesc('id')->get();
+
     return response()->view('rss', compact('posts'), 200)->header('Content-Type', 'application/rss+xml');
 })->name('feed');
 
@@ -84,4 +90,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Subscribers
     Route::get('/subscribers', [AdminController::class, 'subscribers'])->name('admin.subscribers');
+
+    Route::get('/password', [AdminController::class, 'passwordEdit'])->name('admin.password.edit');
+    Route::put('/password', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
 });
