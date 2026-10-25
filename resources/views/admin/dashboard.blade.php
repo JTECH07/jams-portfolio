@@ -22,7 +22,7 @@
       <div class="admin-stat glass">
         <i class="bi bi-envelope-check" style="color:var(--ok);"></i>
         <div class="admin-stat-n">{{ $stats['subscribers'] }}</div>
-        <p>Abonnés</p>
+        <p>Abonnés @if($stats['pending_subscribers'] > 0)<span style="color:var(--yellow);">· {{ $stats['pending_subscribers'] }} en attente</span>@endif</p>
       </div>
       <div class="admin-stat glass">
         <i class="bi bi-star-fill" style="color:var(--yellow);"></i>
@@ -40,6 +40,7 @@
           <a class="btn btn-outline" href="{{ route('admin.posts') }}"><i class="bi bi-journal-text"></i> Gérer les articles</a>
           <a class="btn btn-outline" href="{{ route('admin.comments') }}"><i class="bi bi-chat-dots"></i> Modérer les commentaires</a>
           <a class="btn btn-outline" href="{{ route('admin.subscribers') }}"><i class="bi bi-people"></i> Voir les abonnés</a>
+          <a class="btn btn-outline" href="{{ route('admin.password.edit') }}"><i class="bi bi-shield-lock"></i> Changer de mot de passe</a>
         </div>
       </div>
 
