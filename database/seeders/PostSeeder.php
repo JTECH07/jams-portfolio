@@ -175,7 +175,7 @@ HTML,
             [
                 'title' => 'Un design system léger pour des interfaces cohérentes',
                 'slug' => 'design-system-leger',
-                'excerpt' => "Tokens, composants et documentation : comment garder une interface cohérente sans alourdir le projet.",
+                'excerpt' => 'Tokens, composants et documentation : comment garder une interface cohérente sans alourdir le projet.',
                 'body' => <<<'HTML'
 <h2>Pourquoi un design system ?</h2>
 <p>Sur un projet qui grandit, l'incohérence s'installe vite : trois nuances de gris, deux tailles de boutons, quatre espacements différents. Un design system ne consiste pas à créer une bibliothèque énorme, mais à fixer un vocabulaire commun.</p>
