@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Mail\ContactMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class PagesTest extends TestCase
 {
@@ -52,6 +54,44 @@ class PagesTest extends TestCase
     public function test_404_page(): void
     {
         $this->get('/cette-page-n-existe-pas')->assertStatus(404);
+    }
+
+    public function test_security_headers_are_present(): void
+    {
+        $this->get('/')
+            ->assertHeader('X-Content-Type-Options', 'nosniff')
+            ->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+    }
+
+    public function test_contact_form_queues_an_email(): void
+    {
+        Mail::fake();
+
+        $this->post('/contact/send', [
+            'name' => 'Jean',
+            'email' => 'jean@example.com',
+            'proposal' => 'Site vitrine',
+            'message' => 'Bonjour, parlons de mon projet.',
+        ])->assertRedirect()->assertSessionHas('success');
+
+        $this->assertDatabaseHas('contacts', ['email' => 'jean@example.com']);
+        Mail::assertQueued(ContactMessage::class);
+    }
+
+    public function test_contact_honeypot_is_silently_ignored(): void
+    {
+        Mail::fake();
+
+        $this->post('/contact/send', [
+            'name' => 'Bot',
+            'email' => 'bot@example.com',
+            'proposal' => 'Spam',
+            'message' => 'Spam',
+            'website' => 'https://spam.example',
+        ])->assertRedirect()->assertSessionHas('success');
+
+        $this->assertDatabaseCount('contacts', 0);
+        Mail::assertNothingQueued();
     }
 
     public function test_sitemap_returns_xml(): void
