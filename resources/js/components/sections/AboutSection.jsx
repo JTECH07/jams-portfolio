@@ -104,9 +104,13 @@ export default function AboutSection() {
             <motion.div style={{ y: imgY }}>
               <div className="about-image-frame">
                 <img
-                  src="/images/me_about.png"
+                  src="/images/me-in-workspace.webp"
                   alt="Joseph ALAYE"
-                  onError={(e) => { e.target.src = '/images/me-in-workspace.png'; }}
+                  width="420"
+                  height="525"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { e.target.src = '/images/me-in-workspace.webp'; }}
                 />
                 <span className="about-image-glow" />
               </div>
