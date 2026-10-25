@@ -83,6 +83,8 @@
       <article class="panel glass reveal">
         <h3 style="color: var(--accent-2); font-size: 1.5rem; margin-bottom: 16px;">Parlez-moi de votre projet</h3>
 
+        @include('partials.form-errors')
+
         @if(session('success'))
           <div class="alert-success" style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--ok); background: rgba(16,185,129,0.1); color: var(--ok); margin-bottom: 20px; font-weight: 500;">
             <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
@@ -94,6 +96,7 @@
               action="{{ route('contact.send') }}"
               method="POST">
           @csrf
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
 
           <div class="form-row">
             <div class="field">
