@@ -49,5 +49,9 @@
             </div>
         @endif
     </div>
+
+    <div style="margin-top:20px;">
+        {{ $contacts->links('partials.pagination') }}
+    </div>
 </div>
 @endsection
