@@ -6,7 +6,7 @@
     <a href="{{ route('admin.dashboard') }}" style="display:inline-flex;align-items:center;gap:6px;font-size:.88rem;color:var(--muted);margin-bottom:20px;"><i class="bi bi-arrow-left"></i> Retour</a>
     <div class="section-head reveal">
       <p class="eyebrow" style="color:var(--yellow);">Admin</p>
-      <h2>Commentaires ({{ $comments->count() }})</h2>
+      <h2>Commentaires ({{ $comments->total() }})</h2>
     </div>
 
     @if(session('success'))
@@ -36,7 +36,7 @@
                 @endif
                 <form action="{{ route('admin.comments.delete', $comment) }}" method="POST" onsubmit="return confirm('Supprimer ?')">
                   @csrf @method('DELETE')
-                  <button class="btn btn-outline" style="padding:4px 10px;font-size:.75rem;" type="submit"><i class="bi bi-trash"></i></button>
+                  <button class="btn btn-outline" style="padding:4px 10px;font-size:.75rem;" type="submit" aria-label="Supprimer le commentaire de {{ $comment->author_name }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
                 </form>
               </div>
             </div>
@@ -49,6 +49,10 @@
           <p style="color:var(--muted);">Aucun commentaire.</p>
         </div>
       @endforelse
+    </div>
+
+    <div style="margin-top:20px;">
+      {{ $comments->links('partials.pagination') }}
     </div>
   </div>
 </section>
