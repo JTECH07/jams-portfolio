@@ -115,4 +115,15 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Contact address
+    |--------------------------------------------------------------------------
+    |
+    | Address that receives the messages sent from the public contact form.
+    |
+    */
+
+    'contact_address' => env('MAIL_CONTACT_ADDRESS', 'alayejoseph1@gmail.com'),
+
 ];
