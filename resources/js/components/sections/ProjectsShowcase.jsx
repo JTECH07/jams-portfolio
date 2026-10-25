@@ -282,7 +282,7 @@ const PROJECTS = [
     subtitle: 'Vision par ordinateur',
     description:
       'Système Python avec OpenCV2 et Machine Learning pour la vérification d’identité.',
-    images: ['/images/recognize_face.png', '/images/code.jpg'],
+    images: ['/images/recognize_face.webp', '/images/code.jpg'],
     tags: ['Python', 'OpenCV', 'TensorFlow'],
     study: {
       context:
