@@ -10,7 +10,12 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'excerpt', 'body', 'image', 'category', 'published',
+        'title', 'slug', 'excerpt', 'body', 'image', 'category', 'published', 'published_at',
+    ];
+
+    protected $casts = [
+        'published' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     public const CATEGORIES = [
@@ -34,7 +39,20 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('published', true);
+        return $query->where('published', true)
+            ->where(function ($sub) {
+                $sub->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            });
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (Post $post) {
+            $post->comments()->delete();
+            $post->ratings()->delete();
+            PostRedirect::where('post_id', $post->id)->delete();
+        });
     }
 
     public function comments()
