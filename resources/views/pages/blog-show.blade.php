@@ -4,6 +4,8 @@
 @section('meta_description', $post->excerpt)
 @section('og_title', $post->title)
 @section('og_description', $post->excerpt)
+@section('og_type', 'article')
+@section('og_published', ($post->published_at ?? $post->created_at)->toIso8601String())
 @section('og_image', $post->image ? asset('images/' . $post->image) : asset('images/bg/blog.jpg'))
 
 @section('content')
@@ -23,7 +25,7 @@
       <div class="blog-article-content">
         <div class="blog-article-meta">
           <span class="blog-card-cat" style="position:static;">{{ $post->categoryLabel() }}</span>
-          <small><i class="bi bi-calendar3"></i> {{ $post->created_at->format('d M Y') }}</small>
+          <small><i class="bi bi-calendar3"></i> {{ ($post->published_at ?? $post->created_at)->format('d M Y') }}</small>
           <small><i class="bi bi-clock"></i> {{ $post->readingTime() }} min de lecture</small>
           <small><i class="bi bi-chat-dots"></i> {{ $post->totalComments() }} commentaire(s)</small>
           <small><i class="bi bi-eye"></i> {{ $views }} vue(s)</small>
@@ -83,13 +85,14 @@
 
       <form class="rating-form" action="{{ route('rating.store') }}" method="POST">
         @csrf
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
         <input type="hidden" name="rateable_type" value="post" />
         <input type="hidden" name="rateable_id" value="{{ $post->id }}" />
 
         <div class="star-input" id="starInput">
           @for($i = 1; $i <= 5; $i++)
-            <button type="button" class="star-btn" data-star="{{ $i }}">
-              <i class="bi bi-star"></i>
+            <button type="button" class="star-btn" data-star="{{ $i }}" aria-label="Donner {{ $i }} étoile{{ $i > 1 ? 's' : '' }} sur 5">
+              <i class="bi bi-star" aria-hidden="true"></i>
             </button>
           @endfor
           <input type="hidden" name="stars" id="starsValue" value="5" />
@@ -156,6 +159,7 @@
       {{-- Add comment form --}}
       <form class="comment-form" action="{{ route('comment.store') }}" method="POST" style="margin-top:20px;">
         @csrf
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
         <input type="hidden" name="commentable_type" value="post" />
         <input type="hidden" name="commentable_id" value="{{ $post->id }}" />
 
@@ -223,13 +227,29 @@
           <i class="bi bi-check-circle-fill"></i> Merci ! Votre abonnement est bien enregistré.
         </div>
       @endif
+      @if(session('subscribe_pending'))
+        <div class="blog-follow-success">
+          <i class="bi bi-envelope-check-fill"></i> Vérifiez votre boîte mail pour confirmer votre abonnement.
+        </div>
+      @endif
 
       <form class="blog-follow-form" action="{{ route('blog.subscribe') }}" method="POST">
         @csrf
-        <input type="email" name="email" placeholder="votre@email.com" required aria-label="Votre adresse e-mail" />
-        <button class="btn btn-main" type="submit">
-          <i class="bi bi-send-fill"></i> S’abonner
-        </button>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+        <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <input type="email" name="email" placeholder="votre@email.com" required aria-label="Votre adresse e-mail" style="flex:1;min-width:200px;" />
+            <button class="btn btn-main" type="submit">
+              <i class="bi bi-send-fill"></i> S’abonner
+            </button>
+          </div>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:.7rem;color:var(--muted);line-height:1.5;">
+            <input type="checkbox" name="consent" value="1" required style="margin-top:2px;width:auto;" />
+            <span>J’accepte de recevoir les nouveaux articles. <a href="{{ route('legal.privacy') }}" style="color:var(--yellow);">Politique de confidentialité</a>.</span>
+          </label>
+          @error('email')<p style="color:#ef4444;font-size:.72rem;margin:0;">{{ $message }}</p>@enderror
+          @error('consent')<p style="color:#ef4444;font-size:.72rem;margin:0;">{{ $message }}</p>@enderror
+        </div>
       </form>
     </section>
   </div>
@@ -373,13 +393,13 @@
     text-transform:uppercase;color:var(--accent);margin-bottom:6px;
   }
   .blog-follow-form{grid-column:1/-1;display:flex;gap:10px;align-items:center;max-width:560px}
-  .blog-follow-form input{
+  .blog-follow-form input[type="email"]{
     flex:1;min-width:0;padding:13px 18px;border-radius:100px;border:1px solid var(--line);
     background:rgba(255,255,255,.06);color:var(--text);font-family:var(--font-body);
     font-size:.92rem;outline:none;transition:border-color .3s,box-shadow .3s;
   }
-  .blog-follow-form input::placeholder{color:var(--muted)}
-  .blog-follow-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,197,71,.12)}
+  .blog-follow-form input[type="email"]::placeholder{color:var(--muted)}
+  .blog-follow-form input[type="email"]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,197,71,.12)}
   .blog-follow-form .btn{border-radius:100px;padding:13px 24px;white-space:nowrap}
   .blog-follow-success{
     grid-column:1/-1;display:inline-flex;align-items:center;gap:8px;
@@ -394,7 +414,7 @@
   }
   body.light .blog-follow-copy h3{color:var(--black)}
   body.light .blog-follow-copy p{color:#475569}
-  body.light .blog-follow-form input{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.12)}
+  body.light .blog-follow-form input[type="email"]{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.12)}
 
   @media(max-width:640px){
     .blog-follow{padding:26px;grid-template-columns:1fr;gap:18px}
@@ -463,4 +483,24 @@ document.addEventListener('DOMContentLoaded', () => {
   updateStars(5);
 });
 </script>
+@push('scripts')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BlogPosting',
+    'headline' => $post->title,
+    'description' => $post->excerpt,
+    'datePublished' => ($post->published_at ?? $post->created_at)->toIso8601String(),
+    'dateModified' => $post->updated_at->toIso8601String(),
+    'author' => [
+        '@type' => 'Person',
+        'name' => 'Joseph ALAYE',
+        'url' => url('/'),
+    ],
+    'image' => $post->image ? asset('images/' . $post->image) : asset('images/bg/blog.jpg'),
+    'mainEntityOfPage' => route('blog.show', $post->slug),
+    'inLanguage' => 'fr',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}
+</script>
+@endpush
 @endsection
