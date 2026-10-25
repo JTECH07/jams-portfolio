@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\Comment;
-use App\Models\Subscriber;
 use App\Mail\NewPostNotification;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\PostRedirect;
+use App\Models\Rating;
+use App\Models\Subscriber;
+use App\Support\HtmlSanitizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -22,16 +27,19 @@ class AdminController extends Controller
             'comments' => Comment::count(),
             'pending_comments' => Comment::where('approved', false)->count(),
             'subscribers' => Subscriber::where('active', true)->count(),
-            'ratings' => \App\Models\Rating::count(),
+            'pending_subscribers' => Subscriber::whereNull('confirmed_at')->count(),
+            'ratings' => Rating::count(),
         ];
         $recentComments = Comment::latest()->take(5)->get();
+
         return view('admin.dashboard', compact('stats', 'recentComments'));
     }
 
     // ─── Posts CRUD ───
     public function posts()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest('created_at')->paginate(15);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -50,26 +58,36 @@ class AdminController extends Controller
             'image_file' => 'nullable|image|max:4096',
             'category' => ['required', Rule::in(array_keys(Post::CATEGORIES))],
             'published' => 'nullable',
+            'published_at' => 'nullable|date',
         ]);
+
+        $published = $request->has('published');
+        $publishedAt = $published
+            ? ($request->filled('published_at') ? Carbon::parse($request->published_at) : now())
+            : null;
+
+        $slug = $this->uniqueSlug($request->filled('slug') ? $request->slug : $request->title);
+        PostRedirect::where('slug', $slug)->delete();
 
         $post = Post::create([
             'title' => $request->title,
-            'slug' => $this->uniqueSlug($request->filled('slug') ? $request->slug : $request->title),
+            'slug' => $slug,
             'excerpt' => $request->excerpt,
-            'body' => $request->body,
+            'body' => HtmlSanitizer::clean($request->body),
             'image' => $this->storeImage($request),
             'category' => $request->category,
-            'published' => $request->has('published'),
+            'published' => $published,
+            'published_at' => $publishedAt,
         ]);
 
-        if ($request->has('published')) {
-            $subscribers = Subscriber::where('active', true)->get();
+        if ($published && $publishedAt->lessThanOrEqualTo(now())) {
+            $subscribers = Subscriber::where('active', true)->whereNotNull('confirmed_at')->get();
             foreach ($subscribers as $sub) {
-                Mail::to($sub->email)->send(new NewPostNotification($post));
+                Mail::to($sub->email)->queue(new NewPostNotification($post, $sub));
             }
         }
 
-        return redirect()->route('admin.posts')->with('success', 'Article créé' . ($request->has('published') ? ' et abonnés notifiés.' : '.'));
+        return redirect()->route('admin.posts')->with('success', 'Article créé'.($published ? ' et abonnés notifiés.' : '.'));
     }
 
     public function postEdit(Post $post)
@@ -90,7 +108,11 @@ class AdminController extends Controller
             'image_file' => 'nullable|image|max:4096',
             'category' => ['required', Rule::in(array_keys(Post::CATEGORIES))],
             'published' => 'nullable',
+            'published_at' => 'nullable|date',
         ]);
+
+        $oldSlug = $post->slug;
+        $newSlug = $request->filled('slug') ? $this->uniqueSlug($request->slug, $post->id) : $post->slug;
 
         $image = $post->image;
 
@@ -99,15 +121,28 @@ class AdminController extends Controller
             $image = $this->storeImage($request);
         }
 
+        $published = $request->has('published');
+        $publishedAt = $published
+            ? ($request->filled('published_at')
+                ? Carbon::parse($request->published_at)
+                : ($post->published_at ?? now()))
+            : null;
+
         $post->update([
             'title' => $request->title,
-            'slug' => $request->filled('slug') ? $this->uniqueSlug($request->slug, $post->id) : $post->slug,
+            'slug' => $newSlug,
             'excerpt' => $request->excerpt,
-            'body' => $request->body,
+            'body' => HtmlSanitizer::clean($request->body),
             'image' => $image,
             'category' => $request->category,
-            'published' => $request->has('published'),
+            'published' => $published,
+            'published_at' => $publishedAt,
         ]);
+
+        if ($oldSlug !== $newSlug) {
+            PostRedirect::where('slug', $newSlug)->delete();
+            PostRedirect::updateOrCreate(['slug' => $oldSlug], ['post_id' => $post->id]);
+        }
 
         return redirect()->route('admin.posts')->with('success', 'Article mis à jour.');
     }
@@ -116,6 +151,7 @@ class AdminController extends Controller
     {
         $this->deleteImage($post->image);
         $post->delete();
+
         return redirect()->route('admin.posts')->with('success', 'Article supprimé.');
     }
 
@@ -128,7 +164,7 @@ class AdminController extends Controller
         while (Post::where('slug', $slug)
             ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
             ->exists()) {
-            $slug = $base . '-' . $suffix++;
+            $slug = $base.'-'.$suffix++;
         }
 
         return $slug;
@@ -142,18 +178,18 @@ class AdminController extends Controller
 
         $file = $request->file('image_file');
         $base = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) ?: 'article';
-        $name = $base . '-' . Str::random(6) . '.' . strtolower($file->getClientOriginalExtension());
+        $name = $base.'-'.Str::random(6).'.'.strtolower($file->getClientOriginalExtension());
 
         File::ensureDirectoryExists(public_path('images/blog'));
         $file->move(public_path('images/blog'), $name);
 
-        return 'blog/' . $name;
+        return 'blog/'.$name;
     }
 
     private function deleteImage(?string $image): void
     {
         if ($image && str_starts_with($image, 'blog/')) {
-            $path = public_path('images/' . $image);
+            $path = public_path('images/'.$image);
 
             if (is_file($path)) {
                 @unlink($path);
@@ -164,26 +200,50 @@ class AdminController extends Controller
     // ─── Comments ───
     public function comments()
     {
-        $comments = Comment::latest()->get();
+        $comments = Comment::latest()->paginate(20);
+
         return view('admin.comments.index', compact('comments'));
     }
 
     public function commentApprove(Comment $comment)
     {
         $comment->update(['approved' => true]);
+
         return redirect()->back()->with('success', 'Commentaire approuvé.');
     }
 
     public function commentDelete(Comment $comment)
     {
         $comment->delete();
+
         return redirect()->back()->with('success', 'Commentaire supprimé.');
     }
 
     // ─── Subscribers ───
     public function subscribers()
     {
-        $subscribers = Subscriber::latest()->get();
+        $subscribers = Subscriber::latest()->paginate(20);
+
         return view('admin.subscribers.index', compact('subscribers'));
+    }
+
+    // ─── Password ───
+    public function passwordEdit()
+    {
+        return view('admin.password.edit');
+    }
+
+    public function passwordUpdate(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.password.edit')->with('success', 'Mot de passe mis à jour.');
     }
 }
