@@ -7,6 +7,10 @@
       </div>
       <div class="footer-center">
         <p>&copy; 2026 Tous droits réservés</p>
+        <p style="font-size:.78rem;margin-top:6px;">
+          <a href="{{ route('legal.mentions') }}">Mentions légales</a> ·
+          <a href="{{ route('legal.privacy') }}">Politique de confidentialité</a>
+        </p>
       </div>
       <div class="footer-right">
         <div class="footer-social">
