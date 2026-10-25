@@ -8,7 +8,7 @@ const bgImages = [
   '/images/desktop_code.jpg',
   '/images/code.jpg',
   '/images/laptop_code.jpg',
-  '/images/recognize_face.png',
+  '/images/recognize_face.webp',
 ];
 
 const techLogos = [
@@ -79,8 +79,12 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
             <img
-              src="/images/me_professionnel.png"
+              src="/images/me_professionnel.webp"
               alt="Joseph ALAYE"
+              width="500"
+              height="650"
+              fetchPriority="high"
+              decoding="async"
               onError={(e) => { e.target.src = '/images/me.png'; }}
             />
             <div className="hero-new-photo-glow" />
