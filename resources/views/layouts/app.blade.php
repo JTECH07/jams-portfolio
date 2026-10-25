@@ -9,8 +9,9 @@
   {{-- Open Graph --}}
   <meta property="og:title" content="@yield('og_title', 'Joseph ALAYE | Développeur Web & Mobile')" />
   <meta property="og:description" content="@yield('og_description', 'Développeur web et mobile basé à Porto-Novo, Bénin. Laravel, Flutter, Python, IA.')" />
-  <meta property="og:image" content="@yield('og_image', asset('images/me.png'))" />
-  <meta property="og:type" content="website" />
+  <meta property="og:image" content="@yield('og_image', asset('images/og-image.jpg'))" />
+  <meta property="og:type" content="@yield('og_type', 'website')" />
+  @hasSection('og_published')<meta property="article:published_time" content="@yield('og_published')" />@endif
   <meta property="og:url" content="{{ url()->current() }}" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="Joseph ALAYE Portfolio" />
@@ -19,14 +20,16 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="@yield('og_title', 'Joseph ALAYE | Développeur Web & Mobile')" />
   <meta name="twitter:description" content="@yield('og_description', 'Développeur web et mobile basé à Porto-Novo, Bénin.')" />
-  <meta name="twitter:image" content="@yield('og_image', asset('images/me.png'))" />
+  <meta name="twitter:image" content="@yield('og_image', asset('images/og-image.jpg'))" />
+  <meta name="twitter:image:alt" content="@yield('og_title', 'Joseph ALAYE | Développeur Web & Mobile')" />
 
   {{-- Canonical --}}
   <link rel="canonical" href="{{ url()->current() }}" />
+  <link rel="alternate" type="application/rss+xml" title="Blog de Joseph ALAYE" href="{{ route('feed') }}" />
 
-  <link rel="icon" type="image/png" sizes="32x32 " href="{{ asset('images/me_professionnel.png') }}" />
-  <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('images/me_professionnel.png') }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/me_professionnel.png') }}" />
+  <link rel="icon" type="image/png" sizes="32x32 " href="{{ asset('images/favicon.png') }}" />
+  <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('images/favicon.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon.png') }}" />
   <link rel="manifest" href="{{ asset('manifest.json') }}" />
   <meta name="theme-color" content="#0F172A" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,6 +42,7 @@
   @stack('styles')
 </head>
 <body class="intro-lock">
+  <a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
   <!-- Binary Rain Intro Overlay -->
   <div id="siteIntroOverlay" aria-hidden="false">
     <div class="intro-binary skip-link" aria-hidden="true" id="introBinary"></div>
@@ -51,7 +55,7 @@
 
   @include('partials.navbar')
 
-  <main style="padding-top: 80px;">
+  <main id="main-content" style="padding-top: 80px;">
     @yield('content')
   </main>
 
