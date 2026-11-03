@@ -22,7 +22,7 @@ const PROJECTS = [
     subtitle: 'Plateforme web',
     description:
       'Plateforme web avec gestion de produits, commandes et dashboard analytique pour des initiatives écologiques.',
-    images: ['/images/desktop_code.jpg', '/images/code.jpg', '/images/laptop_code.jpg'],
+    images: ['/images/gwb.png', '/images/gwb2.png', '/images/gwb2-.png', '/images/gwb3.png', '/images/gwb4.png', '/images/gwb5.png', '/images/gwb6.png', '/images/gwb7.png', '/images/gwb8.png'],
     tags: ['PHP', 'MySQL', 'HTML5', 'CSS3'],
     study: {
       context:
@@ -42,7 +42,7 @@ const PROJECTS = [
     subtitle: 'Application métier',
     description:
       'Système de suivi des ouvrages et des emprunts pour améliorer la traçabilité opérationnelle.',
-    images: ['/images/laptop_code.jpg', '/images/code.jpg'],
+    images: ['/images/biblio-gest.png', '/images/biblio-gest2.png', '/images/biblio-gest3.png', '/images/biblio-gest4.png', '/images/biblio-gest5.png', '/images/biblio-gest6.png'],
     tags: ['Laravel', 'MySQL'],
     study: {
       context:
@@ -82,7 +82,7 @@ const PROJECTS = [
     subtitle: 'Site personnel',
     description:
       'Site portfolio pour un technicien agro-industriel : compétences, réalisations et prise de contact.',
-    images: ['/images/laptop_code.jpg', '/images/desktop_code.jpg'],
+    images: ['/images/agro-industriel.png', '/images/agro-industriel2.png', '/images/agro-industriel3.png', '/images/agro-industriel4.png', '/images/agro-industriel5.png', '/images/agro-industriel6.png', '/images/agro-industriel7.png'],
     tags: ['HTML5', 'CSS3', 'JavaScript'],
     study: {
       context:
@@ -102,7 +102,7 @@ const PROJECTS = [
     subtitle: 'E-commerce',
     description:
       'Plateforme e-commerce connectant producteurs agro et restaurants pour les échanges locaux.',
-    images: ['/images/code.jpg', '/images/desktop_code.jpg', '/images/laptop_code.jpg'],
+    images: ['/images/agrimarket.png', '/images/agrimarket2.png', '/images/agrimarket3.png'],
     tags: ['PHP', 'MySQL'],
     study: {
       context:
@@ -202,8 +202,8 @@ const PROJECTS = [
     subtitle: 'Application Flutter',
     description:
       'Application mobile Flutter pour la gestion des paiements étudiants à l’UATM GASA Formation.',
-    images: ['/images/laptop_code.jpg', '/images/code.jpg'],
-    tags: ['Flutter', 'Dart'],
+    images: ['/images/uatm-paiements.png', '/images/uatm-paiements2-.png', '/images/uatm-paiements2.png', '/images/uatm-paiements3.png', '/images/uatm-paiements4.png', '/images/uatm-paiements5.png'],
+    tags: ['Flutter', 'Dart', 'Firebase'],
     study: {
       context:
         'Le suivi des paiements de scolarité était dispersé et difficile à consulter pour les étudiants.',
