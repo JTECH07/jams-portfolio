@@ -40,6 +40,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   @stack('styles')
+<!-- WOW animations (left‑to‑right / fade‑in) -->
+<style>
+  .wow {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .wow.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .wow-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .wow-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body class="intro-lock">
   <a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
@@ -66,10 +91,22 @@
   </button>
 
   @stack('scripts')
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
-    }
-  </script>
+<script>
+  // Initialize WOW animations on scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const els = document.querySelectorAll('.wow');
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    els.forEach(el => observer.observe(el));
+  });
+</script>
 </body>
 </html>
