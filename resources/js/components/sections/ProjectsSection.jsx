@@ -7,7 +7,7 @@ import ParallaxImage from '../ui/ParallaxImage';
 const projects = [
   {
     num: '01',
-    img: '/images/desktop_code.jpg',
+    img: '/images/gwb.png',
     alt: 'Green World Builders',
     tags: ['MySQL', 'PHP'],
     title: 'Green World Builders',
@@ -23,7 +23,7 @@ const projects = [
   },
   {
     num: '03',
-    img: '/images/code.jpg',
+    img: '/images/agrimarket.png',
     alt: 'Agrimarket',
     tags: ['PHP', 'MySQL'],
     title: 'Agrimarket E-commerce',
@@ -31,9 +31,9 @@ const projects = [
   },
   {
     num: '04',
-    img: '/images/laptop_code.jpg',
+    img: '/images/uatm-paiements.png',
     alt: 'Gestion Scolaire',
-    tags: ['Dart', 'Flutter'],
+    tags: ['Dart', 'Flutter', 'Firebase'],
     title: 'App Mobile Scolaire',
     desc: 'Gestion des paiements et inscriptions étudiants.',
   },
