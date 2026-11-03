@@ -70,11 +70,10 @@ if (!HAS_SEEN_INTRO && introOverlay && introBinary) {
     col.style.animationDelay = (-Math.random() * 4) + 's';
     introBinary.appendChild(col);
   }
-  // On cache l'intro après la durée écoulée, sans interrompre lenis
+  // On cache l'intro après la durée écoulée
   setTimeout(() => {
     if (introOverlay) introOverlay.classList.add('hide');
-    document.body.classList.remove('intro-lock');
-    // ne plus appeler lenis.stop() ici
+    // pas de lenis.start/stop pour éviter tout blocage
   }, INTRO_DURATION_MS);
   introOverlay.addEventListener('click', () => introOverlay.classList.add('hide'));
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape' || e.key === ' ') introOverlay.classList.add('hide'); });
