@@ -15,7 +15,7 @@
       'year' => '2024',
       'image' => 'images/me-thinking.webp',
       'desc' => "Usages concrets de l'IA générative et productivité numérique.",
-    ],
+    ],    
     [
       'title' => 'Maintenance Informatique',
       'issuer' => 'SENANTIC',
@@ -43,6 +43,13 @@
       'year' => '2025',
       'image' => 'images/me-coding.webp',
       'desc' => 'Machine learning et applications pratiques.',
+    ],
+    [
+      'title' => 'Baccalauréat D',
+      'issuer' => 'CEG AGBOKOU',
+      'year' => '2024',
+      'image' => 'images/me-thinking.webp',
+      'desc' => "Base scientifique solide pour l'approche analytique.",
     ],
   ];
 @endphp
