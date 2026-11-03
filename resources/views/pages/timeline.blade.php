@@ -139,7 +139,7 @@
 </section>
 
 {{-- ═══════════ CERTIFICATIONS ═══════════ --}}
-<section class="section cert-section" id="certifications">
+<section class="section cert-section wow" id="certifications">
   <div class="cert-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/certifications.jpg') }}" alt="" loading="lazy" />
   </div>
