@@ -55,7 +55,7 @@
 @endphp
 
 @section('content')
-<section class="section" id="timeline">
+<section class="section wow" id="timeline">
   <div class="page-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/timeline.jpg') }}" alt="" />
   </div>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="tl-zig">
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>En cours · Porto-Novo, Bénin</small>
           <h3>Développeur Full-Stack — JAMS TECH</h3>
@@ -76,7 +76,7 @@
         <span class="tl-dot" style="--dot:var(--white);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>Juil — Sept 2025 · Porto-Novo, Bénin</small>
           <h3>Stagiaire Développement Web Laravel — DigiWeb SARL</h3>
@@ -85,7 +85,7 @@
         <span class="tl-dot" style="--dot:var(--accent);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>2025 — aujourd’hui · Porto-Novo, Bénin</small>
           <h3>Membre du Club IA — CAEB</h3>
@@ -94,7 +94,7 @@
         <span class="tl-dot" style="--dot:var(--yellow);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>2024 — 2026 · Porto-Novo, Bénin</small>
           <h3>Licence 2 — Systèmes Informatiques et Logiciels</h3>
@@ -103,7 +103,7 @@
         <span class="tl-dot" style="--dot:var(--accent);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>Avr 2025 · Porto-Novo, Bénin</small>
           <h3>Apprenti en maintenance informatique — SENANTIC</h3>
@@ -112,7 +112,7 @@
         <span class="tl-dot" style="--dot:var(--ok);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>Déc 2024 · Sèmè-Podji, Bénin</small>
           <h3>Formation IA Générative — FuturCraft Institut</h3>
@@ -121,7 +121,7 @@
         <span class="tl-dot" style="--dot:var(--accent-2);" aria-hidden="true"></span>
       </div>
 
-      <div class="tl-row reveal">
+      <div class="tl-row wow reveal">
         <article class="tl-item glass">
           <small>2023 — 2024 · Porto-Novo, Bénin</small>
           <h3>Baccalauréat D — CEG AGBOKOU</h3>
