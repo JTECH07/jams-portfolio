@@ -45,8 +45,8 @@ if (certRoot) {
   }
 }
 
-/* ─── Intro Overlay (Binary Rain) – one‑time only ─── */
-const INTRO_DURATION_MS = 2000;
+/* ─── Intro Overlay (Binary Rain) – allège & stable ─── */
+const INTRO_DURATION_MS = 1500;
 const introOverlay = document.getElementById('siteIntroOverlay');
 const introBinary = document.getElementById('introBinary');
 
@@ -54,31 +54,30 @@ const introBinary = document.getElementById('introBinary');
 const HAS_SEEN_INTRO = localStorage.getItem('introSeen');
 if (!HAS_SEEN_INTRO && introOverlay && introBinary) {
   localStorage.setItem('introSeen', '1');
-  const COL_COUNT = 14;
+  // Quelques colonnes légères pour éviter le blocage
+  const COL_COUNT = 8;
   const chars = '01';
   for (let i = 0; i < COL_COUNT; i++) {
     const col = document.createElement('span');
     col.className = 'col';
     let text = '';
-    const rows = 40 + Math.floor(Math.random() * 20);
+    const rows = 10 + Math.floor(Math.random() * 5); // au max 15 lignes
     for (let r = 0; r < rows; r++) {
-      text += chars[Math.floor(Math.random() * chars.length)] + '\n';
+      text += chars[Math.floor(Math.random() * chars.length)];
     }
     col.textContent = text;
-    col.style.animationDuration = (4 + Math.random() * 4) + 's';
-    col.style.animationDelay = (-Math.random() * 6) + 's';
+    col.style.animationDuration = (3 + Math.random() * 2) + 's';
+    col.style.animationDelay = (-Math.random() * 4) + 's';
     introBinary.appendChild(col);
   }
-  const closeIntro = () => {
-    if (introOverlay.classList.contains('hide')) return;
-    introOverlay.classList.add('hide');
+  // On cache l'intro après la durée écoulée, sans interrompre lenis
+  setTimeout(() => {
+    if (introOverlay) introOverlay.classList.add('hide');
     document.body.classList.remove('intro-lock');
-    lenis.start();
-  };
-  lenis.stop();
-  setTimeout(closeIntro, INTRO_DURATION_MS);
-  introOverlay.addEventListener('click', closeIntro);
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' || e.key === ' ') closeIntro(); });
+    // ne plus appeler lenis.stop() ici
+  }, INTRO_DURATION_MS);
+  introOverlay.addEventListener('click', () => introOverlay.classList.add('hide'));
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' || e.key === ' ') introOverlay.classList.add('hide'); });
 }
 
 /* ─── Pill Nav: scroll + sliding indicator ─── */
