@@ -45,12 +45,15 @@ if (certRoot) {
   }
 }
 
-/* ─── Intro Overlay (Binary Rain) ─── */
+/* ─── Intro Overlay (Binary Rain) – one‑time only ─── */
 const INTRO_DURATION_MS = 2000;
 const introOverlay = document.getElementById('siteIntroOverlay');
 const introBinary = document.getElementById('introBinary');
 
-if (introOverlay && introBinary) {
+// n'afficher l'intro que la première visite de la session
+const HAS_SEEN_INTRO = localStorage.getItem('introSeen');
+if (!HAS_SEEN_INTRO && introOverlay && introBinary) {
+  localStorage.setItem('introSeen', '1');
   const COL_COUNT = 14;
   const chars = '01';
   for (let i = 0; i < COL_COUNT; i++) {
