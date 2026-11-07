@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="section wow" id="services" style="background:var(--bg);">
+<section class="section" id="services" style="background:var(--bg);">
   <div class="page-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/services.jpg') }}" alt="" />
   </div>

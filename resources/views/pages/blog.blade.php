@@ -7,7 +7,7 @@
 @section('og_image', asset('images/bg/blog.jpg'))
 
 @section('content')
-<section class="section blog-page wow" id="blog">
+<section class="section blog-page" id="blog">
   <div class="page-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/blog.jpg') }}" alt="" />
   </div>

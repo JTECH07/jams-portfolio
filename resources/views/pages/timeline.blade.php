@@ -55,7 +55,7 @@
 @endphp
 
 @section('content')
-<section class="section wow" id="timeline">
+<section class="section" id="timeline">
   <div class="page-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/timeline.jpg') }}" alt="" />
   </div>
@@ -139,7 +139,7 @@
 </section>
 
 {{-- ═══════════ CERTIFICATIONS ═══════════ --}}
-<section class="section cert-section wow" id="certifications">
+<section class="section cert-section" id="certifications">
   <div class="cert-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/certifications.jpg') }}" alt="" loading="lazy" />
   </div>

@@ -47,7 +47,7 @@ const card = {
 
 export default function ProjectsSection() {
   return (
-    <section className="section projects-preview wow" id="projects">
+    <section className="section projects-preview" id="projects">
       <div className="wrap">
         <div className="section-head">
           <ScrollReveal>
@@ -64,7 +64,7 @@ export default function ProjectsSection() {
           viewport={{ once: true, amount: 0.1 }}
         >
           {projects.map((p) => (
-            <motion.article key={p.title} className="project-card-editorial wow" variants={card}>
+            <motion.article key={p.title} className="project-card-editorial" variants={card}>
               <span className="project-num">{p.num}</span>
               <motion.figure
                 className="project-figure-editorial"

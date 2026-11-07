@@ -460,7 +460,7 @@ export default function ProjectsShowcase() {
   };
 
   return (
-    <section className="section projects-showcase wow" id="projects">
+    <section className="section projects-showcase" id="projects">
       <div className="projects-showcase-bg" aria-hidden="true">
         <span className="projects-showcase-orb orb-one" />
         <span className="projects-showcase-orb orb-two" />

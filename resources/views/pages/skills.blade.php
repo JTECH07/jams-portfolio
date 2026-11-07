@@ -51,7 +51,7 @@
 @endphp
 
 @section('content')
-<section class="section wow" id="skills" style="background:var(--bg);">
+<section class="section" id="skills" style="background:var(--bg);">
   <div class="page-bg" aria-hidden="true">
     <img src="{{ asset('images/bg/skills.jpg') }}" alt="" />
   </div>
