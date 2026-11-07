@@ -45,23 +45,56 @@ if (certRoot) {
   }
 }
 
-/* ─── Intro Overlay (Binary Rain) – allège & stable ─── */
-const INTRO_DURATION_MS = 1500;
+/* ─── Intro Overlay (Binary Rain) – de l’arrivée au site uniquement ─── */
+const INTRO_DURATION_MS = 1400;
 const introOverlay = document.getElementById('siteIntroOverlay');
 const introBinary = document.getElementById('introBinary');
 
-// n'afficher l'intro que la première visite de la session
-const HAS_SEEN_INTRO = localStorage.getItem('introSeen');
-if (!HAS_SEEN_INTRO && introOverlay && introBinary) {
-  localStorage.setItem('introSeen', '1');
-  // Quelques colonnes légères pour éviter le blocage
+const hideIntro = () => {
+  if (introOverlay) {
+    introOverlay.classList.add('hide');
+  }
+  document.body.classList.remove('intro-lock');
+};
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    hideIntro();
+  }
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    hideIntro();
+  }
+});
+
+const markIntroSeen = () => {
+  try {
+    sessionStorage.setItem('siteIntroSeen', '1');
+    localStorage.setItem('siteIntroSeen', '1');
+  } catch (error) {
+    // In private or restricted contexts, the intro still remains a single-page first-visit experience.
+  }
+};
+
+let hasSeenIntro = false;
+try {
+  hasSeenIntro = sessionStorage.getItem('siteIntroSeen') === '1' || localStorage.getItem('siteIntroSeen') === '1';
+} catch (error) {
+  hasSeenIntro = false;
+}
+
+if (!hasSeenIntro && introOverlay && introBinary) {
+  markIntroSeen();
+
   const COL_COUNT = 8;
   const chars = '01';
   for (let i = 0; i < COL_COUNT; i++) {
     const col = document.createElement('span');
     col.className = 'col';
     let text = '';
-    const rows = 10 + Math.floor(Math.random() * 5); // au max 15 lignes
+    const rows = 10 + Math.floor(Math.random() * 5);
     for (let r = 0; r < rows; r++) {
       text += chars[Math.floor(Math.random() * chars.length)];
     }
@@ -70,13 +103,19 @@ if (!HAS_SEEN_INTRO && introOverlay && introBinary) {
     col.style.animationDelay = (-Math.random() * 4) + 's';
     introBinary.appendChild(col);
   }
-  // On cache l'intro après la durée écoulée
+
   setTimeout(() => {
-    if (introOverlay) introOverlay.classList.add('hide');
-    // pas de lenis.start/stop pour éviter tout blocage
+    hideIntro();
   }, INTRO_DURATION_MS);
-  introOverlay.addEventListener('click', () => introOverlay.classList.add('hide'));
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' || e.key === ' ') introOverlay.classList.add('hide'); });
+
+  introOverlay.addEventListener('click', hideIntro);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === ' ') {
+      hideIntro();
+    }
+  });
+} else {
+  hideIntro();
 }
 
 /* ─── Pill Nav: scroll + sliding indicator ─── */
