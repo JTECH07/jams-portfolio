@@ -1,159 +1,70 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useTransform } from 'motion/react';
 import TextReveal from '../ui/TextReveal';
 import MagneticButton from '../ui/MagneticButton';
 import SwarmCursor from '../SwarmCursor';
 
-const bgImages = [
-  '/images/desktop_code.jpg',
-  '/images/code.jpg',
-  '/images/laptop_code.jpg',
-  '/images/recognize_face.webp',
-];
-
 const techLogos = [
   { name: 'Laravel', icon: 'bi-boxes' },
-  { name: 'Flutter', icon: 'bi-phone' },
-  { name: 'Python', icon: 'bi-filetype-py' },
   { name: 'React', icon: 'bi-react' },
   { name: 'Node.js', icon: 'bi-node-plus' },
+  { name: 'Flutter', icon: 'bi-phone' },
+  { name: 'C++', icon: 'bi-filetype-cpp' },
+  { name: 'Python', icon: 'bi-filetype-py' },
+  { name: 'Machine Learning', icon: 'bi-robot' },
   { name: 'MySQL', icon: 'bi-database' },
   { name: 'Git', icon: 'bi-git' },
   { name: 'Docker', icon: 'bi-box-arrow-up' },
+  { name: 'PostgreSQL', icon: 'bi-database' },
 ];
 
-export default function HeroSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-  const nameY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+export default function HeroSection({ lang = 'fr', toggleLang }) {
+  const [isDark, setIsDark] = useState(() => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Update dark mode on system change
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDark(mq.matches);
+    mq.addEventListener('change', (e) => setIsDark(e.matches));
+  }, []);
+
+  const heroTitle = lang === 'fr' 
+    ? 'Développeur Logiciels & IA' 
+    : 'Developer Software & IA';
+  const heroSubtitle = lang === 'fr'
+    ? 'Je conçois des applications web et mobiles performantes, propulsées par l\'IA'
+    : 'I create performant web and mobile applications powered by AI';
+  const heroCta = lang === 'fr' ? 'Voir mes projets' : 'See my projects';
 
   return (
-    <section className="hero-new" id="home" ref={ref}>
+    <section
+      className="hero-new"
+      id="home"
+      style={{
+        backgroundColor: isDark ? '#111' : '#fff',
+        backgroundImage: 
+          'url("/images/Programming_code_morphs_into_neu…_20261003152800.gif")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <SwarmCursor
-        count={400}
+        count={300}
         size={2}
-        spread={90}
-        swirl={0.4}
-        color="#E8C547"
-        accentColor="#F5DC5A"
+        spread={80}
+        swirl={0.3}
+        color={isDark ? '#E8C547' : '#E8C547'}
+        accentColor={isDark ? '#F5DC5A' : '#F5DC5A'}
         clickEffect="burst"
         idle="roam"
         className="hero-swarm"
       >
-        {/* ─── Slider images tech en fond ─── */}
-        <div className="hero-bg-slider" aria-hidden="true">
-          <AnimatePresence>
-            {bgImages.map((img, i) => (
-              <motion.div
-                key={img}
-                className="hero-bg-slide"
-                style={{ backgroundImage: `url(${img})` }}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: [0, 0.25, 0.25, 0], scale: [1.1, 1, 1, 1.05] }}
-                transition={{ duration: 16, delay: i * 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            ))}
-          </AnimatePresence>
-          <div className="hero-bg-overlay" />
-        </div>
-
-        {/* ─── Badge dispo ─── */}
-        <motion.div
-          className="hero-new-badge"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <span className="hero-new-badge-dot" />
-          <span>Disponible pour projets</span>
-        </motion.div>
-
-        {/* ─── Photo centrée ─── */}
-        <motion.div className="hero-new-photo" style={{ y: photoY }}>
-          <motion.div
-            className="hero-new-photo-frame"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            <img
-              src="/images/me_professionnel.webp"
-              alt="Joseph ALAYE"
-              width="500"
-              height="650"
-              fetchPriority="high"
-              decoding="async"
-              onError={(e) => { e.target.src = '/images/me.png'; }}
-            />
-            <div className="hero-new-photo-glow" />
-          </motion.div>
-        </motion.div>
-
-        {/* ─── Contenu gauche ─── */}
-        <motion.div className="hero-new-left" style={{ opacity: contentOpacity }}>
-          <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            Développeur<br />
-            <span className="hero-new-highlight">Full-Stack</span><br />
-            & IA
-          </motion.h1>
-
-          <motion.div
-            className="hero-new-cta"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-          >
-            <MagneticButton strength={0.25}>
-              <a className="btn-hero-gold" href="/projets">
-                <span>Voir mes projets</span>
-                <i className="bi bi-arrow-right" />
-              </a>
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
-
-        {/* ─── Contenu droit ─── */}
-        <motion.div className="hero-new-right" style={{ opacity: contentOpacity }}>
-          <motion.p
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-          >
-            Salut, moi c'est <strong>Joseph ALAYE</strong> | Je conçois des applications web et mobiles performantes, propulsées par l'IA.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.0 }}
-            style={{ marginTop: 16 }}
-          >
-            <a className="hero-new-link" href="/CV_Joseph_ALAYE.pdf" target="_blank" rel="noopener">
-              <i className="bi bi-download" /> Télécharger mon CV
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* ─── Gros nom en bas ─── */}
-        <motion.div className="hero-new-name" style={{ y: nameY }} aria-hidden="true">
-          <motion.span
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            JOSEPH
-          </motion.span>
-        </motion.div>
-
-        {/* ─── Marquee tech logos en bas ─── */}
+        {/* Tech logos marquee en bas */}
         <motion.div
           className="hero-new-marquee"
-          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
         >
@@ -169,6 +80,86 @@ export default function HeroSection() {
               </span>
             ))}
           </motion.div>
+        </SwarmCursor>
+
+        {/* Photo centrée */}
+        <motion.div 
+          className="hero-new-photo" 
+          style={{ y: 0 }}
+        >
+          <motion.div
+            className="hero-new-photo-frame"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            <img
+              src="/images/me_professionnel.webp"
+              alt={lang === 'fr' ? 'Joseph ALAYE' : 'Joseph ALAYE'}
+              width="500"
+              height="650"
+              fetchPriority="high"
+              decoding="async"
+              onError={(e) => { e.target.src = '/images/me.png'; }}
+            />
+            <div className="hero-new-photo-glow" />
+          </motion.div>
+        </motion.div>
+
+        {/* Contenu gauche */}
+        <motion.div className="hero-new-left" style={{ opacity: 1 }}>
+          <motion.h1
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            {heroTitle}<br />
+            <span className="hero-new-highlight">{lang === 'fr' ? 'Logiciels' : 'Software'}</span><br />
+            & {lang === 'fr' ? 'Ingénieur' : 'Engineer'}
+            <span className="hero-new-highlight">{lang === 'fr' ? ' IA' : ' AI'}</span><br />
+          </motion.h1>
+
+          <motion.div
+            className="hero-new-cta"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+          >
+            <MagneticButton strength={0.25}>
+              <a className="btn-hero-gold" href="/projets">
+                <span>{heroCta}</span>
+                <i className="bi bi-arrow-right" />
+              </a>
+            </MagneticButton>
+          </motion.div>
+        </motion.div>
+
+        {/* Contenu droit */}
+        <motion.div className="hero-new-right" style={{ opacity: 1 }}>
+          <motion.h3
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            Salut, moi c'est <strong>Joseph ALAYE</strong> |<br /> Je conçois des <span className="hero-new-highlight">{lang === 'fr' ? 'applications' : 'applications'}<br /> web et mobiles  performantes, <br/>propulsées par l'<span className="hero-new-highlight">{lang === 'fr' ? 'IA' : 'AI'}</span>.
+          </motion.h3>
+          <motion.div
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.0 }}
+            style={{ marginTop: 16 }}
+          >
+            <a className="hero-new-link" href="/CV_Joseph_ALAYE.pdf" target="_blank" rel="noopener">
+              <i className="bi bi-download" /> Télécharger mon CV
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* Gros nom en bas */}
+        <motion.div className="hero-new-name" style={{ y: 0 }} aria-hidden="true">
+          <motion.span
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            JOSEPH
+          </motion.span>
         </motion.div>
       </SwarmCursor>
     </section>
