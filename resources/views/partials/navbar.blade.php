@@ -18,11 +18,45 @@
     </div>
 
     <a class="pill-cv" href="{{ asset('CV_Joseph_ALAYE.pdf') }}" target="_blank" rel="noopener">
-      <i class="bi bi-download"></i> CV
+      <i class="bi bi-download"></i> Joseph ALAYE
     </a>
 
     <button class="pill-menu-btn" id="menuBtn" aria-label="Menu">
-      <i class="bi bi-list"></i>
+      <i class="bi bi-list" id="menuIcon"></i>
     </button>
   </div>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuBtn.addEventListener('click', function() {
+      const isOpen = navLinks.classList.contains('open');
+      
+      if (isOpen) {
+        // Close menu
+        navLinks.classList.remove('open');
+        menuIcon.classList.remove('bi-x');
+        menuIcon.classList.add('bi-list');
+      } else {
+        // Open menu
+        navLinks.classList.add('open');
+        menuIcon.classList.remove('bi-list');
+        menuIcon.classList.add('bi-x');
+      }
+    });
+    
+    // Close menu when a link is clicked
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuIcon.classList.remove('bi-x');
+        menuIcon.classList.add('bi-list');
+      });
+    });
+  });
+</script>
